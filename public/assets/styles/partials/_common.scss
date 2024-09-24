@@ -1,0 +1,91 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+@font-face {
+    font-family: "Coolvetica-Rg-Regular";
+    src: url("/assets/fonts/coolvetica_rg.otf") format("opentype");
+}
+
+@import './_variables';
+@import './classes';
+@import './colors';
+@import './mixins';
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: $common-font;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $title-font;
+}
+
+.pt_50 {
+  padding-top: 50px;
+}
+
+.pb_50 {
+  padding-bottom: 50px;
+}
+
+.friend-request-btn {
+  border-radius: 8px !important;
+  padding: 10px 30px !important;
+  transition: 0.3s;
+  font-size: 14px !important;
+  text-transform: capitalize !important;
+  font-weight: normal !important;
+
+  &.dismiss {
+      background: #EBE7F6;
+      color: #3A0CA3;
+
+      &:hover {
+          background: #EBE7F6;
+          color: #3A0CA3;
+      }
+  }
+
+  &.accept {
+      background: #3A0CA3;
+      color: #EBE7F6;
+
+      &:hover {
+          background: #3A0CA3;
+          color: #fff;
+      }
+  }
+
+  &:hover {
+          box-shadow: 0 4px 9px -4px rgba(0,0,0,.35) !important;
+  }
+}
+
+
+@media screen and (min-width: 1400px) {
+  .container {
+    max-width: 1700px;
+  }
+}
+
+@keyframes moverAnimation {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}

@@ -1,0 +1,11 @@
+@mixin input-control {
+    border: 0;
+    color: #c7c8ca;
+    font-weight: 500;
+    letter-spacing: 0.93px;
+    white-space: nowrap;
+    height: 3rem;
+    width: 100% !important;
+    border-left: 6px solid;
+    border-radius: 8px;
+}
