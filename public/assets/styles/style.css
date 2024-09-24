@@ -847,6 +847,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .invite-friends .friend-request-card {
   border: none;
+  box-shadow: 15px 15px 20px 0px rgba(98, 98, 98, 0.1019607843);
 }
 .invite-friends .friend-request-card .card-body {
   padding: 30px;
@@ -994,6 +995,187 @@ h1, h2, h3, h4, h5, h6 {
 .invite-friends .friend-request-card .card-body .popular-tables ul.nav li.nav-item:last-child {
   margin-bottom: 0;
 }
+.invite-friends-modal .modal-dialog .modal-content {
+  background-color: #F9F9F9;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-header {
+  padding: 20px 60px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body {
+  padding: 20px 60px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-header {
+  margin-bottom: 10px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-header h4 {
+  margin-bottom: 5px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-header p {
+  margin-bottom: 0px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card {
+  border: none;
+  box-shadow: 15px 15px 20px 0px rgba(58, 12, 163, 0.1019607843);
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body {
+  padding: 30px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .card-top {
+  margin-bottom: 12px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .card-top h6 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0;
+  font-family: "Nunito", sans-serif;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .card-top h6 a {
+  color: #3A0CA3;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item {
+  width: 100%;
+  padding: 12px 0;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item:last-child {
+  padding: 0;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-basis: 76%;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .left .friend-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .left .friend-info .friend-name {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Nunito", sans-serif;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .left .friend-info .friend-name a {
+  color: #000;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .left .friend-info p {
+  font-size: 14px;
+  margin-bottom: 0;
+  font-weight: light;
+  color: #8A8989;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .left .friend-info p.mutual-friends {
+  margin-right: 30px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .right {
+  flex-basis: 24%;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .friend-request-list ul.nav li.nav-item:hover {
+  cursor: pointer;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .search-group {
+  margin-bottom: 32px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .search-group input {
+  border: 0;
+  color: #c7c8ca;
+  font-weight: 500;
+  letter-spacing: 0.93px;
+  white-space: nowrap;
+  height: 3rem;
+  width: 100% !important;
+  border-left: 6px solid;
+  border-radius: 8px;
+  border-top: 1px solid #3A0CA3;
+  border-right: 1px solid #3A0CA3;
+  border-bottom: 1px solid #3A0CA3;
+  border-color: #3A0CA3;
+  box-shadow: 0px 0px 4px 0px rgba(58, 12, 163, 0.2509803922);
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join-lists {
+  margin-bottom: 12px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join-title {
+  margin-bottom: 24px;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Nunito", sans-serif;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item {
+  width: 100%;
+  margin-bottom: 12px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item:last-child {
+  margin-bottom: 0;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .group {
+  display: flex;
+  gap: 20px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .group .group-img {
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .group .group-text {
+  width: 100%;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .group .group-text-name {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Nunito", sans-serif;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .group .group-text-info {
+  display: flex;
+  justify-content: space-between;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .group .group-text-info p {
+  font-size: 14px;
+  color: #8A8989;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .popular-table-single {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .popular-table-single-text-name {
+  font-size: 16px;
+  font-family: "Nunito", sans-serif;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .group-join ul.nav li.nav-item .popular-table-single-text-info p {
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #8A8989;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .popular-tables ul.nav li.nav-item {
+  margin-bottom: 20px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .popular-tables ul.nav li.nav-item .popular-table-single .friend-request-btn {
+  padding: 5px 15px !important;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-body .friend-request-card .card-body .popular-tables ul.nav li.nav-item:last-child {
+  margin-bottom: 0;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-footer {
+  padding: 20px 60px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-footer .find-more-people-btn {
+  background: #3A0CA3;
+  color: #fff;
+  padding: 15px 50px;
+  border-radius: 8px;
+}
+.invite-friends-modal .modal-dialog .modal-content .modal-footer .find-more-people-btn:hover {
+  box-shadow: 0 4px 9px -4px rgba(0, 0, 0, 0.35) !important;
+}
+
 .profile-layout {
   background: #F9F9F9 !important;
   height: 100vh;

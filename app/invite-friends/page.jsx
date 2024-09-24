@@ -1,3 +1,4 @@
+import InviteFriendsPopup from '@/components/InviteFriendsPopup'
 import ProfileLayout from '@/layouts/profileLayout/ProfileLayout'
 import Link from 'next/link'
 import React from 'react'

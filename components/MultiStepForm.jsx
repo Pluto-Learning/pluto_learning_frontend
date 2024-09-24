@@ -253,7 +253,7 @@ const MultiStepForm = () => {
                             <button type="button" className='btn step-btn prev' onClick={handlePrev}>
                                 Back
                             </button>
-                            <button type="submit" className='btn step-btn submit'>Submit</button>
+                            <button type="submit" className='btn step-btn submit' data-bs-toggle="modal" data-bs-target="#invite-friends-modal">Submit</button>
                         </div>
                     </div>
                 )}

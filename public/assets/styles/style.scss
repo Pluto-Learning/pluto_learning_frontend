@@ -921,7 +921,7 @@
                 text-transform: uppercase;
                 padding-left: 20px;
                 position: relative;
-                
+
                 &::before {
                     position: absolute;
                     content: '';
@@ -937,7 +937,7 @@
 
         .rbc-day-slot .rbc-event-content {
             width: 100%;
-             flex: unset; 
+            flex: unset;
             word-wrap: break-word;
         }
 
@@ -996,6 +996,8 @@
 
     .friend-request-card {
         border: none;
+        box-shadow: 15px 15px 20px 0px #6262621A;
+
 
         .card-body {
             padding: 30px;
@@ -1204,7 +1206,261 @@
             // border: 1px solid #3A0CA3 !important;
         }
     }
+}
 
+
+.invite-friends-modal {
+    .modal-dialog {
+        .modal-content {
+            background-color: $pluto-white;
+
+            .modal-header {
+                padding: 20px 60px;
+            }
+
+            .modal-body {
+                padding: 20px 60px;
+
+                .friend-request-header {
+                    margin-bottom: 10px;
+
+                    h4 {
+                        margin-bottom: 5px;
+                    }
+
+                    p {
+                        margin-bottom: 0px;
+                    }
+                }
+
+                .friend-request-card {
+                    border: none;
+                    box-shadow: 15px 15px 20px 0px #3A0CA31A;
+
+                    .card-body {
+                        padding: 30px;
+
+                        .card-top {
+                            margin-bottom: 12px;
+
+                            h6 {
+                                font-size: 16px;
+                                font-weight: 500;
+                                margin-bottom: 0;
+                                font-family: $common-font;
+
+                                a {
+                                    color: #3A0CA3;
+                                }
+                            }
+                        }
+
+                        .friend-request-list {
+                            ul.nav {
+                                li.nav-item {
+                                    width: 100%;
+                                    padding: 12px 0;
+
+                                    &:last-child {
+                                        padding: 0;
+                                    }
+
+                                    .friend-request {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+
+                                        .left {
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 24px;
+                                            flex-basis: 76%;
+
+                                            .friend-img {
+                                                width: 56px;
+                                                height: 56px;
+                                                border-radius: 8px;
+                                                overflow: hidden;
+                                            }
+
+                                            .friend-info {
+
+                                                // display: flex;
+                                                // flex-direction: column;
+                                                // justify-content: space-between;
+                                                .friend-name {
+                                                    font-size: 14px;
+                                                    font-weight: 400;
+                                                    font-family: $common-font;
+
+                                                    a {
+                                                        color: #000;
+                                                    }
+                                                }
+
+                                                p {
+                                                    font-size: 14px;
+                                                    margin-bottom: 0;
+                                                    font-weight: light;
+                                                    color: $pluto-gray;
+
+                                                    &.mutual-friends {
+                                                        margin-right: 30px;
+                                                    }
+
+                                                    &.time {}
+                                                }
+                                            }
+                                        }
+
+                                        .right {
+                                            flex-basis: 24%;
+                                        }
+                                    }
+
+                                    &:hover {
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                        }
+
+                        .search-group {
+                            margin-bottom: 32px;
+
+                            input {
+                                @include input-control;
+                                border-top: 1px solid #3A0CA3;
+                                // border-left: 1px solid #3A0CA3;
+                                border-right: 1px solid #3A0CA3;
+                                border-bottom: 1px solid #3A0CA3;
+                                border-color: #3A0CA3;
+                                box-shadow: 0px 0px 4px 0px #3A0CA340;
+                            }
+                        }
+
+
+
+                        .group-join {
+
+                            &-lists {
+                                margin-bottom: 12px;
+                            }
+
+                            &-title {
+                                margin-bottom: 24px;
+                                font-weight: 600;
+                                font-size: 16px;
+                                font-family: $common-font;
+                            }
+
+                            ul.nav {
+
+                                li.nav-item {
+                                    width: 100%;
+                                    margin-bottom: 12px;
+
+                                    &:last-child {
+                                        margin-bottom: 0;
+                                    }
+
+                                    .group {
+                                        display: flex;
+                                        gap: 20px;
+
+                                        .group-img {
+                                            width: 56px;
+                                            height: 56px;
+                                            overflow: hidden;
+                                            border-radius: 8px;
+                                        }
+
+                                        .group-text {
+                                            width: 100%;
+
+                                            &-name {
+                                                font-size: 16px;
+                                                font-weight: 400;
+                                                font-family: $common-font;
+                                            }
+
+                                            &-info {
+                                                display: flex;
+                                                justify-content: space-between;
+
+                                                p {
+                                                    font-size: 14px;
+                                                    color: $pluto-gray;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .popular-table-single {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+
+                                        &-text {
+
+                                            &-name {
+                                                font-size: 16px;
+                                                font-family: $common-font;
+                                            }
+
+                                            &-info {
+                                                p {
+                                                    margin-bottom: 0;
+                                                    font-size: 14px;
+                                                    color: $pluto-gray;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .popular-tables {
+                            ul.nav {
+                                li.nav-item {
+                                    margin-bottom: 20px;
+
+                                    .popular-table-single {
+                                        .friend-request-btn {
+                                            padding: 5px 15px !important;
+                                        }
+                                    }
+
+                                    &:last-child {
+                                        margin-bottom: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &.suggest-people-card {
+                        // border: 1px solid #3A0CA3 !important;
+                    }
+                }
+            }
+
+            .modal-footer {
+                padding: 20px 60px;
+                .find-more-people-btn{
+                    background: $pluto-deep-blue;
+                    color: $white;
+                    padding: 15px 50px;
+                    border-radius: 8px;
+
+                    &:hover {
+                        box-shadow: 0 4px 9px -4px rgba(0, 0, 0, 0.35) !important;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .profile-layout {

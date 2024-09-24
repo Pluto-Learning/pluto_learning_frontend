@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@liveblocks/client": "^2.7.2",
+    "@liveblocks/react": "^2.7.2",
+    "@mui/material": "^6.1.1",
     "bootstrap": "^5.3.3",
     "date-fns": "^4.1.0",
     "iconoir-react": "^7.9.0",
