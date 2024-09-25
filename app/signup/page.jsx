@@ -14,40 +14,66 @@ export default function SignUp() {
   const [userType, setUserType] = useState("");
   const [secretKey, setSecretKey] = useState("");
 
-  const handleSubmit = (e) => {
-    if (userType == "Admin" && secretKey != "AdarshT") {
-      e.preventDefault();
-      alert("Invalid Admin");
-    } else {
-      e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   if (userType == "Admin" && secretKey != "AdarshT") {
+  //     e.preventDefault();
+  //     alert("Invalid Admin");
+  //   } else {
+  //     e.preventDefault();
+  //     console.log('', fname, lname, email, password);
+  //     fetch("http://localhost:5000/register", {
+  //       method: "POST",
+  //       crossDomain: true,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         "Access-Control-Allow-Origin": "*",
+  //       },
+  //       body: JSON.stringify({
+  //         fname,
+  //         email,
+  //         lname,
+  //         password,
+  //         userType,
+  //       }),
 
-      console.log(fname, lname, email, password);
-      fetch("http://localhost:5000/register", {
-        method: "POST",
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          fname,
-          email,
-          lname,
-          password,
-          userType,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data, "userRegister");
-          if (data.status == "ok") {
-            alert("Registration Successful");
-          } else {
-            alert("Something went wrong");
-          }
-        });
-    }
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log(data, "userRegister");
+  //         if (data.status == "ok") {
+  //           alert("Registration Successful");
+  //         } else {
+  //           alert("Something went wrong");
+  //         }
+  //       });
+  //   }
+  // };
+
+
+  // State to store form data
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    keepSignedIn: false,
+  });
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Process form data, e.g., send to API or validate
+    console.log(formData);
   };
 
   return (
@@ -55,7 +81,7 @@ export default function SignUp() {
     <div className="login-form-container">
       <div className="row g-0">
         <div className="col-lg-6">
-          <div className="login-welcome-bg" style={{backgroundImage: "url('/assets/images/loginform-bg.svg')"}}>
+          <div className="login-welcome-bg" style={{ backgroundImage: "url('/assets/images/loginform-bg.svg')" }}>
 
             <div className='nav-bar_logo'>
               <Link href="/">
@@ -100,8 +126,10 @@ export default function SignUp() {
                     <input
                       type="text"
                       className="firstName form-control"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
                       placeholder="First name"
-                      onChange={(e) => setFname(e.target.value)}
                     />
                   </div>
 
@@ -109,8 +137,10 @@ export default function SignUp() {
                     <input
                       type="text"
                       className="lastName form-control"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
                       placeholder="Last name"
-                      onChange={(e) => setLname(e.target.value)}
                     />
                   </div>
 
@@ -118,8 +148,10 @@ export default function SignUp() {
                     <input
                       type="email"
                       className="email form-control"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       placeholder="E-mail"
-                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
 
@@ -127,22 +159,37 @@ export default function SignUp() {
                     <input
                       type="password"
                       className="password form-control"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
                       placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                 </div>
+
                 <div className="text-center forgot-password mb-3">
                   <div className="d-flex justify-content-between align-items-center">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                      <label class="form-check-label" for="flexCheckDefault">Keep me signed in</label>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        name="keepSignedIn"
+                        checked={formData.keepSignedIn}
+                        onChange={handleChange}
+                        id="flexCheckDefault"
+                      />
+                      <label className="form-check-label" htmlFor="flexCheckDefault">
+                        Keep me signed in
+                      </label>
                     </div>
-                    <p className="mb-0"><Link href="/signin">Already a member?</Link></p>
+                    <p className="mb-0">
+                      <a href="/signin">Already a member?</a>
+                    </p>
                   </div>
                 </div>
+
                 <div className="startExploring">
-                  <button type="button" className="btn submit-btn">
+                  <button type="submit" className="btn submit-btn">
                     Start Exploring
                   </button>
                 </div>

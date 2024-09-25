@@ -1179,6 +1179,7 @@ h1, h2, h3, h4, h5, h6 {
 .profile-layout {
   background: #F9F9F9 !important;
   height: 100vh;
+  overflow: hidden;
 }
 .login-container .login-bg {
   background-repeat: no-repeat;
@@ -1668,4 +1669,541 @@ h1, h2, h3, h4, h5, h6 {
   padding: 15px !important;
   font-size: 16px;
   border-radius: 8px;
+}
+
+.calendar-schedule .calendar-schedule-left {
+  padding: 0 10px 0 10px;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 85vh;
+  scrollbar-width: thin;
+}
+.calendar-schedule .calendar-schedule-left .task-main {
+  border-top: 1px solid #E5E5E5;
+  padding: 20px 0;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-top {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-top .task-title {
+  font-family: "Nunito", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 25px;
+  margin-bottom: 0;
+  color: #8A8989;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-top .task-count {
+  padding: 5px 10px;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-top .task-count p {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom: 0;
+  color: #8A8989;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-top .dropdown .btn {
+  padding: 5px 10px;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-list {
+  max-height: 250px;
+  overflow-y: auto;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-list li {
+  padding-left: 0;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-list li .form-check-input {
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-list li .form-check-input:checked {
+  background-color: #4CD964;
+  border-color: #4CD964;
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-list li .form-check-input:focus {
+  border-color: rgba(76, 217, 100, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(76, 217, 100, 0.25);
+}
+.calendar-schedule .calendar-schedule-left .task-main .task-list li label {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22px;
+}
+.calendar-schedule .calendar-schedule-left .task-main .btn-wrapper {
+  padding: 15px 0;
+}
+.calendar-schedule .calendar-schedule-left .task-main .btn-wrapper .add-task-btn {
+  border: 1px solid #E5E5E5;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8A8989;
+}
+.calendar-schedule .calendar-schedule-right {
+  padding: 0 20px;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 85vh;
+  scrollbar-width: thin;
+}
+.calendar-schedule .calendar-schedule-right h4 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+}
+.calendar-schedule .calendar-schedule-right .task-main {
+  border-top: 1px solid #E5E5E5;
+  padding: 20px 0;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-top {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-top .task-title {
+  font-family: "Nunito", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 25px;
+  margin-bottom: 0;
+  color: #8A8989;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-top .task-count {
+  padding: 5px 10px;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-top .task-count p {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom: 0;
+  color: #8A8989;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-top .dropdown .btn {
+  padding: 5px 10px;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-list li {
+  padding-left: 0;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-list li .form-check-input {
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-list li .form-check-input:checked {
+  background-color: #4CD964;
+  border-color: #4CD964;
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-list li .form-check-input:focus {
+  border-color: rgba(76, 217, 100, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(76, 217, 100, 0.25);
+}
+.calendar-schedule .calendar-schedule-right .task-main .task-list li label {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22px;
+}
+.calendar-schedule .calendar-schedule-right .task-main .btn-wrapper {
+  padding: 15px 0;
+}
+.calendar-schedule .calendar-schedule-right .task-main .btn-wrapper .add-task-btn {
+  border: 1px solid #E5E5E5;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8A8989;
+}
+
+/* App.scss */
+.app-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.sidebar {
+  width: 30%;
+  max-width: 300px;
+  background-color: white;
+  border-right: 1px solid #ccc;
+  overflow-y: scroll;
+}
+
+.sidebar h3 {
+  padding: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #0084ff;
+}
+
+.chat-list {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.chat-list-item {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.chat-list-item:hover {
+  background-color: #f1f1f1;
+}
+
+.chat-list-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-list-item .name {
+  font-weight: bold;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+  background-color: #f1f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message-list-container {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: scroll;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.message.right {
+  justify-content: flex-end;
+}
+
+.message-bubble {
+  background-color: #0084ff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+
+.message-bubble.right {
+  background-color: #e4e6eb;
+  color: black;
+}
+
+.input-container {
+  display: flex;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #ccc;
+  align-items: center;
+}
+
+.input-container .input-field {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.input-container .send-button {
+  background-color: #0084ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.input-container .send-button:hover {
+  background-color: #006bbd;
+}
+
+/* === CONVERSATIONS === */
+.discussions {
+  width: 100%;
+  max-height: 700px;
+  overflow: hidden;
+  background-color: #87a3ec;
+  display: inline-block;
+}
+.discussions .discussion-chat {
+  max-height: 700px;
+  overflow-y: auto;
+}
+.discussions .discussion {
+  width: 100%;
+  height: 90px;
+  background-color: #FAFAFA;
+  border-bottom: solid 1px #E0E0E0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.discussions .discussion .photo {
+  margin-left: 20px;
+  display: block;
+  width: 45px;
+  height: 45px;
+  background: #E6E7ED;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.discussions .discussion .name {
+  margin: 0 0 0 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11pt;
+  color: #515151;
+}
+.discussions .discussion .message {
+  margin: 6px 0 0 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 9pt;
+  color: #515151;
+}
+.discussions .search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E0E0E0;
+}
+.discussions .search .searchbar {
+  height: 40px;
+  background-color: #FFF;
+  width: 70%;
+  padding: 0 20px;
+  border-radius: 50px;
+  border: 1px solid #EEEEEE;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.discussions .search .searchbar input {
+  margin-left: 15px;
+  height: 38px;
+  width: 100%;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+}
+.discussions .search .searchbar input *:-moz-placeholder {
+  color: #E0E0E0;
+}
+.discussions .search .searchbar input *::-moz-placeholder {
+  color: #E0E0E0;
+}
+.discussions .search .searchbar input *:-ms-input-placeholder {
+  color: #E0E0E0;
+}
+.discussions .search .searchbar *::-webkit-input-placeholder {
+  color: #E0E0E0;
+}
+.discussions .message-active {
+  width: 98.5%;
+  height: 90px;
+  background-color: #FFF;
+  border-bottom: solid 1px #E0E0E0;
+}
+
+.online {
+  position: relative;
+  top: 30px;
+  left: 35px;
+  width: 13px;
+  height: 13px;
+  background-color: #8BC34A;
+  border-radius: 13px;
+  border: 3px solid #FAFAFA;
+}
+
+.desc-contact {
+  height: 43px;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timer {
+  margin-left: 15%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  padding: 3px 8px;
+  color: #BBB;
+  background-color: #FFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 15px;
+}
+
+.chat {
+  height: 700px;
+}
+.chat .header-chat .icon {
+  margin-left: 30px;
+  color: #515151;
+  font-size: 14pt;
+}
+.chat .header-chat .name {
+  margin: 0 0 0 20px;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-size: 13pt;
+  color: #515151;
+}
+.chat .header-chat .right {
+  position: absolute;
+  right: 40px;
+}
+.chat .messages-chat {
+  padding: 25px 35px;
+}
+.chat .messages-chat .message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.chat .messages-chat .message .photo {
+  display: block;
+  width: 45px;
+  height: 45px;
+  background: #E6E7ED;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.chat .messages-chat .text {
+  margin: 0 35px;
+  background-color: #f6f6f6;
+  padding: 15px;
+  border-radius: 12px;
+}
+.chat .footer-chat .icon {
+  margin-left: 30px;
+  color: #C0C0C0;
+  font-size: 14pt;
+}
+.chat .footer-chat .send {
+  color: #fff;
+  background-color: #4f6ebd;
+  position: absolute;
+  right: 50px;
+  padding: 12px 12px 12px 12px;
+  border-radius: 50px;
+  font-size: 14pt;
+}
+.chat .footer-chat .name {
+  margin: 0 0 0 20px;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-size: 13pt;
+  color: #515151;
+}
+.chat .footer-chat .right {
+  position: absolute;
+  right: 40px;
+}
+
+.header-chat {
+  background-color: #FFF;
+  height: 90px;
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.text-only {
+  margin-left: 45px;
+}
+
+.time {
+  font-size: 10px;
+  color: lightgrey;
+  margin-bottom: 10px;
+  margin-left: 85px;
+}
+
+.response-time {
+  float: right;
+  margin-right: 40px !important;
+}
+
+.response {
+  float: right;
+  margin-right: 0px !important;
+  margin-left: auto;
+}
+.response .text {
+  background-color: #e3effd !important;
+}
+
+.footer-chat {
+  width: 95%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  background-color: transparent;
+  border-top: 2px solid #EEE;
+}
+.footer-chat *::-webkit-input-placeholder {
+  color: #C0C0C0;
+  font-size: 13pt;
+}
+.footer-chat input *:-moz-placeholder {
+  color: #C0C0C0;
+  font-size: 13pt;
+}
+.footer-chat input *::-moz-placeholder {
+  color: #C0C0C0;
+  font-size: 13pt;
+  margin-left: 5px;
+}
+.footer-chat input *:-ms-input-placeholder {
+  color: #C0C0C0;
+  font-size: 13pt;
+}
+
+.write-message {
+  border: none !important;
+  width: 60%;
+  height: 50px;
+  margin-left: 20px;
+  padding: 10px;
+}
+
+.clickable {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */
