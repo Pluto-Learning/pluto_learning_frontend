@@ -1,47 +1,50 @@
-"use client"
+"use client";
 import Link from "next/link";
-import React, { Component, useState } from "react";
-
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from 'axios'; // Import Axios
+import { routes } from "@/utils/route";
 
 export default function Signin() {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("");
-  const [secretKey, setSecretKey] = useState("");
+  // State to store form data
+  const [formData, setFormData] = useState({
+    email: '',
+    username: '',
+    password: '',
+  });
+  const router = useRouter(); // Initialize the router for navigation
 
-  const handleSubmit = (e) => {
-    if (userType == "Admin" && secretKey != "AdarshT") {
-      e.preventDefault();
-      alert("Invalid Admin");
-    } else {
-      e.preventDefault();
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-      console.log(fname, lname, email, password);
-      fetch("http://localhost:5000/register", {
-        method: "POST",
-        crossDomain: true,
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(routes.login, formData, { // Use the route from routes.js
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          userType,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data, "userRegister");
-          if (data.status == "ok") {
-            alert("Registration Successful");
-          } else {
-            alert("Something went wrong");
-          }
-        });
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const { token, userName } = response.data; // Destructure the response data
+      localStorage.setItem('token', token); // Save the JWT token in localStorage
+      localStorage.setItem('userName', userName); // Save the username if needed
+      router.push('/dashboard'); // Redirect to the dashboard or any other protected route
+    } catch (error) {
+      if (error.response) {
+        alert(`Login failed: ${error.response.data.message || 'Please check your credentials.'}`); // Show appropriate error message
+      } else {
+        console.error('Error logging in:', error);
+        alert('An error occurred. Please try again.'); // Display a generic error message
+      }
     }
   };
 
@@ -49,27 +52,16 @@ export default function Signin() {
     <div className="login-form-container">
       <div className="row g-0">
         <div className="col-lg-6">
-          <div className="login-welcome-bg" style={{backgroundImage: "url('/assets/images/loginform-bg.svg')"}}>
+          <div className="login-welcome-bg" style={{ backgroundImage: "url('/assets/images/loginform-bg.svg')" }}>
             <div className='nav-bar_logo'>
               <Link href="/">
                 <img src={'/assets/images/plutologo.svg'} alt='logo' />
               </Link>
             </div>
 
-            <p className="NiceToSeeYou">
-              NICE TO SEE YOU AGAIN
-            </p>
-            <h1 className="WelcomeBack">
-              WELCOME BACK
-            </h1>
-
-            {/* <div className="bar">
-
-            </div> */}
-
-            <p className="connectGrowexplore">
-              connect. grow. explore
-            </p>
+            <p className="NiceToSeeYou">NICE TO SEE YOU AGAIN</p>
+            <h1 className="WelcomeBack">WELCOME BACK</h1>
+            <p className="connectGrowexplore">connect. grow. explore</p>
           </div>
         </div>
         <div className="col-lg-6">
@@ -77,13 +69,6 @@ export default function Signin() {
             <div className="form-bg-content">
               <h3>Welcome Back!</h3>
               <div className="secondsText">
-                {/* <div>
-              {`You are only T-Minus 10 seconds away from an \n educational experience like no other, log in on Pluto\n now and see the difference!`
-                .split("\n")
-                .map((line, index) => (
-                  <p key={index}>{line}</p>
-                ))}
-            </div> */}
                 <p>You are only T-Minus 10 seconds away from an educational experience like no other, log in on Pluto now and see the difference!</p>
               </div>
 
@@ -91,19 +76,37 @@ export default function Signin() {
                 <div className="input-wrapper">
                   <div className="mb-3">
                     <input
-                      type="email"
+                      type="text"
                       className="form-control"
-                      placeholder="User ID"
-                      onChange={(e) => setEmail(e.target.value)}
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Email"
+                      required
                     />
                   </div>
 
-                  <div className="">
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="username"
+                      value={formData.username}
+                      onChange={handleChange}
+                      placeholder="Username"
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-3">
                     <input
                       type="password"
                       className="form-control"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
                       placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
+                      required
                     />
                   </div>
                 </div>
@@ -113,11 +116,11 @@ export default function Signin() {
                     <a href="/">Forgot Password?</a>
                   </p>
                   <p className="mb-0">
-                    <p><Link href="/signup">Don't have an account?</Link></p>
+                    <Link href="/signup">Don't have an account?</Link>
                   </p>
                 </div>
                 <div className="startExploring">
-                  <button type="button" className="btn submit-btn">
+                  <button type="submit" className="btn submit-btn">
                     Sign in
                   </button>
                 </div>
@@ -127,7 +130,5 @@ export default function Signin() {
         </div>
       </div>
     </div>
-
-
   );
 }

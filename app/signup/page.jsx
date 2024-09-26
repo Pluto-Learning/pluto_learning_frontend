@@ -111,11 +111,6 @@ export default function SignUp() {
               <h3>Sign-Up Now!</h3>
               <div className="secondsText">
                 <div>
-                  {/* {`You are only T-Minus 10 seconds away from an \n educational experience like no other, log in on Pluto\n now and see the difference!`
-.split("\n")
-.map((line, index) => (
-<p key={index}>{line}</p>
-))} */}
                   <p>You are only T-Minus 10 seconds away from an educational experience like no other, log in on Pluto now and see the difference!</p>
                 </div>
               </div>

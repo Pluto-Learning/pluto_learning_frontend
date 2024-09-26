@@ -9,7 +9,7 @@ export default function page() {
             <div className="container">
                 <div className='profile-content'>
                     <div className="invite-friends">
-                        <div className="row">
+                        <div className="row g-4">
                             <div className="col-lg-9">
                                 <div className="row g-4">
                                     <div className="col-12">
@@ -62,7 +62,7 @@ export default function page() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="right">
-                                                                    <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex justify-content-between btn-wrapper">
                                                                         <button class="btn friend-request-btn dismiss shadow-0" type="button">Dismiss</button>
                                                                         <button class="btn friend-request-btn accept shadow-0" type="button">Accept</button>
                                                                     </div>
@@ -86,7 +86,7 @@ export default function page() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="right">
-                                                                    <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex justify-content-between btn-wrapper">
                                                                         <button class="btn friend-request-btn dismiss shadow-0" type="button">Dismiss</button>
                                                                         <button class="btn friend-request-btn accept shadow-0" type="button">Accept</button>
                                                                     </div>
@@ -110,7 +110,7 @@ export default function page() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="right">
-                                                                    <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex justify-content-between btn-wrapper">
                                                                         <button class="btn friend-request-btn dismiss shadow-0" type="button">Dismiss</button>
                                                                         <button class="btn friend-request-btn accept shadow-0" type="button">Accept</button>
                                                                     </div>
@@ -150,7 +150,7 @@ export default function page() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="right">
-                                                                    <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex justify-content-between btn-wrapper">
                                                                         <button class="btn friend-request-btn dismiss shadow-0" type="button">Dismiss</button>
                                                                         <button class="btn friend-request-btn accept shadow-0" type="button">Accept</button>
                                                                     </div>
@@ -174,7 +174,7 @@ export default function page() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="right">
-                                                                    <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex justify-content-between btn-wrapper">
                                                                         <button class="btn friend-request-btn dismiss shadow-0" type="button">Dismiss</button>
                                                                         <button class="btn friend-request-btn accept shadow-0" type="button">Accept</button>
                                                                     </div>
@@ -198,7 +198,7 @@ export default function page() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="right">
-                                                                    <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex justify-content-between btn-wrapper">
                                                                         <button class="btn friend-request-btn dismiss shadow-0" type="button">Dismiss</button>
                                                                         <button class="btn friend-request-btn accept shadow-0" type="button">Accept</button>
                                                                     </div>
