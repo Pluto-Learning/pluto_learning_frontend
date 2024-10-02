@@ -1,11 +1,23 @@
+"use client"
 import JoinATablePopup from '@/components/JoinATablePopup'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 
 export default function () {
+
+    const token = useSelector((state) => state.auth.token);
+    const user = useSelector((state) => state.auth.user);
+  
+    useEffect(() => {
+      console.log('xxxx User:', user);
+      console.log('xxxx Token:', token);
+    }, [user, token]);
+
     return (
         <div>
+            <h1>Popular Table</h1>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#joinTable">
+            {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#joinTable">
                 Launch demo modal
             </button>
 
@@ -28,9 +40,9 @@ export default function () {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <JoinATablePopup />
+            {/* <JoinATablePopup /> */}
         </div>
     )
 }

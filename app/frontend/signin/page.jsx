@@ -1,52 +1,62 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from 'axios'; // Import Axios
-import { routes } from "@/utils/route";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "@/store/slices/authSlice";
+import { toast } from "react-toastify";
+import { loginUser } from "@/app/api/auth";
+import { setCookie } from "cookies-next";
+// import { setCookie } from 'cookie-next'; // Import the setCookie function
+// import { routes } from '../utils/routes'; // Import routes
 
 export default function Signin() {
-  // State to store form data
+
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
-    username: '',
+    userName: '',
     password: '',
   });
-  const router = useRouter(); // Initialize the router for navigation
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+// components/Signin.jsx
 
-    try {
-      const response = await axios.post(routes.login, formData, { // Use the route from routes.js
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const data = await loginUser(formData); // Your API call
 
-      const { token, userName } = response.data; // Destructure the response data
-      localStorage.setItem('token', token); // Save the JWT token in localStorage
-      localStorage.setItem('userName', userName); // Save the username if needed
-      router.push('/dashboard'); // Redirect to the dashboard or any other protected route
-    } catch (error) {
-      if (error.response) {
-        alert(`Login failed: ${error.response.data.message || 'Please check your credentials.'}`); // Show appropriate error message
-      } else {
-        console.error('Error logging in:', error);
-        alert('An error occurred. Please try again.'); // Display a generic error message
-      }
+    if (data && data.token) {
+      // Dispatch the login action
+      dispatch(login({ user: data.userName, token: data.token }));
+
+      // Set cookies manually (though it's done in the reducer too)
+      setCookie('user', data.userName);
+      setCookie('token', data.token);
+
+      toast.success('Login successful!');
+      router.push('/popular-table');
+    } else {
+      toast.error('Login failed.');
     }
-  };
+  } catch (error) {
+    console.error(error);
+    toast.error('An error occurred. Please try again.');
+  }
+};
+
+
+
+
+
+
 
   return (
     <div className="login-form-container">
