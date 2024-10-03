@@ -1,12 +1,12 @@
 "use client"
-import { createCourse, deleteCourse, fetchCourse, fetchCourseById, updateCourse } from '@/app/api/crud';
+import { createCourse, deleteCourse, fetchCourse, fetchCourseById, fetchGetAllCourseSectionMapping, updateCourse } from '@/app/api/crud';
 import React, { useEffect, useState } from 'react'
 
 export default function page() {
 
   const [isUpdateing, setIsUpdateing] = useState(false);
   const [currentCourseId, setCurrentCourseId] = useState(null);
-  const [course, setCourse] = useState([]);
+  const [allCourseSectionMapping, setAllCourseSectionMapping] = useState([]);
 
   const [formData, setFormData] = useState({
     courseId: '',
@@ -29,7 +29,7 @@ export default function page() {
     try {
       await createCourse(formData);
       resetForm();
-      getAllCourse();
+      // getAllCourse();
     } catch (error) {
       console.error("Error creating university:", error);
     }
@@ -38,14 +38,14 @@ export default function page() {
   const handleDelete = async (id) => {
     await deleteCourse(id);
     console.log(id)
-    getAllCourse();
+    // getAllCourse();
   }
 
   const handleUpdate = async () => {
     try {
       await updateCourse(currentCourseId, formData);  // Pass the current course ID and form data
       resetForm();   // Reset the form after update
-      getAllCourse();  // Refresh the course list
+      // getAllCourse();  // Refresh the course list
 
       console.log(currentCourseId, formData)
     } catch (error) {
@@ -53,10 +53,10 @@ export default function page() {
     }
   };
 
-  const getAllCourse = async () => {
+  const getAllCourseSectionMapping = async () => {
     try {
-      const data = await fetchCourse();
-      setCourse(data);
+      const data = await fetchGetAllCourseSectionMapping();
+      setAllCourseSectionMapping(data);
     } catch (error) {
       console.error('Error fetching universities:', error);
     }
@@ -98,7 +98,7 @@ export default function page() {
   };
 
   useEffect(() => {
-    getAllCourse();
+    getAllCourseSectionMapping();
   }, []);
 
   const resetForm = () => {
@@ -113,18 +113,18 @@ export default function page() {
     setCurrentCourseId(null);
   };
 
-  console.log('course: ', course)
+  // console.log('course: ', course)
 
   return (
     <div className='university-list'>
-      <h1>Course Section Binding</h1>
+      <h1>Course Section Mapping</h1>
       <div className="row">
         <div className="col-12">
           <div className="card">
             <div className="card-header d-flex justify-content-between align-items-center">
-              <h4>Course Section</h4>
+              <h4>Course Section Mapping</h4>
               <div>
-                <button className='btn btn-sm btn-info' data-bs-toggle="modal" data-bs-target="#exampleModal">Create +</button>
+                <button className='btn btn-sm pluto-blue-btn' data-bs-toggle="modal" data-bs-target="#exampleModal">Create +</button>
               </div>
             </div>
             <div className=" table-responsive">
@@ -132,48 +132,46 @@ export default function page() {
                 <thead>
                   <tr>
                     <th scope="col" className='text-center'>SL</th>
-                    <th scope="col" className='text-center'>courseId</th>
-                    <th scope="col" className='text-center'>courseName</th>
-                    <th scope="col" className='text-center'>courseNumber</th>
-                    <th scope="col" className='text-center'>sectionNumber</th>
-                    <th scope="col" className='text-center'>sectionTime</th>
-                    <th scope="col" className='text-center'>college</th>
+                    <th scope="col" className='text-center'>sectionCourseId</th>
+                    <th scope="col" className='text-center'>userID</th>
                     <th scope="col" className='text-center'>yearOfCourse</th>
-                    <th scope="col" className='text-center'>universityId</th>
+                    <th scope="col" className='text-center'>courseId</th>
+                    <th scope="col" className='text-center'>courseNumber</th>
+                    <th scope="col" className='text-center'>sectionId</th>
+                    <th scope="col" className='text-center'>sectionNumber</th>
                     <th scope="col" className='text-center'>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {
-                    course && course?.length > 0 &&
-                    course?.map((item, index) => {
-                      const { id, courseId, courseName, courseNumber, sectionNumber, sectionTime, college, yearOfCourse, universityId } = item;
+                  {
+                    allCourseSectionMapping && allCourseSectionMapping?.length > 0 &&
+                    allCourseSectionMapping?.map((item, index) => {
+                      const { id, sectionCourseId, userID, yearOfCourse, courseId, courseNumber, sectionId, sectionNumber } = item;
                       return (
                         <tr>
                           <td scope="row" className='text-center'>{index + 1}</td>
-                          <td className='text-center'>{courseId}</td>
-                          <td className='text-center'>{courseName}</td>
-                          <td className='text-center'>{courseNumber}</td>
-                          <td className='text-center'>{sectionNumber}</td>
-                          <td className='text-center'>{sectionTime}</td>
-                          <td className='text-center'>{college}</td>
+                          <td className='text-center'>{sectionCourseId}</td>
+                          <td className='text-center'>{userID}</td>
                           <td className='text-center'>{yearOfCourse}</td>
-                          <td className='text-center'>{universityId}</td>
+                          <td className='text-center'>{courseId}</td>
+                          <td className='text-center'>{courseNumber}</td>
+                          <td className='text-center'>{sectionId}</td>
+                          <td className='text-center'>{sectionNumber}</td>
                           <td className='text-center'>
                             <div className="d-grid gap-2 d-md-block">
                               <button
-                                className='btn btn-sm btn-warning me-md-2'
+                                className='btn btn-sm pluto-yellow-btn me-md-2'
                                 data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"
                                 onClick={() => getCourseById(item.courseId)}
                               >Update</button>
-                              <button className='btn btn-sm btn-danger' onClick={() => handleDelete(courseId)}>Delete</button>
+                              <button className='btn btn-sm pluto-pink-btn' onClick={() => handleDelete(courseId)}>Delete</button>
                             </div>
                           </td>
                         </tr>
                       )
                     })
-                  } */}
+                  }
                 </tbody>
               </table>
             </div>

@@ -124,7 +124,7 @@ export default function page() {
             <div className="card-header d-flex justify-content-between align-items-center">
               <h4>Section</h4>
               <div>
-                <button className='btn btn-sm btn-info' data-bs-toggle="modal" data-bs-target="#exampleModal">Create +</button>
+                <button className='btn btn-sm pluto-blue-btn' data-bs-toggle="modal" data-bs-target="#exampleModal">Create +</button>
               </div>
             </div>
             <div className=" table-responsive">
@@ -154,9 +154,9 @@ export default function page() {
                           <td className='text-center'>{sectionStartTime}</td>
                           <td className='text-center'>{sectionEndTime}</td>
                           <td className='text-center'>
-                            <div className="d-grid gap-2 d-md-block">
-                              <button className='btn btn-sm btn-warning me-md-2' onClick={() => getSectionById(sectionId)} data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
-                              <button className='btn btn-sm btn-danger' onClick={() => handleDelete(sectionId)}>Delete</button>
+                            <div className="btn-wrapper d-grid gap-2 d-md-block">
+                              <button className='btn btn-sm pluto-yellow-btn me-md-2' onClick={() => getSectionById(sectionId)} data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+                              <button className='btn btn-sm pluto-pink-btn' onClick={() => handleDelete(sectionId)}>Delete</button>
                             </div>
                           </td>
                         </tr>

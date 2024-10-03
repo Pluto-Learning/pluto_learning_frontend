@@ -121,7 +121,7 @@ export default function Page() {
             <div className="card-header d-flex justify-content-between align-items-center">
               <h4>University</h4>
               <button
-                className="btn btn-sm btn-info"
+                className="btn btn-sm pluto-blue-btn"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 onClick={() => resetForm()}
@@ -158,9 +158,9 @@ export default function Page() {
                       <td className="text-center">{item.contactInfo}</td>
                       <td className="text-center">{item.websiteUrl}</td>
                       <td className="text-center">
-                        <div className="d-grid gap-2 d-md-block">
+                        <div className="btn-wrapper d-grid gap-2 d-md-block">
                           <button
-                            className="btn btn-sm btn-warning me-md-2"
+                            className="btn btn-sm pluto-yellow-btn me-md-2"
                             data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
                             onClick={() => getUniversityById(item.universityId)}
@@ -168,7 +168,7 @@ export default function Page() {
                             Update
                           </button>
                           <button
-                            className="btn btn-sm btn-danger"
+                            className="btn btn-sm pluto-pink-btn"
                             onClick={() => handleDelete(item.universityId)}
                           >
                             Delete

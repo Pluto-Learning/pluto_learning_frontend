@@ -124,7 +124,7 @@ export default function page() {
             <div className="card-header d-flex justify-content-between align-items-center">
               <h4>Course</h4>
               <div>
-                <button className='btn btn-sm btn-info' data-bs-toggle="modal" data-bs-target="#exampleModal">Create +</button>
+                <button className='btn btn-sm pluto-blue-btn' data-bs-toggle="modal" data-bs-target="#exampleModal">Create +</button>
               </div>
             </div>
             <div className=" table-responsive">
@@ -160,14 +160,14 @@ export default function page() {
                           <td className='text-center'>{yearOfCourse}</td>
                           <td className='text-center'>{universityId}</td>
                           <td className='text-center'>
-                            <div className="d-grid gap-2 d-md-block">
+                            <div className="btn-wrapper d-grid gap-2 d-md-block">
                               <button
-                                className='btn btn-sm btn-warning me-md-2'
+                                className='btn btn-sm pluto-yellow-btn me-md-2'
                                 data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"
                                 onClick={() => getCourseById(item.courseId)}
                               >Update</button>
-                              <button className='btn btn-sm btn-danger' onClick={() => handleDelete(courseId)}>Delete</button>
+                              <button className='btn btn-sm pluto-pink-btn' onClick={() => handleDelete(courseId)}>Delete</button>
                             </div>
                           </td>
                         </tr>

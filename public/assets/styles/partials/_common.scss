@@ -3,8 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 @font-face {
-    font-family: "Coolvetica-Rg-Regular";
-    src: url("/assets/fonts/coolvetica_rg.otf") format("opentype");
+  font-family: "Coolvetica-Rg-Regular";
+  src: url("/assets/fonts/coolvetica_rg.otf") format("opentype");
 }
 
 @import './_variables';
@@ -33,8 +33,13 @@ a {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: $title-font;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $title-font;
 }
 
 .pt_50 {
@@ -54,27 +59,144 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal !important;
 
   &.dismiss {
+    background: #EBE7F6;
+    color: #3A0CA3;
+
+    &:hover {
       background: #EBE7F6;
       color: #3A0CA3;
-
-      &:hover {
-          background: #EBE7F6;
-          color: #3A0CA3;
-      }
+    }
   }
 
   &.accept {
-      background: #3A0CA3;
-      color: #EBE7F6;
+    background: #3A0CA3;
+    color: #EBE7F6;
 
-      &:hover {
-          background: #3A0CA3;
-          color: #fff;
-      }
+    &:hover {
+      background: #3A0CA3;
+      color: #fff;
+    }
   }
 
   &:hover {
-          box-shadow: 0 4px 9px -4px rgba(0,0,0,.35) !important;
+    box-shadow: 0 4px 9px -4px rgba(0, 0, 0, .35) !important;
+  }
+}
+
+.pluto-white-btn {
+  background-color: $pluto-white;
+  color: $pluto-black;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-white;
+    border: 1px solid $pluto-white;
+  }
+}
+
+.pluto-light-gray-btn {
+  background-color: $pluto-light-gray;
+  color: $white;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-light-gray;
+    border: 1px solid $pluto-light-gray;
+  }
+}
+
+.pluto-yellow-btn {
+  background-color: $pluto-yellow;
+  color: $pluto-black;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-yellow;
+    border: 1px solid $pluto-yellow;
+  }
+}
+
+.pluto-pink-btn {
+  background-color: $pluto-pink;
+  color: $white;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-pink;
+    border: 1px solid $pluto-pink;
+  }
+}
+
+.pluto-purple-btn {
+  background-color: $pluto-purple;
+  color: $white;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-purple;
+    border: 1px solid $pluto-purple;
+  }
+}
+
+.pluto-purple-light-btn {
+  background-color: $pluto-purple-light;
+  color: $white;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-purple-light;
+    border: 1px solid $pluto-purple-light;
+  }
+}
+
+.pluto-blue-btn {
+  background-color: $pluto-blue;
+  color: $white;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-blue;
+    border: 1px solid $pluto-blue;
+  }
+}
+
+.pluto-deep-blue-btn {
+  background-color: $pluto-deep-blue;
+  color: $white;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-deep-blue;
+    border: 1px solid $pluto-deep-blue;
+  }
+}
+
+.pluto-dark-blue-btn {
+  background-color: $pluto-dark-blue;
+  color: $white;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: transparent;
+    color: $pluto-dark-blue;
+    border: 1px solid $pluto-dark-blue;
   }
 }
 
@@ -86,6 +208,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes moverAnimation {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-20px); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
 }
