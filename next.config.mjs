@@ -14,10 +14,10 @@ const nextConfig = {
                 source: '/course-selection',
                 destination: '/frontend/course-selection',
             },
-            {
-                source: '/invite-friends',
-                destination: '/frontend/invite-friends',
-            },
+            // {
+            //     source: '/invite-friends',
+            //     destination: '/frontend/invite-friends',
+            // },
             {
                 source: '/login',
                 destination: '/frontend/login',

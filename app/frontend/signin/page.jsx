@@ -9,6 +9,7 @@ import { loginUser } from "@/app/api/auth";
 import { setCookie } from "cookies-next";
 // import { setCookie } from 'cookie-next'; // Import the setCookie function
 // import { routes } from '../utils/routes'; // Import routes
+import { signIn } from "next-auth/react"
 
 export default function Signin() {
 
@@ -30,6 +31,7 @@ export default function Signin() {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  await signIn("credentials", formData)
   try {
     const data = await loginUser(formData); // Your API call
 
@@ -92,7 +94,6 @@ const handleSubmit = async (e) => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="Email"
-                      required
                     />
                   </div>
 

@@ -3889,6 +3889,7 @@ $background-color_8: #4f6ebd;
         min-height: 100vh;
         transition: all 0.3s;
         background: $pluto-white;
+
         &.active {
             width: 100%;
         }
@@ -3966,7 +3967,7 @@ $background-color_8: #4f6ebd;
                                 color: $pluto-gray;
                                 font-size: 14px;
 
-                                .btn-wrapper{
+                                .btn-wrapper {
                                     width: 150px;
                                     margin: 0 auto;
                                 }
@@ -3997,8 +3998,194 @@ $background-color_8: #4f6ebd;
     }
 }
 
-
-
-
-
 // =================== BACKEND ENDS ======================= //
+
+.popular-tables {
+
+    .recent-table-wrapper {
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: cover !important;
+        padding: 50px 0 80px 0;
+
+        h2 {
+            margin-bottom: 40px;
+            font-family: $common-font;
+            font-size: 40px;
+            font-weight: 700;
+        }
+
+        .recent-tables {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+    }
+
+    .all-popular-table-main {
+        padding: 80px 0;
+
+        .top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+
+            .single {
+                text-align: center;
+                cursor: pointer;
+                transition: 0.5s ease;
+
+                .icon {
+                    background-color: $pluto-pink;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 10px;
+
+                    img {
+                        width: 50px;
+                    }
+                }
+
+                .info {
+                    h6 {
+                        font-family: $common-font;
+                        font-size: 18px;
+                        font-weight: 700;
+                    }
+                }
+
+                &:hover {
+                    transform: translateY(-10px);
+                }
+            }
+        }
+
+        .all-popular-table-card-wrapper {
+            margin-top: 50px;
+
+            .filter-section {
+                margin-bottom: 50px;
+
+                .search {
+                    input {
+                        box-shadow: 4.83px 4.83px 24.15px 3.62px #0000001A;
+                        width: 100%;
+                        border: none;
+                        padding: 20px 40px;
+                    }
+                }
+
+                .sort {
+                    .form-select {
+                        width: 200px;
+                        float: right;
+                        border: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .popular-table-card {
+        border-radius: 12px;
+        box-shadow: 15px 15px 25px 0px #0000001A;
+        border: none;
+        transition: 0.5s ease;
+
+        .card-body {
+            padding: 20px;
+
+            .card-img {
+                margin-bottom: 20px;
+
+                img {
+                    border-radius: 8px;
+                }
+            }
+
+            .card-info {
+                .table-name {
+                    font-size: 18px;
+                    font-weight: 700;
+                    font-family: $common-font;
+                    margin-bottom: 5px;
+                    color: $pluto-dark-blue;
+                }
+
+                .college-name {
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: $pluto-gray;
+                    margin-bottom: 5px;
+                }
+            }
+
+        }
+
+        .card-footer {
+            padding: 0 20px 20px 20px;
+            background-color: $white;
+            display: flex;
+            justify-content: space-between;
+
+            .invite-btn {
+                font-size: 14px;
+                border: none;
+            }
+        }
+
+        &.create-card {
+            cursor: pointer;
+            transition: 0.5s ease;
+            .card-body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .create-info {
+                    text-align: center;
+                    .icon {
+                        margin-bottom: 20px;
+                        svg {
+                            transition: 0.5s ease;
+                        }
+                    }
+                    h4 {
+                        font-family: $common-font;
+                        font-weight: 700;
+                        text-transform: capitalize;
+                        transition: 0.3s ease;
+                    }
+                }
+            }
+
+            &:hover {
+                background-color: $pluto-pink;
+                .card-body {
+                    .create-info {
+                        .icon {
+                            svg {
+                                path {
+                                    fill: $white;
+                                }
+                            }
+                        }
+                        h4 {
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            transform: translateY(-10px);
+        }
+    }
+}
