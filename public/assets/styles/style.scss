@@ -4001,6 +4001,74 @@ $background-color_8: #4f6ebd;
 // =================== BACKEND ENDS ======================= //
 
 .popular-tables {
+    
+
+    .popular-table-slider {
+        padding: 200px 0 100px 0;
+        // height: 100vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+
+        h1 {
+            text-align: center;
+            margin-bottom: 0;
+            font-family: $common-font;
+            color: $white;
+            font-size: 60px;
+            font-weight: 700; 
+        }
+
+        .swiper {
+            // width: 100%;
+            padding-top: 100px;
+            padding-bottom: 100px;
+            overflow: unset;
+
+            .swiper-pagination{
+                background: $white;
+                width: unset;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -50px;
+                padding: 20px;
+                border-radius: 10px;
+
+                .swiper-pagination-bullet{
+                    &.swiper-pagination-bullet-active{
+                        background: $pluto-pink;
+                    }
+                }
+            }
+        }
+
+        .swiper-slide {
+            // background-position: center;
+            // background-size: cover;
+            // width: 300px;
+            // height: 300px;
+            transition: 0.3s;
+
+            &.swiper-slide-active {
+                transform: scale(1.2);
+            }
+
+            .popular-table-card {
+                box-shadow: none;
+
+                &:hover {
+                    transform: translateY(0px);
+                }
+            }
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+        }
+
+
+    }
 
     .recent-table-wrapper {
         background-repeat: no-repeat !important;
@@ -4092,100 +4160,146 @@ $background-color_8: #4f6ebd;
             }
         }
     }
+}
 
-    .popular-table-card {
-        border-radius: 12px;
-        box-shadow: 15px 15px 25px 0px #0000001A;
-        border: none;
+.popular-table-card {
+    border-radius: 20px;
+    box-shadow: 15px 15px 25px 0px #0000001A;
+    border: none;
+    transition: 0.5s ease;
+
+    .card-body {
+        padding: 20px;
+        position: relative;
+
+        .status{
+            background: $white;
+            position: absolute;
+            z-index: 9;
+            left: 30px;
+            top: 30px;
+            height: 30px;
+            width: 100px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            
+
+            &-light {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 100%;
+                
+                &.unavailable {
+                    background: $pluto-pink;
+                }
+                
+                &.available {
+                    background: $pluto-checkbox-green;
+                }
+            }
+
+            &-title {
+                display: inline-block;
+                font-size: 12px;
+                font-weight: 600;
+            }
+        }
+
+        .card-img {
+            margin-bottom: 20px;
+
+            img {
+                border-radius: 8px;
+            }
+        }
+
+        .card-info {
+            .table-name {
+                font-size: 18px;
+                font-weight: 700;
+                font-family: $common-font;
+                margin-bottom: 5px;
+                color: $pluto-dark-blue;
+            }
+
+            .college-name {
+                font-size: 14px;
+                font-weight: 500;
+                color: $pluto-gray;
+                margin-bottom: 5px;
+            }
+        }
+
+    }
+
+    .card-footer {
+        padding: 0 20px 20px 20px;
+        background-color: $white;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 20px;
+
+        .invite-btn {
+            font-size: 14px;
+            border: none;
+        }
+    }
+
+    &.create-card {
+        cursor: pointer;
         transition: 0.5s ease;
 
         .card-body {
-            padding: 20px;
-
-            .card-img {
-                margin-bottom: 20px;
-
-                img {
-                    border-radius: 8px;
-                }
-            }
-
-            .card-info {
-                .table-name {
-                    font-size: 18px;
-                    font-weight: 700;
-                    font-family: $common-font;
-                    margin-bottom: 5px;
-                    color: $pluto-dark-blue;
-                }
-
-                .college-name {
-                    font-size: 14px;
-                    font-weight: 500;
-                    color: $pluto-gray;
-                    margin-bottom: 5px;
-                }
-            }
-
-        }
-
-        .card-footer {
-            padding: 0 20px 20px 20px;
-            background-color: $white;
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
 
-            .invite-btn {
-                font-size: 14px;
-                border: none;
-            }
-        }
+            .create-info {
+                text-align: center;
 
-        &.create-card {
-            cursor: pointer;
-            transition: 0.5s ease;
-            .card-body {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .create-info {
-                    text-align: center;
-                    .icon {
-                        margin-bottom: 20px;
-                        svg {
-                            transition: 0.5s ease;
-                        }
-                    }
-                    h4 {
-                        font-family: $common-font;
-                        font-weight: 700;
-                        text-transform: capitalize;
-                        transition: 0.3s ease;
+                .icon {
+                    margin-bottom: 20px;
+
+                    svg {
+                        transition: 0.5s ease;
                     }
                 }
-            }
 
-            &:hover {
-                background-color: $pluto-pink;
-                .card-body {
-                    .create-info {
-                        .icon {
-                            svg {
-                                path {
-                                    fill: $white;
-                                }
-                            }
-                        }
-                        h4 {
-                            color: $white;
-                        }
-                    }
+                h4 {
+                    font-family: $common-font;
+                    font-weight: 700;
+                    text-transform: capitalize;
+                    transition: 0.3s ease;
                 }
             }
         }
 
         &:hover {
-            transform: translateY(-10px);
+            background-color: $pluto-pink;
+
+            .card-body {
+                .create-info {
+                    .icon {
+                        svg {
+                            path {
+                                fill: $white;
+                            }
+                        }
+                    }
+
+                    h4 {
+                        color: $white;
+                    }
+                }
+            }
         }
+    }
+
+    &:hover {
+        transform: translateY(-10px);
     }
 }

@@ -3210,6 +3210,53 @@ h6 {
   }
 }
 
+.popular-tables .popular-table-slider {
+  padding: 200px 0 100px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.popular-tables .popular-table-slider h1 {
+  text-align: center;
+  margin-bottom: 0;
+  font-family: "Nunito", sans-serif;
+  color: #fff;
+  font-size: 60px;
+  font-weight: 700;
+}
+.popular-tables .popular-table-slider .swiper {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  overflow: unset;
+}
+.popular-tables .popular-table-slider .swiper .swiper-pagination {
+  background: #fff;
+  width: unset;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -50px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.popular-tables .popular-table-slider .swiper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #F72585;
+}
+.popular-tables .popular-table-slider .swiper-slide {
+  transition: 0.3s;
+}
+.popular-tables .popular-table-slider .swiper-slide.swiper-slide-active {
+  transform: scale(1.2);
+}
+.popular-tables .popular-table-slider .swiper-slide .popular-table-card {
+  box-shadow: none;
+}
+.popular-tables .popular-table-slider .swiper-slide .popular-table-card:hover {
+  transform: translateY(0px);
+}
+.popular-tables .popular-table-slider .swiper-slide img {
+  display: block;
+  width: 100%;
+}
 .popular-tables .recent-table-wrapper {
   background-repeat: no-repeat !important;
   background-position: center !important;
@@ -3281,77 +3328,111 @@ h6 {
   float: right;
   border: none;
 }
-.popular-tables .popular-table-card {
-  border-radius: 12px;
+
+.popular-table-card {
+  border-radius: 20px;
   box-shadow: 15px 15px 25px 0px rgba(0, 0, 0, 0.1019607843);
   border: none;
   transition: 0.5s ease;
 }
-.popular-tables .popular-table-card .card-body {
+.popular-table-card .card-body {
   padding: 20px;
+  position: relative;
 }
-.popular-tables .popular-table-card .card-body .card-img {
+.popular-table-card .card-body .status {
+  background: #fff;
+  position: absolute;
+  z-index: 9;
+  left: 30px;
+  top: 30px;
+  height: 30px;
+  width: 100px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.popular-table-card .card-body .status-light {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+}
+.popular-table-card .card-body .status-light.unavailable {
+  background: #F72585;
+}
+.popular-table-card .card-body .status-light.available {
+  background: #4CD964;
+}
+.popular-table-card .card-body .status-title {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+}
+.popular-table-card .card-body .card-img {
   margin-bottom: 20px;
 }
-.popular-tables .popular-table-card .card-body .card-img img {
+.popular-table-card .card-body .card-img img {
   border-radius: 8px;
 }
-.popular-tables .popular-table-card .card-body .card-info .table-name {
+.popular-table-card .card-body .card-info .table-name {
   font-size: 18px;
   font-weight: 700;
   font-family: "Nunito", sans-serif;
   margin-bottom: 5px;
   color: #010231;
 }
-.popular-tables .popular-table-card .card-body .card-info .college-name {
+.popular-table-card .card-body .card-info .college-name {
   font-size: 14px;
   font-weight: 500;
   color: #8A8989;
   margin-bottom: 5px;
 }
-.popular-tables .popular-table-card .card-footer {
+.popular-table-card .card-footer {
   padding: 0 20px 20px 20px;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
+  border-radius: 20px;
 }
-.popular-tables .popular-table-card .card-footer .invite-btn {
+.popular-table-card .card-footer .invite-btn {
   font-size: 14px;
   border: none;
 }
-.popular-tables .popular-table-card.create-card {
+.popular-table-card.create-card {
   cursor: pointer;
   transition: 0.5s ease;
 }
-.popular-tables .popular-table-card.create-card .card-body {
+.popular-table-card.create-card .card-body {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.popular-tables .popular-table-card.create-card .card-body .create-info {
+.popular-table-card.create-card .card-body .create-info {
   text-align: center;
 }
-.popular-tables .popular-table-card.create-card .card-body .create-info .icon {
+.popular-table-card.create-card .card-body .create-info .icon {
   margin-bottom: 20px;
 }
-.popular-tables .popular-table-card.create-card .card-body .create-info .icon svg {
+.popular-table-card.create-card .card-body .create-info .icon svg {
   transition: 0.5s ease;
 }
-.popular-tables .popular-table-card.create-card .card-body .create-info h4 {
+.popular-table-card.create-card .card-body .create-info h4 {
   font-family: "Nunito", sans-serif;
   font-weight: 700;
   text-transform: capitalize;
   transition: 0.3s ease;
 }
-.popular-tables .popular-table-card.create-card:hover {
+.popular-table-card.create-card:hover {
   background-color: #F72585;
 }
-.popular-tables .popular-table-card.create-card:hover .card-body .create-info .icon svg path {
+.popular-table-card.create-card:hover .card-body .create-info .icon svg path {
   fill: #fff;
 }
-.popular-tables .popular-table-card.create-card:hover .card-body .create-info h4 {
+.popular-table-card.create-card:hover .card-body .create-info h4 {
   color: #fff;
 }
-.popular-tables .popular-table-card:hover {
+.popular-table-card:hover {
   transform: translateY(-10px);
 }/*# sourceMappingURL=style.css.map */
