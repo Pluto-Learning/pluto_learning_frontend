@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import axiosInstance from '@/utils/axiosInstance';
 import { toast } from 'react-toastify';
 import { login } from '@/store/slices/authSlice';
+import { signIn } from "next-auth/react"
 
 export default function AdminLogin() {
   const dispatch = useDispatch();
@@ -27,19 +28,28 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axiosInstance.post('/admin-login', formData);
-      const { userName, token } = response.data;
 
-      // Dispatch login action
-      dispatch(login({ user: userName, token }));
-
-      // Redirect to the admin dashboard or another page
-      toast.success("Login successful!");
-      router.push('/backend/admin-dashboard'); // Change this to your actual path
-    } catch (error) {
-      toast.error("Login failed. Please try again.");
+    let nextAuthData = await signIn("credentials", {
+      ...formData,
+      redirect: false
+    })
+    console.log(nextAuthData)
+    if (nextAuthData?.ok == true) {
+      router.push('/admin/dashboard')
     }
+    // try {
+    //   const response = await axiosInstance.post('/admin-login', formData);
+    //   const { userName, token } = response.data;
+
+    //   // Dispatch login action
+    //   dispatch(login({ user: userName, token }));
+
+    //   // Redirect to the admin dashboard or another page
+    //   toast.success("Login successful!");
+    //   router.push('/backend/admin-dashboard'); // Change this to your actual path
+    // } catch (error) {
+    //   toast.error("Login failed. Please try again.");
+    // }
   };
 
   return (

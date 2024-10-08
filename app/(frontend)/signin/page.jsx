@@ -31,27 +31,33 @@ export default function Signin() {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  await signIn("credentials", formData)
-  try {
-    const data = await loginUser(formData); // Your API call
-
-    if (data && data.token) {
-      // Dispatch the login action
-      dispatch(login({ user: data.userName, token: data.token }));
-
-      // Set cookies manually (though it's done in the reducer too)
-      setCookie('user', data.userName);
-      setCookie('token', data.token);
-
-      toast.success('Login successful!');
-      router.push('/popular-table');
-    } else {
-      toast.error('Login failed.');
-    }
-  } catch (error) {
-    console.error(error);
-    toast.error('An error occurred. Please try again.');
+  let nextAuthData=await signIn("credentials", {
+    ...formData,
+    redirect:false
+  })
+  console.log(nextAuthData)
+  if(nextAuthData?.ok==true){
+     router.push('/popular-table')
   }
+  // try {
+  //   const data = await loginUser(formData); // Your API call
+  //   if (data && data.token) {
+  //     // Dispatch the login action
+  //     dispatch(login({ user: data.userName, token: data.token }));
+
+  //     // Set cookies manually (though it's done in the reducer too)
+  //     setCookie('user', data.userName);
+  //     setCookie('token', data.token);
+
+  //     toast.success('Login successful!');
+  //     router.push('/popular-table');
+  //   } else {
+  //     toast.error('Login failed.');
+  //   }
+  // } catch (error) {
+  //   console.error(error);
+  //   toast.error('An error occurred. Please try again.');
+  // }
 };
 
 

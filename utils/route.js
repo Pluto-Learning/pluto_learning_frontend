@@ -31,4 +31,13 @@ export const routes = {
   GetCourseSectionDetailsById: '/Course/GetCourseSectionDetailsById',
   GetAllStudentCourseSectionDetails: '/Course/GetAllStudentCourseSectionDetails',
   GetStudentCourseSectionDetailsById: '/Course/GetStudentCourseSectionDetailsById',
+
+  // User Registration
+  GetAllUser: '/UserSetup/GetAllUserSetup',
+  CreateUser: '/UserSetup/SaveRegistrationSetup',
+
+    // User Profile
+    GetUserProfileById: '/UserProfile/GetUserProfileById?UserId=',
+    SaveUserProfile: '/UserSetup/SaveUserProfile',
+    UpdateProfilePicture: '/UserProfile/UpdateProfilePicture/'
 };

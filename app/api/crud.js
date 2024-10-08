@@ -250,3 +250,61 @@ export const fetchStudentCourseSectionDetailsById = async (id) => {
     throw error;
   }
 };
+
+
+
+
+//==================== CRUD FOR USER REGISTRATION ====================
+export const createUser = async (data) => {
+  try {
+    const response = await apiClient.post(routes.CreateUser, data);
+    toast.success('Successfully Registered');
+    return response.data;
+  } catch (error) {
+    toast.error('Error creating the course.');
+    throw error;
+  }
+};
+
+
+//==================== CRUD FOR USER PROFILE SETUP ====================
+
+export const fetchUserProfileById = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetUserProfileById + '/' + id);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const saveUserProfile = async (data) => {
+  try {
+    const response = await apiClient.post(routes.SaveUserProfile, data);
+    toast.success('Successfully Registered');
+    return response.data;
+  } catch (error) {
+    toast.error('Error creating the course.');
+    throw error;
+  }
+};
+
+export const UserImageUpload = async (userID, imageFile) => {
+
+   // Prepare form data for the image upload
+   const formData = new FormData();
+   formData.append('image', imageFile);
+
+  try {
+    const response = await apiClient.put(routes.UpdateProfilePicture + userID, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Override the default JSON content type
+      },
+    });
+    toast.success('Successfully Registered');
+    return response.data;
+  } catch (error) {
+    toast.error('Error creating the course.');
+    throw error;
+  }
+};

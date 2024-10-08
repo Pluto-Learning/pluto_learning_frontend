@@ -3,13 +3,16 @@ import Link from "next/link";
 import React, { useState } from "react";
 import axios from "axios"; // Import axios
 import { routes } from "@/utils/route";
+import { createUser } from "@/app/api/crud";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
+    userID: '',
     firstName: '',
     lastName: '',
     email: '',
     password: '',
+    userType: '',
     keepSignedIn: false,
   });
 
@@ -21,23 +24,31 @@ export default function SignUp() {
     });
   };
 
+  const handleCreateUser = async (e) => {
+    try {
+      await createUser(formData);
+      resetForm();
+    } catch (error) {
+      console.error("Error creating User:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await handleCreateUser()
+    console.log(formData)
+  };
 
-    try {
-      const response = await axios.post(routes.signup, formData);
-
-      const data = response.data;
-
-      if (data.status === "ok") {
-        alert("Registration successful!");
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error during registration:", error);
-      alert("Failed to register. Please check your connection or try again later.");
-    }
+  const resetForm = () => {
+    setFormData({
+      userID: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      userType: '',
+      keepSignedIn: false,
+    });
   };
 
   return (
@@ -66,6 +77,16 @@ export default function SignUp() {
                     <input
                       type="text"
                       className="firstName form-control"
+                      name="userID"
+                      value={formData.userID}
+                      onChange={handleChange}
+                      placeholder="User Name"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="firstName form-control"
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
@@ -80,6 +101,16 @@ export default function SignUp() {
                       value={formData.lastName}
                       onChange={handleChange}
                       placeholder="Last name"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="lastName form-control"
+                      name="userType"
+                      value={formData.userType}
+                      onChange={handleChange}
+                      placeholder="User Type"
                     />
                   </div>
                   <div className="mb-3">

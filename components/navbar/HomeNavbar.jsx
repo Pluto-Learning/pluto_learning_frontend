@@ -1,8 +1,13 @@
 "use client"
+import { useSession } from 'next-auth/react';
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 export default function HomeNavbar() {
+
+    const { data, status } = useSession()
+
+    console.log('session: ', data)
 
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -99,9 +104,14 @@ export default function HomeNavbar() {
                             </div>
 
                             <div className='nav-bar-links-signup d-none d-lg-block'>
-                                <button type="button">
-                                    <Link href="/login">Sign in</Link>
-                                </button>
+                                {
+                                    status === 'unauthenticated' ? <button type="button">
+                                        <Link href="/login">Sign in</Link>
+                                    </button> : <button type="button">
+                                        <Link href="/login">Sign out</Link>
+                                    </button>
+                                }
+
                             </div>
                         </div>
                     </nav>
