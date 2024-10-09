@@ -36,8 +36,22 @@ export const routes = {
   GetAllUser: '/UserSetup/GetAllUserSetup',
   CreateUser: '/UserSetup/SaveRegistrationSetup',
 
-    // User Profile
-    GetUserProfileById: '/UserProfile/GetUserProfileById?UserId=',
-    SaveUserProfile: '/UserSetup/SaveUserProfile',
-    UpdateProfilePicture: '/UserProfile/UpdateProfilePicture/'
+  // User Profile
+  GetUserProfileById: '/UserProfile/GetUserProfileById?UserId=',
+  SaveUserProfile: '/UserProfile/SaveUserProfile',
+  UpdateProfilePicture: '/UserProfile/UpdateProfilePicture/',
+
+  // Tables
+  GetAllTable: '/Table/GetAllTable',
+  GetTableByRoomId: '/Table/GetTableByRoomId',
+  SaveTableInformation: '/Table/SaveTableInformation',
+  UpdateTableInformation: '/Table/UpdateTableInformation',
+  UpdateTablePicture: '/Table/UpdateTablePicture',
+  DeleteTableData: '/Table/DeleteTableData',
+  GetAllTableDetails: '/Table/GetAllTableDetails',
+  GetTableDetailById: '/Table/GetTableDetailById',
+  AddTableMember: '/Table/AddTableMember',
+  UpdateAddTableMember: '/Table/UpdateAddTableMember',
+  GetTableMembersDetailsById: '/Table/GetTableMembersDetailsById',
+
 };

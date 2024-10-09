@@ -1,23 +1,15 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "@/store/slices/authSlice";
-import { toast } from "react-toastify";
-import { loginUser } from "@/app/api/auth";
-import { setCookie } from "cookies-next";
-// import { setCookie } from 'cookie-next'; // Import the setCookie function
-// import { routes } from '../utils/routes'; // Import routes
-import { signIn } from "next-auth/react"
+import { signIn, getSession } from "next-auth/react";
 
 export default function Signin() {
 
-  const dispatch = useDispatch();
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
-    userName: '',
+    username: '',
     password: '',
   });
 
@@ -27,39 +19,30 @@ export default function Signin() {
   };
 
   // Handle form submission
-// components/Signin.jsx
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  let nextAuthData=await signIn("credentials", {
-    ...formData,
-    redirect:false
-  })
-  console.log(nextAuthData)
-  if(nextAuthData?.ok==true){
-     router.push('/popular-table')
-  }
-  // try {
-  //   const data = await loginUser(formData); // Your API call
-  //   if (data && data.token) {
-  //     // Dispatch the login action
-  //     dispatch(login({ user: data.userName, token: data.token }));
+    // Sign in using NextAuth
+    let nextAuthData = await signIn("credentials", {
+      ...formData,
+      redirect: false // prevent auto redirect
+    });
 
-  //     // Set cookies manually (though it's done in the reducer too)
-  //     setCookie('user', data.userName);
-  //     setCookie('token', data.token);
+    console.log('nextAuthData: ', nextAuthData)
 
-  //     toast.success('Login successful!');
-  //     router.push('/popular-table');
-  //   } else {
-  //     toast.error('Login failed.');
-  //   }
-  // } catch (error) {
-  //   console.error(error);
-  //   toast.error('An error occurred. Please try again.');
-  // }
-};
+    if (nextAuthData?.ok) {
+      // Manually refresh session to update without page reload
+      // const session = await getSession();
+      // console.log("Session updated after sign-in:", session);
 
+      await getSession();
+
+      // Redirect to desired page
+      router.push('/popular-table');
+    } else {
+      console.log("Login failed:", nextAuthData.error);
+    }
+  };
 
   return (
     <div className="login-form-container">
@@ -95,6 +78,7 @@ const handleSubmit = async (e) => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="Email"
+                      required
                     />
                   </div>
 

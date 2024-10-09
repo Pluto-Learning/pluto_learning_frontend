@@ -1,13 +1,16 @@
 "use client"
 import { fetchUserProfileById, saveUserProfile, UserImageUpload } from '@/app/api/crud';
 import HomeLayout from '@/layouts/homeLayout/HomeLayout'
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 
-export default function page() {
-
-    const [singleUserProfile, setSingleUserProfile] = useState([])
-    const [currentUserId, setCurrentUserId] = useState(null)
+export default function Page() {
+    const { data: session } = useSession(); // Get session data
+    const [singleUserProfile, setSingleUserProfile] = useState([]);
+    const [currentUserId, setCurrentUserId] = useState(null);
 
     const [formData, setFormData] = useState({
         "userID": "",
@@ -20,33 +23,54 @@ export default function page() {
         "awsFileUrl": ""
     });
 
+    useEffect(() => {
+        if (session) {
+            setCurrentUserId(session.user.id); // Set currentUserId from session
+            setFormData((prev) => ({
+                ...prev,
+                userID: session.user.id, // Set userID in formData
+            }));
+        }
+    }, [session]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+
+        // Format date when the dateOfBirth field is changed
+        if (name === "dateOfBirth") {
+            const date = new Date(value);
+            const formattedDate = date.toISOString(); // Converts to ISO format
+            setFormData((prev) => ({
+                ...prev,
+                [name]: formattedDate, // Set the formatted date
+            }));
+        } else {
+            setFormData((prev) => ({
+                ...prev,
+                [name]: value,
+            }));
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleUserProfileSave()
+        handleUserProfileSave();
+        getUserData()
         console.log(formData);
     };
 
-    const handleUserProfileSave = async (e) => {
+    const handleUserProfileSave = async () => {
         try {
             await saveUserProfile(formData);
             resetForm();
         } catch (error) {
-            console.error("Error creating university:", error);
+            console.error("Error saving user profile:", error);
         }
     };
 
     const resetForm = () => {
         setFormData({
-            "userID": "",
+            "userID": session?.user.id || "", // Reset to current user ID if available
             "gender": "",
             "mobile": "",
             "dateOfBirth": "",
@@ -58,65 +82,182 @@ export default function page() {
     };
 
     const getUserData = async () => {
-        const data = await fetchUserProfileById(currentUserId)
-        setSingleUserProfile(data)
-    }
-
-    useEffect(() => {
-        getUserData()
-    }, [])
-
-
-
-    // ===============================================
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [previewImage, setPreviewImage] = useState(null);
-    const [userID, setUserID] = useState('');
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setSelectedImage(file);
-            setPreviewImage(URL.createObjectURL(file)); // Preview image before upload
+        if (currentUserId) {
+            const data = await fetchUserProfileById(currentUserId);
+            setSingleUserProfile(data);
         }
     };
 
-    const handleUserIDChange = (event) => {
-        setUserID(event.target.value);
+    useEffect(() => {
+        getUserData();
+    }, [currentUserId]);
+
+    console.log('SingleUserProfile: ', singleUserProfile)
+
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [preview, setPreview] = useState(null);
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            setSelectedFile(file);
+            setPreview(URL.createObjectURL(file));
+        } else {
+            console.error("No file selected or the file is invalid");
+        }
     };
 
-    const handleImgSubmit = async (event) => {
-        event.preventDefault();
+    const handleImgSubmit = async (e) => {
+        e.preventDefault();
 
-        // Ensure selected image and userID are provided
-        if (!selectedImage || !userID) {
-            toast.error("Please select an image and enter a user ID.");
+        if (!selectedFile) {
+            alert('Please select an image first');
             return;
         }
 
+        const formData = new FormData();
+        formData.append('file', selectedFile); // Change 'image' to 'file' or whatever is expected by the API
+
         try {
-            // Call the UserImageUpload function to handle the image upload
-            await UserImageUpload(userID, selectedImage);
-
-            // Reset form state after successful upload
-            setSelectedImage(null);
-            setPreviewImage(null);
-            setUserID('');
-
-            // Optionally refresh the list of universities if applicable
-            // getAllUniversities(); // Uncomment this if you have a function to fetch updated data
+            const response = await axios.put(
+                'http://192.168.1.225:3232/api/UserProfile/UpdateProfilePicture/' + session?.user?.id,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+            getUserData()
+            console.log('Image uploaded successfully:', response.data);
+            toast.success('Image uploaded successfully!');
         } catch (error) {
-            console.error("Error updating profile picture:", error);
-            toast.error("Error updating profile picture.");
+            console.error('Error uploading image:', error.response ? error.response.data : error);
+            toast.error('Error uploading image: ' + (error.response ? error.response.data.title : error.message));
         }
     };
+
+
+    // Clean up URL on unmount
+    useEffect(() => {
+        return () => {
+            if (preview) {
+                URL.revokeObjectURL(preview);
+            }
+        };
+    }, [preview]);
+
+    const [showImageUpload, setShowImageUpload] = useState(false)
 
 
     return (
         <div className='profile'>
+            <div className="container mt-5">
+                <div className="card mx-auto" style={{ width: '24rem' }}>
+                    <div className="card-body">
+                        <small className='text-muted'><i>Please at first Set info by clicking set info Button then set profile picture</i></small>
+                        {/* Profile Picture */}
+                        <div
+                            className="profile-image text-end position-relative"
+                        >
+                            <button
+                                className="btn btn-success btn-sm"
+                                onClick={() => setShowImageUpload((prev) => !prev)}
+                            >
+                                <i class="fa-regular fa-pen-to-square"></i> Edit Image
+                            </button>
+                            <div className="image"
+                                style={{
+                                    borderRadius: '100%',
+                                    // marginTop: '15px',
+                                    width: '150px',
+                                    height: '150px',
+                                    // objectFit: 'cover',
+                                    // display: 'block',
+                                    marginLeft: 'auto',
+                                    marginRight: 'auto',
+                                    overflow: 'hidden'
+                                }}
+                            >
+
+                                <img
+                                    src={singleUserProfile?.awsFileUrl ?? '/assets/images/image-placeholder.jpg'}
+                                    className=" img-fluid"
+                                    alt="Profile"
+                                // style={{
+                                //     borderRadius: '50%',
+                                //     marginTop: '15px',
+                                //     width: '150px',
+                                //     height: '150px',
+                                //     objectFit: 'cover',
+                                //     display: 'block',
+                                //     marginLeft: 'auto',
+                                //     marginRight: 'auto',
+                                // }}
+                                />
+                            </div>
+                        </div>
+
+                        {
+                            showImageUpload && <div className='image-upload'>
+                                <h5>Image Upload</h5>
+                                <form onSubmit={handleImgSubmit}>
+                                    <input type="file" accept="image/*" onChange={handleFileChange} className='form-control mb-2' />
+                                    <button type="submit" className='btn btn-secondary'>Upload</button>
+                                </form>
+                                {/* {preview && (
+                            <div>
+                                <h3>Image Preview:</h3>
+                                <img src={preview} alt="Image Preview" style={{ width: '200px' }} />
+                            </div>
+                        )} */}
+                            </div>
+                        }
+
+
+                        <div className="card-body text-center">
+                            <h4 className="card-title">User Profile</h4>
+                        </div>
+
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">
+                                <strong>User ID: </strong> {singleUserProfile?.userID}
+                            </li>
+                            <li className="list-group-item">
+                                <strong>Gender: </strong> {singleUserProfile?.gender}
+                            </li>
+                            <li className="list-group-item">
+                                <strong>Mobile: </strong> {singleUserProfile?.mobile}
+                            </li>
+                            <li className="list-group-item">
+                                <strong>Date of Birth: </strong> {singleUserProfile?.dateOfBirth}
+                            </li>
+                            <li className="list-group-item">
+                                <strong>Student Year: </strong> {singleUserProfile?.studentYear}
+                            </li>
+                            <li className="list-group-item">
+                                <strong>Status: </strong> {singleUserProfile?.status}
+                            </li>
+                        </ul>
+
+                        <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Set Info
+                            </button>
+                            <Link type="button" href="/" class="btn btn-primary">
+                                Back to Home
+                            </Link>
+                        </div>
+
+                       
+                    </div>
+                </div>
+            </div>
+
             <div className="container">
-                <h1>Usre Profile</h1>
-                <form onSubmit={handleSubmit}>
+                {/* <h1>User Profile</h1> */}
+                {/* <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="userID" className="form-label">User ID</label>
                         <input
@@ -125,10 +266,7 @@ export default function page() {
                             id="userID"
                             name="userID"
                             value={formData.userID}
-                            onChange={(e) => {
-                                handleChange(e);
-                                setCurrentUserId(e.target.value);
-                            }}
+                            readOnly // Make it read-only since it's set from session
                         />
                     </div>
                     <div className="mb-3">
@@ -163,7 +301,7 @@ export default function page() {
                             className="form-control"
                             id="dateOfBirth"
                             name="dateOfBirth"
-                            value={formData.dateOfBirth}
+                            value={formData.dateOfBirth ? formData.dateOfBirth.split("T")[0] : ""} // Display date correctly
                             onChange={handleChange}
                         />
                     </div>
@@ -189,92 +327,118 @@ export default function page() {
                             onChange={handleChange}
                         />
                     </div>
-                    {/* <div className="mb-3">
-                        <label htmlFor="profilePictureName" className="form-label">Profile Picture Name</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="profilePictureName"
-                            name="profilePictureName"
-                            value={formData.profilePictureName}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="awsFileUrl" className="form-label">AWS File URL</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="awsFileUrl"
-                            name="awsFileUrl"
-                            value={formData.awsFileUrl}
-                            onChange={handleChange}
-                        />
-                    </div> */}
                     <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
-                <br /><br />
+                </form> */}
+                {/* <br /><br /> */}
 
-                <div>
-                    <h1>Upload an Image</h1>
+                {/* <div>
+                    <h2>Image Upload</h2>
                     <form onSubmit={handleImgSubmit}>
-                        <div>
-                            <label>User ID:</label>
-                            <input
-                                type="text"
-                                value={userID}
-                                onChange={handleUserIDChange}
-                                placeholder="Enter your user ID"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Image:</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageChange}
-                                required
-                            />
-                        </div>
+                        <input type="file" accept="image/*" onChange={handleFileChange} />
                         <button type="submit">Upload</button>
                     </form>
-
-                    {previewImage && (
+                    {preview && (
                         <div>
-                            <h2>Image Preview:</h2>
-                            <img src={previewImage} alt="Selected" style={{ width: '300px' }} />
+                            <h3>Image Preview:</h3>
+                            <img src={preview} alt="Image Preview" style={{ width: '200px' }} />
                         </div>
                     )}
+                </div> */}
+
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="mb-3">
+                                        <label htmlFor="userID" className="form-label">User ID</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="userID"
+                                            name="userID"
+                                            value={formData.userID}
+                                            readOnly // Make it read-only since it's set from session
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="gender" className="form-label">Gender</label>
+                                        <select
+                                            className="form-select"
+                                            id="gender"
+                                            name="gender"
+                                            value={formData.gender}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="">Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="mobile" className="form-label">Mobile</label>
+                                        <input
+                                            type="tel"
+                                            className="form-control"
+                                            id="mobile"
+                                            name="mobile"
+                                            value={formData.mobile}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="dateOfBirth" className="form-label">Date of Birth</label>
+                                        <input
+                                            type="date"
+                                            className="form-control"
+                                            id="dateOfBirth"
+                                            name="dateOfBirth"
+                                            value={formData.dateOfBirth ? formData.dateOfBirth.split("T")[0] : ""} // Display date correctly
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="studentYear" className="form-label">Student Year</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="studentYear"
+                                            name="studentYear"
+                                            value={formData.studentYear}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="status" className="form-label">Status</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="status"
+                                            name="status"
+                                            value={formData.status}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            {/* <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div> */}
+                        </div>
+                    </div>
                 </div>
 
-                <hr />
 
-                <table class="table mt-5">
-                    <thead>
-                        <tr>
-                            <th scope="col">User ID</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Mobile</th>
-                            <th scope="col">DOB</th>
-                            <th scope="col">Year</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
+
+
         </div>
     )
 }

@@ -1,5 +1,5 @@
 "use client"
-// app/backend/layout.jsx
+// app/admin/layout.jsx
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Avatar, Badge, styled } from '@mui/material';
@@ -77,22 +77,22 @@ const BackendLayout = ({ children }) => {
             <div class="collapse" id="collapseExample">
               <ul className="nav flex-column">
                 <li className="nav-item">
-                  <Link href="/backend/settings/university" className="nav-link ps-4">
+                  <Link href="/admin/settings/university" className="nav-link ps-4">
                     University
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/backend/settings/section" className="nav-link ps-4">
+                  <Link href="/admin/settings/section" className="nav-link ps-4">
                     Section
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/backend/settings/course" className="nav-link ps-4">
+                  <Link href="/admin/settings/course" className="nav-link ps-4">
                     Course
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/backend/settings/course-section" className="nav-link ps-4">
+                  <Link href="/admin/settings/course-section" className="nav-link ps-4">
                     Course Section Bind
                   </Link>
                 </li>

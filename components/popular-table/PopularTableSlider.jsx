@@ -9,9 +9,9 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import VirtualTableCard from './VirtualTableCard';
 
-export default function PopularTableSlider({ tables }) {
+export default function PopularTableSlider({ table }) {
 
-    console.log('tables: ', tables)
+    console.log('tablesssssss: ', table)
 
     return (
         <>
@@ -27,12 +27,13 @@ export default function PopularTableSlider({ tables }) {
                 className="mySwiper"
             >
                 {/* {
-                    tables && tables?.length > 0 && tables?.map((item) => {
+                    table?.length > 0 && table?.map((item) => {
                         <SwiperSlide>
                             <VirtualTableCard />
                         </SwiperSlide>
                     })
                 } */}
+
                 <SwiperSlide>
                     <VirtualTableCard />
                 </SwiperSlide>

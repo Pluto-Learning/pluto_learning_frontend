@@ -271,7 +271,7 @@ export const createUser = async (data) => {
 
 export const fetchUserProfileById = async (id) => {
   try {
-    const response = await apiClient.get(routes.GetUserProfileById + '/' + id);
+    const response = await apiClient.get(routes.GetUserProfileById + id);
     return response.data;
   } catch (error) {
     throw error;
@@ -281,19 +281,20 @@ export const fetchUserProfileById = async (id) => {
 export const saveUserProfile = async (data) => {
   try {
     const response = await apiClient.post(routes.SaveUserProfile, data);
-    toast.success('Successfully Registered');
+    toast.success('Profile saved successfully');
     return response.data;
   } catch (error) {
     toast.error('Error creating the course.');
+    console.log(error)
     throw error;
   }
 };
 
 export const UserImageUpload = async (userID, imageFile) => {
 
-   // Prepare form data for the image upload
-   const formData = new FormData();
-   formData.append('image', imageFile);
+  // Prepare form data for the image upload
+  const formData = new FormData();
+  formData.append('image', imageFile);
 
   try {
     const response = await apiClient.put(routes.UpdateProfilePicture + userID, formData, {
@@ -305,6 +306,19 @@ export const UserImageUpload = async (userID, imageFile) => {
     return response.data;
   } catch (error) {
     toast.error('Error creating the course.');
+    throw error;
+  }
+};
+
+
+
+//==================== CRUD FOR TABLE ====================
+
+export const fetchAllTable = async () => {
+  try {
+    const response = await apiClient.get(routes.GetAllTable);
+    return response.data;
+  } catch (error) {
     throw error;
   }
 };

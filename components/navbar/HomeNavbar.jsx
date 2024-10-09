@@ -1,14 +1,21 @@
 "use client"
-import { useSession } from 'next-auth/react';
+import { fetchUserProfileById } from '@/app/api/crud';
+import { Avatar } from '@mui/material';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 export default function HomeNavbar() {
 
-    const { data, status } = useSession()
+    const [userData, setUserData] = useState([]);
+    const [currentUserId, setCurrentUserId] = useState(null);
 
-    console.log('session: ', data)
+    // const session = useSession();
 
+    const { data: session, status } = useSession();
+
+
+    console.log('session: ', session?.user?.id);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -22,6 +29,25 @@ export default function HomeNavbar() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+        if (session) {
+            setCurrentUserId(session?.user?.id); // Set currentUserId from session
+        }
+    }, [session]);
+
+    const getUserData = async () => {
+        if (currentUserId) {
+            const data = await fetchUserProfileById(currentUserId);
+            setUserData(data);
+        }
+    };
+
+    useEffect(() => {
+        getUserData();
+    }, [currentUserId]);
+
+    console.log('userData: ', userData)
 
     return (
         <>
@@ -105,14 +131,28 @@ export default function HomeNavbar() {
 
                             <div className='nav-bar-links-signup d-none d-lg-block'>
                                 {
-                                    status === 'unauthenticated' ? <button type="button">
-                                        <Link href="/login">Sign in</Link>
-                                    </button> : <button type="button">
-                                        <Link href="/login">Sign out</Link>
-                                    </button>
+                                    status === 'unauthenticated' ?
+                                        <button type="button">
+                                            <Link href="/login">Sign in</Link>
+                                        </button> :
+                                        <button type="button">
+                                            <a href="javascript:void(0)" onClick={() => signOut()}>Sign out</a>
+                                        </button>
                                 }
-
                             </div>
+
+
+                            <div class="btn-group ms-3">
+                                {/* <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Action
+                                </button> */}
+                                <Avatar alt={userData?.userID} src={userData?.awsFileUrl} data-bs-toggle="dropdown" aria-expanded="false" />
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-capitalize" href="javascript:void(0)"><strong>{userData?.userID}</strong></a></li>
+                                    <li><Link class="dropdown-item" href="/profile">Setup Profile</Link></li>
+                                </ul>
+                            </div>
+
                         </div>
                     </nav>
                 </div>

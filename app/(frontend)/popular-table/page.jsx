@@ -1,6 +1,6 @@
 "use client"
 import JoinATablePopup from '@/components/JoinATablePopup'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -8,104 +8,121 @@ import AvatarGroup from '@mui/material/AvatarGroup';
 import PopularTableSlider from '@/components/popular-table/PopularTableSlider';
 import VirtualTableCard from '@/components/popular-table/VirtualTableCard';
 import HomeLayout from '@/layouts/homeLayout/HomeLayout';
+import { fetchAllTable } from '@/app/api/crud';
 
 export default function () {
 
     const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.auth.user);
+    const [table, setTable] = useState([]);
 
     useEffect(() => {
         console.log('xxxx User:', user);
         console.log('xxxx Token:', token);
     }, [user, token]);
 
-    const tables = [
-        {
-            id: 1,
-            status: "unavailable",
-            type: "Virtual table",
-            image: "/images/image_1.png",
-            title: "Structures Besties!",
-            label: "College of Architecture Public Planning Affairs",
-            description:
-                "Relearning Physics and Calculus to solve structure problems, Get on board now and have fun!",
-            members: [
-                "/avatars/avatar_1.png",
-                "/avatars/avatar_2.png",
-                "/avatars/avatar_3.png",
-                "/avatars/avatar_4.png",
-                "/avatars/avatar_5.png",
-            ],
-        },
-        {
-            id: 2,
-            status: "available",
-            type: "Virtual table",
-            image: "/images/image_2.png",
-            title: "Culinary Cultural Exchange",
-            label: "Student Life - UT Arlington",
-            description:
-                "Embark on a gastronomic journey around the world. Share recipes, cooking tips, and savor diverse flavors together!",
-            members: [
-                "/avatars/avatar_1.png",
-                "/avatars/avatar_2.png",
-                "/avatars/avatar_3.png",
-                "/avatars/avatar_4.png",
-                "/avatars/avatar_5.png",
-            ],
-        },
-        {
-            id: 3,
-            status: "unavailable",
-            type: "Virtual table",
-            image: "/images/image_3.png",
-            title: "Eco Warriors United",
-            label: "College of Science",
-            description:
-                "Join the fight for a greener future. Discuss eco-friendly initiative, and make a positive impact on the environment!",
-            members: [
-                "/avatars/avatar_1.png",
-                "/avatars/avatar_2.png",
-                "/avatars/avatar_3.png",
-                "/avatars/avatar_4.png",
-                "/avatars/avatar_5.png",
-            ],
-        },
-        {
-            id: 4,
-            status: "available",
-            type: "Virtual table",
-            image: "/images/image_4.png",
-            title: "Mind Matters Collective",
-            label: "College of Science",
-            description:
-                "Dive into the human psyche, and explore the mysteries of the mind together!",
-            members: [
-                "/avatars/avatar_1.png",
-                "/avatars/avatar_2.png",
-                "/avatars/avatar_3.png",
-                "/avatars/avatar_4.png",
-                "/avatars/avatar_5.png",
-            ],
-        },
-        {
-            id: 5,
-            status: "unavailable",
-            type: "Virtual table",
-            image: "/images/image_5.png",
-            title: "ACM - UT Arlington Chapter",
-            label: "Student Life - UT Arlington",
-            description:
-                "Join our team, participate at our annual HackUTA or work on semester long projects to gain experience!",
-            members: [
-                "/avatars/avatar_1.png",
-                "/avatars/avatar_2.png",
-                "/avatars/avatar_3.png",
-                "/avatars/avatar_4.png",
-                "/avatars/avatar_5.png",
-            ],
-        },
-    ];
+    // const tables = [
+    //     {
+    //         id: 1,
+    //         status: "unavailable",
+    //         type: "Virtual table",
+    //         image: "/images/image_1.png",
+    //         title: "Structures Besties!",
+    //         label: "College of Architecture Public Planning Affairs",
+    //         description:
+    //             "Relearning Physics and Calculus to solve structure problems, Get on board now and have fun!",
+    //         members: [
+    //             "/avatars/avatar_1.png",
+    //             "/avatars/avatar_2.png",
+    //             "/avatars/avatar_3.png",
+    //             "/avatars/avatar_4.png",
+    //             "/avatars/avatar_5.png",
+    //         ],
+    //     },
+    //     {
+    //         id: 2,
+    //         status: "available",
+    //         type: "Virtual table",
+    //         image: "/images/image_2.png",
+    //         title: "Culinary Cultural Exchange",
+    //         label: "Student Life - UT Arlington",
+    //         description:
+    //             "Embark on a gastronomic journey around the world. Share recipes, cooking tips, and savor diverse flavors together!",
+    //         members: [
+    //             "/avatars/avatar_1.png",
+    //             "/avatars/avatar_2.png",
+    //             "/avatars/avatar_3.png",
+    //             "/avatars/avatar_4.png",
+    //             "/avatars/avatar_5.png",
+    //         ],
+    //     },
+    //     {
+    //         id: 3,
+    //         status: "unavailable",
+    //         type: "Virtual table",
+    //         image: "/images/image_3.png",
+    //         title: "Eco Warriors United",
+    //         label: "College of Science",
+    //         description:
+    //             "Join the fight for a greener future. Discuss eco-friendly initiative, and make a positive impact on the environment!",
+    //         members: [
+    //             "/avatars/avatar_1.png",
+    //             "/avatars/avatar_2.png",
+    //             "/avatars/avatar_3.png",
+    //             "/avatars/avatar_4.png",
+    //             "/avatars/avatar_5.png",
+    //         ],
+    //     },
+    //     {
+    //         id: 4,
+    //         status: "available",
+    //         type: "Virtual table",
+    //         image: "/images/image_4.png",
+    //         title: "Mind Matters Collective",
+    //         label: "College of Science",
+    //         description:
+    //             "Dive into the human psyche, and explore the mysteries of the mind together!",
+    //         members: [
+    //             "/avatars/avatar_1.png",
+    //             "/avatars/avatar_2.png",
+    //             "/avatars/avatar_3.png",
+    //             "/avatars/avatar_4.png",
+    //             "/avatars/avatar_5.png",
+    //         ],
+    //     },
+    //     {
+    //         id: 5,
+    //         status: "unavailable",
+    //         type: "Virtual table",
+    //         image: "/images/image_5.png",
+    //         title: "ACM - UT Arlington Chapter",
+    //         label: "Student Life - UT Arlington",
+    //         description:
+    //             "Join our team, participate at our annual HackUTA or work on semester long projects to gain experience!",
+    //         members: [
+    //             "/avatars/avatar_1.png",
+    //             "/avatars/avatar_2.png",
+    //             "/avatars/avatar_3.png",
+    //             "/avatars/avatar_4.png",
+    //             "/avatars/avatar_5.png",
+    //         ],
+    //     },
+    // ];
+
+    const getAllTable = async () => {
+        try {
+            const data = await fetchAllTable();
+            setTable(data);
+        } catch (error) {
+            console.error("Error fetching universities:", error);
+        }
+    };
+
+    useEffect(() => {
+        getAllTable()
+    }, [])
+
+    console.log('table: ', table)
 
 
     return (
@@ -120,7 +137,7 @@ export default function () {
                     }}
                 >
                     <h1>Popular Tables</h1>
-                    <PopularTableSlider tables={tables} />
+                    <PopularTableSlider table={table} />
                 </div>
                 <div className="recent-table-wrapper" style={{ background: "url('/assets/images/recent-tables/recent-table-bg.png')" }}>
                     <div className="container">

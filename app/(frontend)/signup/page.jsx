@@ -4,8 +4,15 @@ import React, { useState } from "react";
 import axios from "axios"; // Import axios
 import { routes } from "@/utils/route";
 import { createUser } from "@/app/api/crud";
+// import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function SignUp() {
+
+  const pathname = usePathname();
+  const router = useRouter();
+  console.log('pathname: ', pathname)
+
   const [formData, setFormData] = useState({
     userID: '',
     firstName: '',
@@ -28,6 +35,7 @@ export default function SignUp() {
     try {
       await createUser(formData);
       resetForm();
+      router.push('/signin')
     } catch (error) {
       console.error("Error creating User:", error);
     }

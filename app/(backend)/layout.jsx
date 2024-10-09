@@ -1,5 +1,5 @@
 "use client"
-// app/backend/layout.jsx
+// app/admin/layout.jsx
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Avatar, Badge, styled } from '@mui/material';
@@ -64,7 +64,7 @@ const BackendLayout = ({ children }) => {
 
           <ul class="list-unstyled components">
             <li class="nav-item">
-              <Link class="nav-link" href="/backend/dashboard">Dashboard</Link>
+              <Link class="nav-link" href="/admin/dashboard">Dashboard</Link>
             </li>
             {/* <li class="">
               <a href="#homeSubmenu" data-bs-toggle="collapse" aria-expanded="false"
@@ -88,32 +88,32 @@ const BackendLayout = ({ children }) => {
                 <i class="fa-solid fa-chevron-down"></i></a>
               <ul class="collapse list-unstyled dropdown__lvl1" id="pageSubmenu">
                 <li className="nav-item">
-                  <Link href="/backend/settings/university" className="nav-link ps-4">
+                  <Link href="/admin/settings/university" className="nav-link ps-4">
                     University
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/backend/settings/section" className="nav-link ps-4">
+                  <Link href="/admin/settings/section" className="nav-link ps-4">
                     Section
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/backend/settings/course" className="nav-link ps-4">
+                  <Link href="/admin/settings/course" className="nav-link ps-4">
                     Course
                   </Link>
                 </li>
                 {/* <li className="nav-item">
-                  <Link href="/backend/settings/course-section-mapping" className="nav-link ps-4">
+                  <Link href="/admin/settings/course-section-mapping" className="nav-link ps-4">
                     Course Section Mapping
                   </Link>
                 </li> */}
                 <li className="nav-item">
-                  <Link href="/backend/settings/course-section-details" className="nav-link ps-4">
+                  <Link href="/admin/settings/course-section-details" className="nav-link ps-4">
                     Course Section Details
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/backend/settings/student-course-section-details" className="nav-link ps-4">
+                  <Link href="/admin/settings/student-course-section-details" className="nav-link ps-4">
                     Student Course Section Details
                   </Link>
                 </li>
