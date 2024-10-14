@@ -317,7 +317,16 @@ export const UserImageUpload = async (userID, imageFile) => {
 export const fetchAllTable = async () => {
   try {
     const response = await apiClient.get(routes.GetAllTable);
-    return response.data;
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchAllTableDetails = async () => {
+  try {
+    const response = await apiClient.get(routes.GetAllTableDetails);
+    return response?.data;
   } catch (error) {
     throw error;
   }

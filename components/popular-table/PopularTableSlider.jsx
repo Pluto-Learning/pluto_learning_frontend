@@ -19,22 +19,24 @@ export default function PopularTableSlider({ table }) {
                 slidesPerView={2}
                 centeredSlides={true}
                 spaceBetween={200}
-                loop={true}
+                loop={false}
                 pagination={{
                     clickable: true,
                 }}
                 modules={[Pagination]}
                 className="mySwiper"
             >
-                {/* {
+                {
                     table?.length > 0 && table?.map((item) => {
-                        <SwiperSlide>
-                            <VirtualTableCard />
-                        </SwiperSlide>
+                        return (
+                            <SwiperSlide>
+                                <VirtualTableCard />
+                            </SwiperSlide>
+                        )
                     })
-                } */}
+                }
 
-                <SwiperSlide>
+                {/* <SwiperSlide>
                     <VirtualTableCard />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -57,7 +59,7 @@ export default function PopularTableSlider({ table }) {
                 </SwiperSlide>
                 <SwiperSlide>
                     <VirtualTableCard />
-                </SwiperSlide>
+                </SwiperSlide> */}
             </Swiper>
         </>
     );

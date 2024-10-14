@@ -1,13 +1,17 @@
 import { Rating } from '@mui/material'
+import Link from 'next/link'
 import React from 'react'
 
-export default function JoinATablePopup() {
+export default function JoinATablePopup({ session }) {
+
+
+
     return (
-        <div className='join-table-popup'>
+        <div className='join-table-popup-content'>
             <div className="card">
                 <div className="card-body">
                     <div className="course-details">
-                        <h6>Gamification : Motivation Psychology & The Art of Engagement</h6>
+                        <h5>Gamification : Motivation Psychology & The Art of Engagement</h5>
                         <p>Learn how to motivate and engage anyone by learning the psychology that underpins human behavior.</p>
                         <div className="rating d-flex align-items-center">
                             <div>
@@ -32,7 +36,7 @@ export default function JoinATablePopup() {
                         <div className="what-you-learn">
                             <div className="card">
                                 <div className="card-body">
-                                    <h6>what you'll learn</h6>
+                                    <h5>what you'll learn</h5>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <p className='what-you-learn-text'>Learn how to motivate and engage anyone by learning the psychology that underpins human behavior.</p>
@@ -49,6 +53,10 @@ export default function JoinATablePopup() {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="btn-wrapper text-center">
+                            <a href={`/virtual-table`} type='button' className="btn pluto-deep-blue-btn">Join</a>
                         </div>
                     </div>
                 </div>

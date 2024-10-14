@@ -32,6 +32,21 @@ const MultiStepForm = () => {
                     <div>
                         <div className='multistep-form-step status'>
                             <ul className='nav flex-column'>
+                                {/* <li className='nav-item'>
+                                    <div className="common-radio">
+                                        <input
+                                            type="radio"
+                                            name="studentStatus"
+                                            value="fresherman"
+                                            checked={formData.studentStatus === 'fresherman'}
+                                            onChange={handleChange}
+                                            id="fresherman"
+                                        />
+                                        <label for='fresherman'>
+                                            Fresherman
+                                        </label>
+                                    </div>
+                                </li> */}
                                 <li className='nav-item'>
                                     <div className="custom-radio-btn status">
                                         <input
@@ -42,7 +57,9 @@ const MultiStepForm = () => {
                                             onChange={handleChange}
                                             id="fresherman"
                                         />
-                                        <label htmlFor='fresherman'>Fresherman</label>
+                                        <label for='fresherman'>
+                                            Fresherman
+                                        </label>
                                     </div>
                                 </li>
                                 <li className='nav-item'>
@@ -55,7 +72,9 @@ const MultiStepForm = () => {
                                             onChange={handleChange}
                                             id="sophomore"
                                         />
-                                        <label htmlFor="sophomore">Sophomore</label>
+                                        <label for="sophomore">
+                                            Sophomore
+                                        </label>
                                     </div>
                                 </li>
                                 <li className='nav-item'>
@@ -68,7 +87,9 @@ const MultiStepForm = () => {
                                             onChange={handleChange}
                                             id="junior"
                                         />
-                                        <label htmlFor="junior">Junior</label>
+                                        <label for="junior">
+                                            Junior
+                                        </label>
                                     </div>
                                 </li>
                                 <li className='nav-item'>
@@ -81,7 +102,9 @@ const MultiStepForm = () => {
                                             onChange={handleChange}
                                             id="senior"
                                         />
-                                        <label htmlFor="senior">Senior</label>
+                                        <label for="senior">
+                                            Senior
+                                        </label>
                                     </div>
                                 </li>
                             </ul>
@@ -103,19 +126,19 @@ const MultiStepForm = () => {
                                         <input type="text" className='form-control' placeholder='Type your course name' />
                                     </div>
                                     <div className='section-input'>
-                                        <select className="form-select" aria-label="Default select example">
+                                        <select class="form-select" aria-label="Default select example">
                                             <option selected>Section</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
                                         </select>
                                     </div>
-                                    {/* <div className="btn-wrapper">
+                                    <div className="btn-wrapper">
                                         <button className="btn add-btn">Add</button>
-                                    </div> */}
+                                    </div>
                                 </div>
-                                {/* <p className='course-suggestion'>course suggestion</p> */}
-                                {/* <ul className="nav">
+                                <p className='course-suggestion'>course suggestion</p>
+                                <ul className="nav">
                                     <li className="nav-item">
                                         <div className="custom-radio-btn course">
                                             <input
@@ -126,7 +149,9 @@ const MultiStepForm = () => {
                                                 onChange={handleChange}
                                                 id="math101"
                                             />
-                                            <label htmlFor="math101">Math 101</label>
+                                            <label for="math101">
+                                                Math 101
+                                            </label>
                                         </div>
                                     </li>
                                     <li className="nav-item">
@@ -139,7 +164,9 @@ const MultiStepForm = () => {
                                                 onChange={handleChange}
                                                 id="engl1320"
                                             />
-                                            <label htmlFor="engl1320">Engl 1320</label>
+                                            <label for="engl1320">
+                                                Engl 1320
+                                            </label>
                                         </div>
                                     </li>
                                     <li className="nav-item">
@@ -152,14 +179,29 @@ const MultiStepForm = () => {
                                                 onChange={handleChange}
                                                 id="cse1320"
                                             />
-                                            <label htmlFor="cse1320">Cse 1320</label>
+                                            <label for="cse1320">
+                                                Cse 1320
+                                            </label>
                                         </div>
                                     </li>
-                                </ul> */}
+                                </ul>
                             </form>
-                        </div>
 
-                        {/* <div className='multistep-form-step time'>
+                        </div>
+                        <div className='btn-wrapper'>
+                            <button type="button" className='btn step-btn prev' onClick={handlePrev}>
+                                Back
+                            </button>
+                            <button type="button" className='btn step-btn next' onClick={handleNext} disabled={!formData.course}>
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {step === 3 && (
+                    <div>
+                        <div className='multistep-form-step time'>
                             <div className="date-time-wrapper">
                                 <div className='date-time'>
                                     <label htmlFor="date" className='mb-1'>Date</label>
@@ -206,9 +248,8 @@ const MultiStepForm = () => {
                                     placeholder='Type Your Purpose'
                                 />
                             </div>
-                        </div> */}
-
-                        <div className='btn-wrapper'>
+                        </div>
+                        <div className="btn-wrapper">
                             <button type="button" className='btn step-btn prev' onClick={handlePrev}>
                                 Back
                             </button>

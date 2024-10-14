@@ -4307,3 +4307,45 @@ $background-color_8: #4f6ebd;
 .profile{
     
 }
+
+.whiteboard-area {
+overflow: hidden;
+// height: 100vh;
+    .whiteboard{
+        height: 100vh;
+        width: 100%;
+    }
+}
+
+.about-main{
+    height: 55vh;
+    padding: 30px 0;
+}
+
+.join-table-modal {
+    .modal-content{
+        .modal-header{
+            background: $pluto-white;
+            border: none;
+        }
+        .modal-body{
+            background: $pluto-white;
+            .join-table-popup-content{
+                .card {
+                    .card-body {
+
+                        padding-bottom: 50px;
+                    }
+                }
+            }
+            .course-details{
+                .btn-wrapper{
+                    margin-top: 50px;
+                    .btn {
+                        padding: 5px 30px;
+                    }
+                }
+            }
+        }
+    }
+}

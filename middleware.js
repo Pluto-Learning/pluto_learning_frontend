@@ -22,6 +22,7 @@ export const config = {
     matcher: [
         "/popular-table",
         "/dashboard",
+        "/virtual-table",
         '/admin/settings/:path*',
         '/admin/dashboard/:path*'
     ],

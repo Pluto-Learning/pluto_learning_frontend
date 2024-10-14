@@ -2,20 +2,28 @@
 import Footer from '@/components/common/Footer'
 import HomeNavbar from '@/components/navbar/HomeNavbar'
 import React from 'react'
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function HomeLayout({ children }) {
     const router = useRouter()
+    const pathname = usePathname()
 
     console.log('router: ', router)
-    
+
     return (
         <>
             <div className="home-layout">
+                {/* {
+                    pathname !== '/virtual-table' &&
+                } */}
                 <HomeNavbar />
 
+
                 {children}
-                <Footer />
+                {
+                    pathname !== '/virtual-table' && <Footer />
+                }
+
             </div>
         </>
     )

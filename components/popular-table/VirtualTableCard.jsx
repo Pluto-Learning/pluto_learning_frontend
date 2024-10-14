@@ -1,10 +1,10 @@
 import { Avatar, AvatarGroup } from '@mui/material'
 import React from 'react'
 
-export default function VirtualTableCard() {
+export default function VirtualTableCard({allTableDetails}) {
     return (
         <>
-            <div class="popular-table-card card h-100" >
+            <div class="popular-table-card card h-100" data-bs-toggle="modal" data-bs-target="#joinTable">
                 <div class="card-body">
                     <div className="status">
                         <span className="status-light available"></span>

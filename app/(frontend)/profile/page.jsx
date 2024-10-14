@@ -245,9 +245,9 @@ export default function Page() {
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Set Info
                             </button>
-                            <Link type="button" href="/" class="btn btn-primary">
+                            <a type="button" href="/" class="btn btn-primary">
                                 Back to Home
-                            </Link>
+                            </a>
                         </div>
 
                        

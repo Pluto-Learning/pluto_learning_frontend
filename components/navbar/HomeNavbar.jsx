@@ -3,6 +3,7 @@ import { fetchUserProfileById } from '@/app/api/crud';
 import { Avatar } from '@mui/material';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 export default function HomeNavbar() {
@@ -15,7 +16,7 @@ export default function HomeNavbar() {
     const { data: session, status } = useSession();
 
 
-    console.log('session: ', session?.user?.id);
+    // console.log('session: ', session?.user?.id);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -36,6 +37,10 @@ export default function HomeNavbar() {
         }
     }, [session]);
 
+    const router = useRouter()
+    const pathname = usePathname()
+    console.log('pathname: ', pathname)
+
     const getUserData = async () => {
         if (currentUserId) {
             const data = await fetchUserProfileById(currentUserId);
@@ -51,7 +56,7 @@ export default function HomeNavbar() {
 
     return (
         <>
-            <div className={`nav-bar fixed-top ${isScrolled ? 'navbar-scrolled' : ''}`}>
+            <div className={`nav-bar ${pathname == '/' ? 'fixed-top' : 'navbar-scrolled'} ${isScrolled && pathname !== '/virtual-table' ? 'navbar-scrolled fixed-top' : ''}`}>
                 <div className="container">
                     <div className='nav-bar-links d-none'>
                         <div className='nav-bar_logo'>
@@ -111,6 +116,13 @@ export default function HomeNavbar() {
                                         <li class="nav-item ">
                                             <Link class="nav-link" href="/">Home</Link>
                                         </li>
+                                        {
+                                            status === 'authenticated' &&
+                                            <li class="nav-item ">
+                                                <Link class="nav-link" href="/popular-table">Table Discovery</Link>
+                                            </li>
+                                        }
+
                                         <li class="nav-item ">
                                             <Link class="nav-link" href="/about">About</Link>
                                         </li>
