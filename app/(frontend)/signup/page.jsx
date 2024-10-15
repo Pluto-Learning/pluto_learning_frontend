@@ -54,7 +54,7 @@ export default function SignUp() {
       lastName: '',
       email: '',
       password: '',
-      userType: '',
+      userType: 'student',
       keepSignedIn: false,
     });
   };
@@ -111,7 +111,7 @@ export default function SignUp() {
                       placeholder="Last name"
                     />
                   </div>
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <input
                       type="text"
                       className="lastName form-control"
@@ -120,7 +120,7 @@ export default function SignUp() {
                       onChange={handleChange}
                       placeholder="User Type"
                     />
-                  </div>
+                  </div> */}
                   <div className="mb-3">
                     <input
                       type="text"
@@ -143,8 +143,8 @@ export default function SignUp() {
                   </div>
                 </div>
                 <div className="text-center forgot-password mb-3">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div className="form-check">
+                  <div className="d-flex justify-content-start align-items-center">
+                    {/* <div className="form-check">
                       <input
                         className="form-check-input"
                         type="checkbox"
@@ -156,7 +156,7 @@ export default function SignUp() {
                       <label className="form-check-label" htmlFor="flexCheckDefault">
                         Keep me signed in
                       </label>
-                    </div>
+                    </div> */}
                     <p className="mb-0">
                       <a href="/signin">Already a member?</a>
                     </p>

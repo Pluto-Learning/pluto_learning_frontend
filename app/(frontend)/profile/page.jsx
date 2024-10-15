@@ -152,112 +152,187 @@ export default function Page() {
 
 
     return (
-        <div className='profile'>
-            <div className="container mt-5">
-                <div className="card mx-auto" style={{ width: '24rem' }}>
-                    <div className="card-body">
-                        <small className='text-muted'><i>Please at first Set info by clicking set info Button then set profile picture</i></small>
-                        {/* Profile Picture */}
-                        <div
-                            className="profile-image text-end position-relative"
-                        >
-                            <button
-                                className="btn btn-success btn-sm"
-                                onClick={() => setShowImageUpload((prev) => !prev)}
-                            >
-                                <i class="fa-regular fa-pen-to-square"></i> Edit Image
-                            </button>
-                            <div className="image"
-                                style={{
-                                    borderRadius: '100%',
-                                    // marginTop: '15px',
-                                    width: '150px',
-                                    height: '150px',
-                                    // objectFit: 'cover',
-                                    // display: 'block',
-                                    marginLeft: 'auto',
-                                    marginRight: 'auto',
-                                    overflow: 'hidden'
-                                }}
-                            >
+        <HomeLayout><>
 
-                                <img
-                                    src={singleUserProfile?.awsFileUrl ?? '/assets/images/image-placeholder.jpg'}
-                                    className=" img-fluid"
-                                    alt="Profile"
-                                // style={{
-                                //     borderRadius: '50%',
-                                //     marginTop: '15px',
-                                //     width: '150px',
-                                //     height: '150px',
-                                //     objectFit: 'cover',
-                                //     display: 'block',
-                                //     marginLeft: 'auto',
-                                //     marginRight: 'auto',
-                                // }}
-                                />
+            <div className="container">
+            </div>
+
+            <div className='profile pt_50 pb_50'>
+                <div className="container mt-5">
+                    <div className="row g-4">
+                        <div className="col-lg-3">
+                            <div className="card shadow h-100">
+                                <div className="card-body">
+                                    <h2 className='text-center mb-xxl-4'>Profile Picture</h2>
+
+                                    <div className="profile-image-wrapper">
+
+                                        <div className="edit-image-icon">
+                                            <Link href={'/profile/edit/picture'}
+
+                                            >
+                                                <i class="fa-solid fa-camera"></i>
+                                            </Link>
+                                        </div>
+                                        <div className="profile-image"
+                                        >
+
+                                            <img
+                                                src={singleUserProfile?.awsFileUrl ?? '/assets/images/image-placeholder.jpg'}
+                                                className=" img-fluid"
+                                                alt="Profile"
+                                            // style={{
+                                            //     borderRadius: '50%',
+                                            //     marginTop: '15px',
+                                            //     width: '150px',
+                                            //     height: '150px',
+                                            //     objectFit: 'cover',
+                                            //     display: 'block',
+                                            //     marginLeft: 'auto',
+                                            //     marginRight: 'auto',
+                                            // }}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <h5 className='text-center text-capitalize mt-2 fw-light'>{session?.user?.name}</h5>
+
+                                </div>
                             </div>
                         </div>
+                        <div className="col-lg-9">
+                            <div className="card shadow h-100">
+                                <div className="card-body">
+                                    <h2 className='text-center mb-xxl-4'>User Info</h2>
+                                    <ul className="list-group list-group-flush">
+                                        <li className="list-group-item">
+                                            <strong>User ID: </strong> {singleUserProfile?.userID}
+                                        </li>
+                                        <li className="list-group-item">
+                                            <strong>Gender: </strong> {singleUserProfile?.gender}
+                                        </li>
+                                        <li className="list-group-item">
+                                            <strong>Mobile: </strong> {singleUserProfile?.mobile}
+                                        </li>
+                                        <li className="list-group-item">
+                                            <strong>Date of Birth: </strong> {singleUserProfile?.dateOfBirth}
+                                        </li>
+                                        <li className="list-group-item">
+                                            <strong>Student Year: </strong> {singleUserProfile?.studentYear}
+                                        </li>
+                                        <li className="list-group-item">
+                                            <strong>Status: </strong> {singleUserProfile?.status}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        {
-                            showImageUpload && <div className='image-upload'>
-                                <h5>Image Upload</h5>
-                                <form onSubmit={handleImgSubmit}>
-                                    <input type="file" accept="image/*" onChange={handleFileChange} className='form-control mb-2' />
-                                    <button type="submit" className='btn btn-secondary'>Upload</button>
-                                </form>
-                                {/* {preview && (
+                    <div className="card mx-auto d-none" style={{ width: '24rem' }}>
+                        <div className="card-body">
+                            <small className='text-muted'><i>Please at first Set info by clicking set info Button then set profile picture</i></small>
+                            {/* Profile Picture */}
+                            <div
+                                className="profile-image text-end position-relative"
+                            >
+                                <button
+                                    className="btn btn-success btn-sm"
+                                    onClick={() => setShowImageUpload((prev) => !prev)}
+                                >
+                                    <i class="fa-regular fa-pen-to-square"></i> Edit Image
+                                </button>
+                                <div className="image"
+                                    style={{
+                                        borderRadius: '100%',
+                                        // marginTop: '15px',
+                                        width: '150px',
+                                        height: '150px',
+                                        // objectFit: 'cover',
+                                        // display: 'block',
+                                        marginLeft: 'auto',
+                                        marginRight: 'auto',
+                                        overflow: 'hidden'
+                                    }}
+                                >
+
+                                    <img
+                                        src={singleUserProfile?.awsFileUrl ?? '/assets/images/image-placeholder.jpg'}
+                                        className=" img-fluid"
+                                        alt="Profile"
+                                    // style={{
+                                    //     borderRadius: '50%',
+                                    //     marginTop: '15px',
+                                    //     width: '150px',
+                                    //     height: '150px',
+                                    //     objectFit: 'cover',
+                                    //     display: 'block',
+                                    //     marginLeft: 'auto',
+                                    //     marginRight: 'auto',
+                                    // }}
+                                    />
+                                </div>
+                            </div>
+
+                            {
+                                showImageUpload && <div className='image-upload'>
+                                    <h5>Image Upload</h5>
+                                    <form onSubmit={handleImgSubmit}>
+                                        <input type="file" accept="image/*" onChange={handleFileChange} className='form-control mb-2' />
+                                        <button type="submit" className='btn btn-secondary'>Upload</button>
+                                    </form>
+                                    {/* {preview && (
                             <div>
                                 <h3>Image Preview:</h3>
                                 <img src={preview} alt="Image Preview" style={{ width: '200px' }} />
                             </div>
                         )} */}
+                                </div>
+                            }
+
+
+                            <div className="card-body text-center">
+                                <h4 className="card-title">User Profile</h4>
                             </div>
-                        }
+
+                            <ul className="list-group list-group-flush">
+                                <li className="list-group-item">
+                                    <strong>User ID: </strong> {singleUserProfile?.userID}
+                                </li>
+                                <li className="list-group-item">
+                                    <strong>Gender: </strong> {singleUserProfile?.gender}
+                                </li>
+                                <li className="list-group-item">
+                                    <strong>Mobile: </strong> {singleUserProfile?.mobile}
+                                </li>
+                                <li className="list-group-item">
+                                    <strong>Date of Birth: </strong> {singleUserProfile?.dateOfBirth}
+                                </li>
+                                <li className="list-group-item">
+                                    <strong>Student Year: </strong> {singleUserProfile?.studentYear}
+                                </li>
+                                <li className="list-group-item">
+                                    <strong>Status: </strong> {singleUserProfile?.status}
+                                </li>
+                            </ul>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Set Info
+                                </button>
+                                <a type="button" href="/" class="btn btn-primary">
+                                    Back to Home
+                                </a>
+                            </div>
 
 
-                        <div className="card-body text-center">
-                            <h4 className="card-title">User Profile</h4>
                         </div>
-
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">
-                                <strong>User ID: </strong> {singleUserProfile?.userID}
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Gender: </strong> {singleUserProfile?.gender}
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Mobile: </strong> {singleUserProfile?.mobile}
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Date of Birth: </strong> {singleUserProfile?.dateOfBirth}
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Student Year: </strong> {singleUserProfile?.studentYear}
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Status: </strong> {singleUserProfile?.status}
-                            </li>
-                        </ul>
-
-                        <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Set Info
-                            </button>
-                            <a type="button" href="/" class="btn btn-primary">
-                                Back to Home
-                            </a>
-                        </div>
-
-                       
                     </div>
                 </div>
-            </div>
 
-            <div className="container">
-                {/* <h1>User Profile</h1> */}
-                {/* <form onSubmit={handleSubmit}>
+                <div className="container">
+                    {/* <h1>User Profile</h1> */}
+                    {/* <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="userID" className="form-label">User ID</label>
                         <input
@@ -329,9 +404,9 @@ export default function Page() {
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form> */}
-                {/* <br /><br /> */}
+                    {/* <br /><br /> */}
 
-                {/* <div>
+                    {/* <div>
                     <h2>Image Upload</h2>
                     <form onSubmit={handleImgSubmit}>
                         <input type="file" accept="image/*" onChange={handleFileChange} />
@@ -346,99 +421,101 @@ export default function Page() {
                 </div> */}
 
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form onSubmit={handleSubmit}>
-                                    <div className="mb-3">
-                                        <label htmlFor="userID" className="form-label">User ID</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="userID"
-                                            name="userID"
-                                            value={formData.userID}
-                                            readOnly // Make it read-only since it's set from session
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="gender" className="form-label">Gender</label>
-                                        <select
-                                            className="form-select"
-                                            id="gender"
-                                            name="gender"
-                                            value={formData.gender}
-                                            onChange={handleChange}
-                                        >
-                                            <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="mobile" className="form-label">Mobile</label>
-                                        <input
-                                            type="tel"
-                                            className="form-control"
-                                            id="mobile"
-                                            name="mobile"
-                                            value={formData.mobile}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="dateOfBirth" className="form-label">Date of Birth</label>
-                                        <input
-                                            type="date"
-                                            className="form-control"
-                                            id="dateOfBirth"
-                                            name="dateOfBirth"
-                                            value={formData.dateOfBirth ? formData.dateOfBirth.split("T")[0] : ""} // Display date correctly
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="studentYear" className="form-label">Student Year</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="studentYear"
-                                            name="studentYear"
-                                            value={formData.studentYear}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="status" className="form-label">Status</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="status"
-                                            name="status"
-                                            value={formData.status}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                    <button type="submit" className="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                            {/* <div class="modal-footer">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="mb-3">
+                                            <label htmlFor="userID" className="form-label">User ID</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="userID"
+                                                name="userID"
+                                                value={formData.userID}
+                                                readOnly // Make it read-only since it's set from session
+                                            />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="gender" className="form-label">Gender</label>
+                                            <select
+                                                className="form-select"
+                                                id="gender"
+                                                name="gender"
+                                                value={formData.gender}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="mobile" className="form-label">Mobile</label>
+                                            <input
+                                                type="tel"
+                                                className="form-control"
+                                                id="mobile"
+                                                name="mobile"
+                                                value={formData.mobile}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="dateOfBirth" className="form-label">Date of Birth</label>
+                                            <input
+                                                type="date"
+                                                className="form-control"
+                                                id="dateOfBirth"
+                                                name="dateOfBirth"
+                                                value={formData.dateOfBirth ? formData.dateOfBirth.split("T")[0] : ""} // Display date correctly
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="studentYear" className="form-label">Student Year</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="studentYear"
+                                                name="studentYear"
+                                                value={formData.studentYear}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="status" className="form-label">Status</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="status"
+                                                name="status"
+                                                value={formData.status}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <button type="submit" className="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                                {/* <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary">Save changes</button>
                         </div> */}
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
 
 
-            </div>
-
-
-        </div>
+            </div> 
+             </>
+        </HomeLayout>
     )
 }

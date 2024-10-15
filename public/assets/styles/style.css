@@ -3382,6 +3382,8 @@ h6 {
   font-family: "Nunito", sans-serif;
   margin-bottom: 5px;
   color: #010231;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 .popular-table-card .card-body .card-info .college-name {
   font-size: 14px;
@@ -3436,12 +3438,51 @@ h6 {
 .popular-table-card:hover {
   transform: translateY(-10px);
 }
+.popular-table-card:hover .card-body .card-info .table-name {
+  color: #F72585;
+}
+
+.profile .profile-image-wrapper {
+  position: relative;
+}
+.profile .profile-image-wrapper .edit-image-icon {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F72585;
+  color: #F9F9F9;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  z-index: 1;
+}
+.profile .profile-image-wrapper .profile-image {
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 3px solid #F72585;
+}
+.profile .profile-image-wrapper .profile-image img {
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
 
 .whiteboard-area {
   overflow: hidden;
 }
 .whiteboard-area .whiteboard {
-  height: 100vh;
+  height: 89vh;
   width: 100%;
 }
 

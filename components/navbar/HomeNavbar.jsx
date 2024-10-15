@@ -154,14 +154,14 @@ export default function HomeNavbar() {
                             </div>
 
 
-                            <div class="btn-group ms-3">
+                            <div class="btn-group ms-3 " style={{cursor: "pointer"}}>
                                 {/* <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Action
                                 </button> */}
-                                <Avatar alt={userData?.userID} src={userData?.awsFileUrl} data-bs-toggle="dropdown" aria-expanded="false" />
+                                <Avatar alt={userData?.userID} src={userData?.awsFileUrl} data-bs-toggle="dropdown" aria-expanded="false" className='border border-3' sx={{ width: 56, height: 56 }}/>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item text-capitalize" href="javascript:void(0)"><strong>{userData?.userID}</strong></a></li>
-                                    <li><Link class="dropdown-item" href="/profile">Setup Profile</Link></li>
+                                    <li><Link class="dropdown-item" href="/profile">Profile</Link></li>
                                 </ul>
                             </div>
 

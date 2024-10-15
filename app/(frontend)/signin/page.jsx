@@ -3,8 +3,18 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, getSession } from "next-auth/react";
+import { fetchUserProfileById } from "@/app/api/crud";
 
 export default function Signin() {
+
+  const [isSetProfile, setIsSetProfile] = useState(null)
+
+//   const getUserData = async () => {
+//     if (currentUserId) {
+//         const data = await fetchUserProfileById();
+//         setSingleUserProfile(data);
+//     }
+// };
 
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -32,13 +42,22 @@ export default function Signin() {
 
     if (nextAuthData?.ok) {
       // Manually refresh session to update without page reload
-      // const session = await getSession();
+      const session = await getSession();
       // console.log("Session updated after sign-in:", session);
 
-      await getSession();
+      const userProfileData = await fetchUserProfileById(session?.user?.id);
 
-      // Redirect to desired page
-      router.push('/popular-table');
+      // console.log("Session updated after sign-in:", userProfileData);
+      if(userProfileData) {
+        // Redirect to desired page
+        await getSession();
+        router.push('/popular-table');
+      } else {
+        await getSession();
+        router.push('/profile/edit/info');
+      }
+
+
     } else {
       console.log("Login failed:", nextAuthData.error);
     }
@@ -111,7 +130,7 @@ export default function Signin() {
                   <p className="mb-0">
                     <a href="/">Forgot Password?</a>
                   </p>
-                  <p className="mb-0">
+                  <p className="">
                     <Link href="/signup">Don't have an account?</Link>
                   </p>
                 </div>

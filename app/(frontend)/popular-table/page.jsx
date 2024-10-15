@@ -159,7 +159,7 @@ export default function () {
                     <div className="container">
                         <h2>Recent Tables</h2>
                         <div className="recent-tables" >
-                            <div className="popular-table-card card" style={{ width: '25rem' }} data-bs-toggle="modal" data-bs-target="#joinTable">
+                            <div className="popular-table-card card" style={{ width: '25rem' }}>
                                 <div className="card-body">
                                     <div className="status">
                                         <span className="status-light available"></span>
@@ -169,12 +169,12 @@ export default function () {
                                         <img src="/assets/images/recent-tables/recent-table-1.png" alt="" className='img-fluid card-img-top' />
                                     </div>
                                     <div className="card-info">
-                                        <h4 className="card-title table-name">CSE 1320 - Programming</h4>
+                                        <h4 className="card-title table-name" data-bs-toggle="modal" data-bs-target="#joinTable">CSE 1320 - Programming</h4>
                                         <p className="college-name">College of Engineering</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="popular-table-card card" style={{ width: '25rem' }} data-bs-toggle="modal" data-bs-target="#joinTable">
+                            <div className="popular-table-card card" style={{ width: '25rem' }}>
                                 <div className="card-body">
                                     <div className="status">
                                         <span className="status-light available"></span>
@@ -184,12 +184,12 @@ export default function () {
                                         <img src="/assets/images/recent-tables/recent-table-1.png" alt="" className='img-fluid card-img-top' />
                                     </div>
                                     <div className="card-info">
-                                        <h4 className="card-title table-name">CSE 1320 - Programming</h4>
+                                        <h4 className="card-title table-name" data-bs-toggle="modal" data-bs-target="#joinTable">CSE 1320 - Programming</h4>
                                         <p className="college-name">College of Engineering</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="popular-table-card card" style={{ width: '25rem' }} data-bs-toggle="modal" data-bs-target="#joinTable">
+                            <div className="popular-table-card card" style={{ width: '25rem' }}>
                                 <div className="card-body">
                                     <div className="status">
                                         <span className="status-light available"></span>
@@ -199,7 +199,7 @@ export default function () {
                                         <img src="/assets/images/recent-tables/recent-table-1.png" alt="" className='img-fluid card-img-top' />
                                     </div>
                                     <div className="card-info">
-                                        <h4 className="card-title table-name">CSE 1320 - Programming</h4>
+                                        <h4 className="card-title table-name" data-bs-toggle="modal" data-bs-target="#joinTable">CSE 1320 - Programming</h4>
                                         <p className="college-name">College of Engineering</p>
                                     </div>
                                 </div>

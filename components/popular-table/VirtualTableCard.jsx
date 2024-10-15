@@ -4,7 +4,7 @@ import React from 'react'
 export default function VirtualTableCard({allTableDetails}) {
     return (
         <>
-            <div class="popular-table-card card h-100" data-bs-toggle="modal" data-bs-target="#joinTable">
+            <div class="popular-table-card card h-100">
                 <div class="card-body">
                     <div className="status">
                         <span className="status-light available"></span>
@@ -14,7 +14,7 @@ export default function VirtualTableCard({allTableDetails}) {
                         <img src="/assets/images/recent-tables/recent-table-1.png" alt="" className='img-fluid card-img-top' />
                     </div>
                     <div className="card-info">
-                        <h4 className="card-title table-name">CSE 1320 - Programming</h4>
+                        <h4 className="card-title table-name" data-bs-toggle="modal" data-bs-target="#joinTable">CSE 1320 - Programming</h4>
                         <p className="college-name">College of Engineering</p>
                         <p className="description">Embark on a gastronomic journey around the world. Share recipes, cooking tips, and savor diverse flavors together!</p>
                     </div>

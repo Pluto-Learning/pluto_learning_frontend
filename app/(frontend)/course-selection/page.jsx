@@ -1,15 +1,16 @@
 import InviteFriendsPopup from '@/components/InviteFriendsPopup'
 import MultiStepForm from '@/components/MultiStepForm'
 import MyCalendar from '@/components/MyCalendar'
+import HomeLayout from '@/layouts/homeLayout/HomeLayout'
 import ProfileLayout from '@/layouts/profileLayout/ProfileLayout'
 import Link from 'next/link'
 import React from 'react'
 
 export default function page() {
     return (
-        <ProfileLayout>
-            <div className="container">
-                <div className="profile-content">
+        <HomeLayout>
+            <div className="profile-content pt_50 pb_50">
+                <div className="container">
                     <div className="course-selection">
                         <div className="row">
                             <div className="col-lg-6">
@@ -54,6 +55,6 @@ export default function page() {
                     </div>
                 </div>
             </div>
-        </ProfileLayout>
+        </HomeLayout>
     )
 }
