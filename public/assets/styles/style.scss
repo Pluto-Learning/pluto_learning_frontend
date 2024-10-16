@@ -4214,6 +4214,10 @@ $background-color_8: #4f6ebd;
 
             img {
                 border-radius: 8px;
+                aspect-ratio: 72/29;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
             }
         }
 

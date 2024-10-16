@@ -16,8 +16,8 @@ export default function () {
 
     const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.auth.user);
-    const [alltable, setAllTable] = useState([]);
-    const [allTableDetails, setAllTableDetails] = useState([]);
+    const [alltable, setAllTable] = useState(null);
+    const [allTableDetails, setAllTableDetails] = useState(null);
 
     useEffect(() => {
         console.log('xxxx User:', user);
@@ -136,6 +136,7 @@ export default function () {
     }, [])
 
     console.log('table: ', alltable)
+    console.log('allTableDetails: ', allTableDetails)
 
     const { data: session, status } = useSession();
     console.log('session: ', session?.user);
@@ -153,7 +154,7 @@ export default function () {
                     }}
                 >
                     <h1>Popular Tables</h1>
-                    <PopularTableSlider table={alltable} />
+                    <PopularTableSlider table={allTableDetails} />
                 </div>
                 <div className="recent-table-wrapper" style={{ background: "url('/assets/images/recent-tables/recent-table-bg.png')" }}>
                     <div className="container">
@@ -278,11 +279,32 @@ export default function () {
                                     </Link>
                                 </div>
                                 {
-                                    allTableDetails && allTableDetails?.length > 0 && allTableDetails?.map((item) => {
+                                    allTableDetails != null && allTableDetails?.length > 0 && allTableDetails?.map((item) => {
+                                        console.log('itemitemitemitemitem', item)
                                         return (
-                                            <div className="col-lg-3">
-                                                <VirtualTableCard allTableDetails={allTableDetails} />
-                                            </div>
+                                            <>
+
+                                                <div className="col-lg-3">
+                                                    <VirtualTableCard tableData={item} />
+                                                    <div class="modal fade join-table-modal" id={`joinTable-${item?.roomId}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-xl">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <div>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Welcome Back, {session?.user?.name}</h5>
+                                                                        <p>Take a look your learning progress for today September 22, 2024</p>
+                                                                    </div>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <JoinATablePopup tableData={item} session={session} />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </>
                                         )
                                     })
                                 }
@@ -302,11 +324,11 @@ export default function () {
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#joinTable">
+                {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#joinTable">
                     Launch demo modal
-                </button>
+                </button> */}
 
-                <div class="modal fade join-table-modal" id="joinTable" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                {/* <div class="modal fade join-table-modal" id="joinTable" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -321,7 +343,7 @@ export default function () {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* <JoinATablePopup /> */}
 

@@ -1,9 +1,72 @@
+'use state'
+import { addTableMember } from '@/app/api/crud';
 import { Rating } from '@mui/material'
+import { useSession } from 'next-auth/react';
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
-export default function JoinATablePopup({ session }) {
+export default function JoinATablePopup({ tableData = {} }) {
 
+    const router = useRouter()
+    const { data: session } = useSession();
+    console.log('join table session', session)
+
+    const {
+        roomId,
+        roomName,
+        meetingTime,
+        meetingDay,
+        privacyStatus,
+        tableType,
+        shortDescription,
+        longDescription,
+        roomImg,
+        // status,
+        courseId,
+        courseName,
+        courseNumber,
+        college,
+        yearOfCourse,
+        description1,
+        description2,
+        description3,
+        description4
+    } = tableData;
+
+    const [formData, setFormData] = useState({
+        memberId: '',
+        roomId: '',
+        role: "student"
+    });
+
+    console.log('setFormDatasetFormData:', formData)
+
+    useEffect(() => {
+        setFormData({
+            memberId: session?.user?.id,
+            roomId: roomId,
+            role: "student"
+        })
+    }, [tableData, session])
+
+    const handleJoinMember = async (e) => {
+        try {
+            await addTableMember(formData);
+            toast.success("Successfully joined");
+    
+    
+            // Navigate to the virtual table
+            router.push(`/virtual-table/${roomId}`);
+        } catch (error) {
+            console.error("Error Join Table:", error);
+        }
+    };
+    
+    
+    
+    
 
 
     return (
@@ -11,8 +74,8 @@ export default function JoinATablePopup({ session }) {
             <div className="card">
                 <div className="card-body">
                     <div className="course-details">
-                        <h5>Gamification : Motivation Psychology & The Art of Engagement</h5>
-                        <p>Learn how to motivate and engage anyone by learning the psychology that underpins human behavior.</p>
+                        <h5>{roomName}</h5>
+                        <p>{longDescription}</p>
                         <div className="rating d-flex align-items-center">
                             <div>
                                 <span>4.0</span>
@@ -56,7 +119,15 @@ export default function JoinATablePopup({ session }) {
                         </div>
 
                         <div className="btn-wrapper text-center">
-                            <a href={`/virtual-table`} type='button' className="btn pluto-deep-blue-btn">Join</a>
+                            {/* <a
+                                href={`/virtual-table/${roomId}`}
+                                target='_blank'
+                                type='button'
+                                className="btn pluto-deep-blue-btn"
+                            >
+                                Join
+                            </a> */}
+                            <button className="btn pluto-deep-blue-btn" onClick={handleJoinMember} data-bs-dismiss="modal" aria-label="Close">Join</button>
                         </div>
                     </div>
                 </div>

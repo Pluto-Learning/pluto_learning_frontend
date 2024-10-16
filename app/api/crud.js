@@ -331,3 +331,24 @@ export const fetchAllTableDetails = async () => {
     throw error;
   }
 };
+
+
+//==================== CRUD FOR TABLE MEMBER ====================
+export const FetchTableMembersDetailsById = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetTableMembersDetailsById+'/'+id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+export const addTableMember = async (data) => {
+  try {
+    const response = await apiClient.post(routes.AddTableMember, data);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+};

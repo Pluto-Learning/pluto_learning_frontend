@@ -50,6 +50,8 @@ export const routes = {
   DeleteTableData: '/Table/DeleteTableData',
   GetAllTableDetails: '/Table/GetAllTableDetails',
   GetTableDetailById: '/Table/GetTableDetailById',
+
+  // Table Member
   AddTableMember: '/Table/AddTableMember',
   UpdateAddTableMember: '/Table/UpdateAddTableMember',
   GetTableMembersDetailsById: '/Table/GetTableMembersDetailsById',

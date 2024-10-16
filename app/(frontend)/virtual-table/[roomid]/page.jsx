@@ -5,8 +5,17 @@ import { useSyncDemo, createPresenceStateDerivation } from '@tldraw/sync';
 import { Tldraw, useTldrawUser } from 'tldraw';
 import 'tldraw/tldraw.css';
 import { useSession } from 'next-auth/react';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function Page() {
+
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const uniqueRoomId = pathname.split("/").pop();
+
+  console.log('pathnamepathname tableId:', uniqueRoomId);
+
 
   const {data: session} = useSession()
 
@@ -31,7 +40,7 @@ export default function Page() {
 
 
   // [2]
-	const store = useSyncDemo({ roomId: 'my-unique-room-id', userInfo: userPreferences })
+	const store = useSyncDemo({ roomId: uniqueRoomId, userInfo: userPreferences })
 
 	// [3]
 	const user = useTldrawUser({ userPreferences, setUserPreferences })
@@ -45,11 +54,13 @@ export default function Page() {
     <HomeLayout>
       <div className="whiteboard-area">
         <div className="virtual-table whiteboard">
-          <Tldraw
+          {
+            uniqueRoomId && session?.user?.id ?<Tldraw
             store={store}
             user={user}
-            
-          />
+          />:<h1>Wait...........</h1>
+          }
+          
         </div>
       </div>
     </HomeLayout>

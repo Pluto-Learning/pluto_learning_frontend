@@ -154,7 +154,8 @@ export default function HomeNavbar() {
                             </div>
 
 
-                            <div class="btn-group ms-3 " style={{cursor: "pointer"}}>
+                                {
+                                    status === 'authenticated' &&  <div class="btn-group ms-3 " style={{cursor: "pointer"}}>
                                 {/* <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Action
                                 </button> */}
@@ -164,6 +165,8 @@ export default function HomeNavbar() {
                                     <li><Link class="dropdown-item" href="/profile">Profile</Link></li>
                                 </ul>
                             </div>
+                                }
+                          
 
                         </div>
                     </nav>

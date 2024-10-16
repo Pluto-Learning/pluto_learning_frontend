@@ -89,7 +89,7 @@ export default function Signin() {
 
               <form onSubmit={handleSubmit}>
                 <div className="input-wrapper">
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <input
                       type="text"
                       className="form-control"
@@ -99,7 +99,7 @@ export default function Signin() {
                       placeholder="Email"
                       required
                     />
-                  </div>
+                  </div> */}
 
                   <div className="mb-3">
                     <input

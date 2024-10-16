@@ -30,7 +30,7 @@ export default function PopularTableSlider({ table }) {
                     table?.length > 0 && table?.map((item) => {
                         return (
                             <SwiperSlide>
-                                <VirtualTableCard />
+                                <VirtualTableCard tableData={item} />
                             </SwiperSlide>
                         )
                     })
