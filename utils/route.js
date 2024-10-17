@@ -19,13 +19,13 @@ export const routes = {
   // Course routes
   GetAllCourse: '/Course/GetAllCourse',
   GetCourseById: '/Course/GetCourseByCourseId',
-  CreateCourse: '/Course/SaveCourseData',
-  UpdateCourse: '/Course/UpdateCourseData',
+  CreateCourse: '/Course/SaveCourse',
+  UpdateCourse: '/Course/UpdateCourse',
   DeleteCourse: '/Course/DeleteCourseByCourseId',
 
   // Course Section
-  GetAllCourseSectionMapping: '/Course/GetAllCourseSectionMapping',
-  saveCourseSectionMapping: '/Course/saveCourseSectionMapping',
+  GetAllCourseSectionMapping: '/Course/GetAllCourseSection',
+  saveCourseSectionMapping: '/Course/saveCourseSection',
   UpdateCourseSectionData: '/Course/UpdateCourseSectionData',
   GetAllCourseSectionDetails: '/Course/GetAllCourseSectionDetails',
   GetCourseSectionDetailsById: '/Course/GetCourseSectionDetailsById',
@@ -53,7 +53,7 @@ export const routes = {
 
   // Table Member
   AddTableMember: '/Table/AddTableMember',
-  UpdateAddTableMember: '/Table/UpdateAddTableMember',
+  UpdateAddTableMember: '/Table/UpdateTableMember',
   GetTableMembersDetailsById: '/Table/GetTableMembersDetailsById',
 
 };

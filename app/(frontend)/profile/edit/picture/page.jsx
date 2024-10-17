@@ -178,9 +178,9 @@ export default function page() {
 
                                             <img
                                                 src={
-                                                    singleUserProfile?.awsFileUrl
-                                                    // singleUserProfile?.awsFileUrl :
-                                                    // '/assets/images/image-placeholder.jpg'
+                                                    singleUserProfile?.awsFileUrl ?
+                                                    singleUserProfile?.awsFileUrl :
+                                                    '/assets/images/image-placeholder.jpg'
                                                 }
                                                 className=" img-fluid"
                                                 alt="Profile"

@@ -4407,13 +4407,18 @@ $background-color_8: #4f6ebd;
 }
 
 .table-create-modal{
+    .modal-body {
+        padding: 0;
+    }
     .table-create-form{
-        display: flex;
-        .left{
-            flex-basis: 30%;
-        }
+        // display: flex;
+        // .left{
+        //     flex-basis: 30%;
+        //     background-color: $pluto-deep-blue;
+        // }
         .right{
-            flex-basis: 70%;
+            // flex-basis: 70%;
+            padding: 20px;
         }
     }
 }

@@ -80,7 +80,7 @@ export default function StepOne({ onNextStep }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-3">
+    <form onSubmit={handleSubmit} className="">
       <div className="mb-3">
         <label htmlFor="roomName" className="form-label">Room Name</label>
         <input type="text" className="form-control" id="roomName" name="roomName" value={formData.roomName} onChange={handleChange} required />
@@ -134,7 +134,7 @@ export default function StepOne({ onNextStep }) {
         <textarea className="form-control" id="longDescription" name="longDescription" value={formData.longDescription} onChange={handleChange} required />
       </div>
 
-      <button type="submit" className="btn btn-primary">Submit Step 1</button>
+      <button type="submit" className="btn pluto-pink-btn">Submit Step 1</button>
     </form>
   );
 }

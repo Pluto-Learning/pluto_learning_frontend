@@ -56,9 +56,11 @@ export default function Signin() {
         // Redirect to desired page
         await getSession();
         router.push('/popular-table');
+        
       } else {
         await getSession();
         router.push('/profile/edit/info');
+        
       }
     } else {
       console.log("Login failed:", nextAuthData.error);

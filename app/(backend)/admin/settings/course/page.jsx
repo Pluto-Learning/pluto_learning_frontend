@@ -9,7 +9,7 @@ export default function page() {
   const [course, setCourse] = useState([]);
 
   const [formData, setFormData] = useState({
-    courseId: '',
+    courseId: 'string',
     courseName: '',
     courseNumber: '',
     college: '',
@@ -91,10 +91,10 @@ export default function page() {
 
     // console.log(formData)
 
-    // Close the modal after submission
-    const modalElement = document.getElementById('exampleModal');
-    const modalInstance = bootstrap.Modal.getInstance(modalElement); // Get the modal instance
-    modalInstance.hide(); // Hide the modal
+    // // Close the modal after submission
+    // const modalElement = document.getElementById('exampleModal');
+    // const modalInstance = bootstrap.Modal.getInstance(modalElement); // Get the modal instance
+    // modalInstance.hide(); // Hide the modal
   };
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export default function page() {
 
   const resetForm = () => {
     setFormData({
-      courseId: '',
+      courseId: 'string',
       courseName: '',
       courseNumber: '',
       college: '',
@@ -217,7 +217,7 @@ export default function page() {
                         <option value="senior">Senior</option>
                       </select>
                     </div>
-                    <button type="submit" className="btn btn-primary">{isUpdateing ? "Update" : "Create"}</button>
+                    <button type="submit" className="btn btn-primary" >{isUpdateing ? "Update" : "Create"}</button>
                   </form>
                 </div>
               </div>
