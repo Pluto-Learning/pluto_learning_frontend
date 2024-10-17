@@ -28,6 +28,8 @@ apiClient.interceptors.request.use(
   }
 );
 
+
+
 //==================== CRUD FOR UNIVERSITY ====================
 export const fetchUniversity = async () => {
   try {
@@ -78,6 +80,8 @@ export const deleteUniversity = async (id) => {
     throw error;
   }
 };
+
+
 
 //==================== CRUD FOR SECTIONS ====================
 export const fetchSection = async () => {
@@ -130,6 +134,8 @@ export const deleteSection = async (id) => {
   }
 };
 
+
+
 //==================== CRUD FOR COURSE ====================
 export const fetchCourse = async () => {
   try {
@@ -181,6 +187,8 @@ export const deleteCourse = async (id) => {
   }
 };
 
+
+
 //==================== CRUD FOR COURSE SECTION MAPPING ====================
 export const fetchGetAllCourseSectionMapping = async () => {
   try {
@@ -213,6 +221,8 @@ export const updateCourseSectionData = async (id, data) => {
   }
 };
 
+
+
 //==================== CRUD FOR COURSE SECTION DETAILS ====================
 export const fetchAllCourseSectionDetails = async () => {
   try {
@@ -232,6 +242,8 @@ export const fetchCourseSectionDetailsById = async (id) => {
   }
 };
 
+
+
 //==================== CRUD FOR STUDENT COURSE SECTION DETAILS ====================
 export const fetchAllStudentCourseSectionDetails = async () => {
   try {
@@ -250,8 +262,6 @@ export const fetchStudentCourseSectionDetailsById = async (id) => {
     throw error;
   }
 };
-
-
 
 
 //==================== CRUD FOR USER REGISTRATION ====================
@@ -332,11 +342,23 @@ export const fetchAllTableDetails = async () => {
   }
 };
 
+export const createTable = async (data) => {
+  try {
+    const response = await apiClient.post(routes.SaveTableInformation, data);
+    toast.success('Table Created successfully');
+    return response.data;
+  } catch (error) {
+    toast.error('Error creating table.');
+    console.log(error)
+    throw error;
+  }
+};
+
 
 //==================== CRUD FOR TABLE MEMBER ====================
 export const FetchTableMembersDetailsById = async (id) => {
   try {
-    const response = await apiClient.get(routes.GetTableMembersDetailsById+'/'+id);
+    const response = await apiClient.get(routes.GetTableMembersDetailsById + '/' + id);
     return response?.data;
   } catch (error) {
     throw error;

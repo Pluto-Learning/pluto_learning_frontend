@@ -122,7 +122,7 @@ export default function page() {
 
         try {
             const response = await axios.put(
-                'http://192.168.1.225:3232/api/UserProfile/UpdateProfilePicture/' + session?.user?.id,
+                'http://software.mediasoftbd.com:3232/api/UserProfile/UpdateProfilePicture/' + session?.user?.id,
                 formData,
                 {
                     headers: {
@@ -177,7 +177,11 @@ export default function page() {
                                         >
 
                                             <img
-                                                src={singleUserProfile?.awsFileUrl ?? '/assets/images/image-placeholder.jpg'}
+                                                src={
+                                                    singleUserProfile?.awsFileUrl
+                                                    // singleUserProfile?.awsFileUrl :
+                                                    // '/assets/images/image-placeholder.jpg'
+                                                }
                                                 className=" img-fluid"
                                                 alt="Profile"
                                             // style={{
@@ -224,7 +228,7 @@ export default function page() {
                                             <h6>Image Preview:</h6>
                                             <div className='mx-auto'>
 
-                                            <img src={preview} alt="Image Preview"  className='img-fluid'/>
+                                                <img src={preview} alt="Image Preview" className='img-fluid' />
                                             </div>
                                         </div>
                                     )}

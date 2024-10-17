@@ -4,17 +4,18 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, getSession } from "next-auth/react";
 import { fetchUserProfileById } from "@/app/api/crud";
+import { toast } from "react-toastify";
 
 export default function Signin() {
 
   const [isSetProfile, setIsSetProfile] = useState(null)
 
-//   const getUserData = async () => {
-//     if (currentUserId) {
-//         const data = await fetchUserProfileById();
-//         setSingleUserProfile(data);
-//     }
-// };
+  //   const getUserData = async () => {
+  //     if (currentUserId) {
+  //         const data = await fetchUserProfileById();
+  //         setSingleUserProfile(data);
+  //     }
+  // };
 
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -41,14 +42,17 @@ export default function Signin() {
     console.log('nextAuthData: ', nextAuthData)
 
     if (nextAuthData?.ok) {
+      // toast.success("Successfully signed in")
       // Manually refresh session to update without page reload
       const session = await getSession();
       // console.log("Session updated after sign-in:", session);
 
       const userProfileData = await fetchUserProfileById(session?.user?.id);
 
+      router.refresh()
+
       // console.log("Session updated after sign-in:", userProfileData);
-      if(userProfileData) {
+      if (userProfileData) {
         // Redirect to desired page
         await getSession();
         router.push('/popular-table');
@@ -56,8 +60,6 @@ export default function Signin() {
         await getSession();
         router.push('/profile/edit/info');
       }
-
-
     } else {
       console.log("Login failed:", nextAuthData.error);
     }
@@ -82,7 +84,7 @@ export default function Signin() {
         <div className="col-lg-6">
           <div className="form-bg">
             <div className="form-bg-content">
-              <h3>Welcome Back!</h3>
+              <h3>Sign-In Now</h3>
               <div className="secondsText">
                 <p>You are only T-Minus 10 seconds away from an educational experience like no other, log in on Pluto now and see the difference!</p>
               </div>

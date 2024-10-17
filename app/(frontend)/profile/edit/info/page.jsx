@@ -18,7 +18,7 @@ export default function page() {
         "mobile": "",
         "dateOfBirth": "",
         "studentYear": "",
-        "status": "",
+        "status": "active",
         "profilePictureName": "",
         "awsFileUrl": ""
     });
@@ -250,7 +250,7 @@ export default function page() {
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="mb-3">
+                                    {/* <div className="mb-3">
                                         <label htmlFor="status" className="form-label">Status</label>
                                         <input
                                             type="text"
@@ -260,7 +260,7 @@ export default function page() {
                                             value={formData.status}
                                             onChange={handleChange}
                                         />
-                                    </div>
+                                    </div> */}
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </form>
                             </div>

@@ -19,8 +19,9 @@ export default function SignUp() {
     lastName: '',
     email: '',
     password: '',
-    userType: '',
-    keepSignedIn: false,
+    college: '',
+    userType: 'student',
+    keepSignedIn: true,
   });
 
   const handleChange = (e) => {
@@ -111,6 +112,16 @@ export default function SignUp() {
                       placeholder="Last name"
                     />
                   </div>
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="college form-control"
+                      name="college"
+                      value={formData.college}
+                      onChange={handleChange}
+                      placeholder="College Name"
+                    />
+                  </div>
                   {/* <div className="mb-3">
                     <input
                       type="text"
@@ -123,7 +134,7 @@ export default function SignUp() {
                   </div> */}
                   <div className="mb-3">
                     <input
-                      type="text"
+                      type="email"
                       className="email form-control"
                       name="email"
                       value={formData.email}

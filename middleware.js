@@ -23,6 +23,7 @@ export const config = {
         "/popular-table",
         "/dashboard",
         "/virtual-table",
+        "/virtual-table/:path*",
         "/profile",
         "/profile/edit",
         "/profile/edit/info",

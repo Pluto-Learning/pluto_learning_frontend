@@ -11,6 +11,8 @@ import HomeLayout from '@/layouts/homeLayout/HomeLayout';
 import { fetchAllTable, fetchAllTableDetails } from '@/app/api/crud';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import StepOne from '@/components/popular-table/createTable/StepOne';
+import StepTwo from '@/components/popular-table/createTable/StepTwo';
 
 export default function () {
 
@@ -142,6 +144,15 @@ export default function () {
     console.log('session: ', session?.user);
 
 
+    // =========================================
+    const [currentStep, setCurrentStep] = useState(1);
+
+    const handleNextStep = () => {
+        setCurrentStep(currentStep + 1);
+    };
+
+
+
     return (
         <HomeLayout>
             <div className='popular-tables'>
@@ -263,8 +274,8 @@ export default function () {
 
                             <div className="row g-5">
                                 <div className="col-lg-3">
-                                    <Link href={`/popular-table/create`} prefetch={true}>
-                                        <div class="popular-table-card card create-card h-100" >
+                                    {/* <Link href={`/popular-table/create`} prefetch={true}> */}
+                                        <div class="popular-table-card card create-card h-100" data-bs-toggle="modal" data-bs-target="#createTableModal">
                                             <div class="card-body">
                                                 <div className="create-info">
                                                     <div className="icon">
@@ -276,7 +287,7 @@ export default function () {
                                                 </div>
                                             </div>
                                         </div>
-                                    </Link>
+                                    {/* </Link> */}
                                 </div>
                                 {
                                     allTableDetails != null && allTableDetails?.length > 0 && allTableDetails?.map((item) => {
@@ -346,6 +357,38 @@ export default function () {
                 </div> */}
 
                 {/* <JoinATablePopup /> */}
+
+
+                {/* ================== Create Table ================ */}
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTableModal">
+                    Launch demo modal
+                </button>
+
+                <div class="modal fade table-create-modal" id="createTableModal" tabindex="-1" aria-labelledby="createTableModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="createTableModalLabel">Create Table</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div className='table-create-form'>
+                                    <div className="left">
+                                        <div className="step">
+                                            <h1>step</h1>
+                                        </div>
+                                    </div>
+                                    <div className="right">
+
+                                        {currentStep === 1 && <StepOne onNextStep={handleNextStep} />}
+                                        {currentStep === 2 && <StepTwo />}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
 
             </div>

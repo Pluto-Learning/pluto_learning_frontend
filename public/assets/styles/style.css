@@ -3510,4 +3510,14 @@ h6 {
 }
 .join-table-modal .modal-content .modal-body .course-details .btn-wrapper .btn {
   padding: 5px 30px;
+}
+
+.table-create-modal .table-create-form {
+  display: flex;
+}
+.table-create-modal .table-create-form .left {
+  flex-basis: 30%;
+}
+.table-create-modal .table-create-form .right {
+  flex-basis: 70%;
 }/*# sourceMappingURL=style.css.map */

@@ -4405,3 +4405,15 @@ $background-color_8: #4f6ebd;
         }
     }
 }
+
+.table-create-modal{
+    .table-create-form{
+        display: flex;
+        .left{
+            flex-basis: 30%;
+        }
+        .right{
+            flex-basis: 70%;
+        }
+    }
+}
