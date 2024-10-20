@@ -14,6 +14,8 @@ import { useSession } from 'next-auth/react';
 import StepOne from '@/components/popular-table/createTable/StepOne';
 import StepTwo from '@/components/popular-table/createTable/StepTwo';
 import VerticalStepper from '@/components/VerticalStepper';
+import EditTablePicture from '@/components/popular-table/EditTablePicutre';
+import EditTableInfo from '@/components/popular-table/EditTableInfo';
 
 export default function () {
 
@@ -298,6 +300,7 @@ export default function () {
 
                                                 <div className="col-lg-3">
                                                     <VirtualTableCard tableData={item} />
+                                                    {/* ===================== Join Table Start ================ */}
                                                     <div class="modal fade join-table-modal" id={`joinTable-${item?.roomId}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-xl">
                                                             <div class="modal-content">
@@ -314,6 +317,43 @@ export default function () {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    {/* ===================== Join Table End ================ */}
+
+                                                    {/* ===================== Edit Table Start ================ */}
+                                                    <div class="modal fade" id={`editTable-${item?.roomId}`} tabindex="-1" aria-labelledby="editTableModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="editTableModalLabel">Edit Table Info</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <EditTableInfo tableData={item} GetAllTableDetails={GetAllTableDetails} />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/* ===================== Edit Table End ================ */}
+
+                                                    {/* ===================== Edit Profile Picture Start ================ */}
+                                                    <div class="modal edit-table-picture-modal fade" id={`editTableImage-${item?.roomId}`} tabindex="-1" aria-labelledby="editTableImageModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="editTableImageModalLabel">{item?.roomName}</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <EditTablePicture tableData={item} />
+                                                                </div>
+                                                                {/* <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                </div> */}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/* ===================== Edit Profile Picture End ================ */}
                                                 </div>
 
                                             </>
@@ -365,18 +405,41 @@ export default function () {
                 <div class="modal fade table-create-modal" id="createTableModal" tabindex="-1" aria-labelledby="createTableModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            {/* <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="createTableModalLabel">Create Table</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                            </div> */}
                             <div class="modal-body">
                                 <div className='table-create-form'>
-                                    {/* <div className="left">
-                                        <div className="step">
-                                            <h1>step</h1>
+                                    <div className="left">
+                                        <div className="step-wrapper">
+                                            <ul className='nav flex-column step-info'>
+                                                <li className='nav-item'>
+                                                    <div className='step-count'>
+                                                        <p className="title">Enter Table Info</p>
+                                                        <p className={`number ${currentStep === 1 || currentStep === 2 && 'acive'}`}>
+                                                            {
+                                                                currentStep === 2 ?
+                                                                    <i class="fa-solid fa-check"></i> : '1'
+                                                            }
+
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li className='nav-item'>
+                                                    <div className='step-count'>
+                                                        <p className="title">Upload Image</p>
+                                                        <p className={`number ${currentStep === 2 && 'acive'}`}>2</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </div> */}
+                                    </div>
                                     <div className="right">
+                                        <div className="title-wrapper">
+                                            <h4 class="modal-title text-center" id="createTableModalLabel">Create Table</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
                                         {currentStep === 1 && <StepOne onNextStep={handleNextStep} />}
                                         {currentStep === 2 && <StepTwo setCurrentStep GetAllTableDetails={GetAllTableDetails} />}
                                     </div>
@@ -386,6 +449,7 @@ export default function () {
                         </div>
                     </div>
                 </div>
+
 
 
             </div>

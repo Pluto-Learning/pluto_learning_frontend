@@ -59,7 +59,15 @@ export default function VirtualTableCard({ tableData = {} }) {
                         <span className='status-title'>Availabe</span>
                     </div>
                     <div className="card-img">
-                        <img src={roomImg ? roomImg : "/assets/images/recent-tables/recent-table-1.png"} alt="" className='img-fluid card-img-top' />
+                        <button className="btn edit-btn picture" data-bs-toggle="modal" data-bs-target={`#editTableImage-${roomId}`} >
+                            <i class="fa-solid fa-camera"></i>
+                        </button>
+                        <button className="btn edit-btn info" data-bs-toggle="modal" data-bs-target={`#editTable-${roomId}`} >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+
+                        <img src={!roomImg ? "/assets/images/image-placeholder.jpg" : roomImg} alt="" className='img-fluid card-img-top' />
+                        {/* <img src={"/assets/images/image-placeholder.jpg"} alt="" className='img-fluid card-img-top' /> */}
                     </div>
                     <div className="card-info">
                         <h4 className="card-title table-name" data-bs-toggle="modal" data-bs-target={`#joinTable-${roomId}`}>{roomName}</h4>

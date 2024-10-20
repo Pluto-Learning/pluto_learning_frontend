@@ -119,7 +119,7 @@ export default function HomeNavbar() {
                                         {
                                             status === 'authenticated' &&
                                             <li class="nav-item ">
-                                                <Link class="nav-link" href="/popular-table">Table Discovery</Link>
+                                                <Link class="nav-link" href="/table-discovery">Table Discovery</Link>
                                             </li>
                                         }
 

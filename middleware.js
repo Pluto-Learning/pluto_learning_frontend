@@ -20,7 +20,7 @@ export default auth((req) => {
 // Manage list of protected routes
 export const config = {
     matcher: [
-        "/popular-table",
+        "/table-discovery",
         "/dashboard",
         "/virtual-table",
         "/virtual-table/:path*",

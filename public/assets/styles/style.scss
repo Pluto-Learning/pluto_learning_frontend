@@ -4004,7 +4004,7 @@ $background-color_8: #4f6ebd;
 
 
     .popular-table-slider {
-        padding: 200px 0 100px 0;
+        padding: 100px 0 100px 0;
         // height: 100vh;
         background-repeat: no-repeat;
         background-size: cover;
@@ -4211,6 +4211,37 @@ $background-color_8: #4f6ebd;
 
         .card-img {
             margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+
+            .edit-btn {
+                position: absolute;
+                z-index: 1;
+                background-color: $pluto-pink;
+                color: $white;
+                padding: 3px 6px;
+                font-size: 12px;
+                visibility: hidden;
+                opacity: 0;
+                // right: 0px;
+                transform: translateX(30px);
+
+                &.info {
+                    top: 35px;
+                    right: 5px;
+                    transition: 0.5s;
+                }
+
+                &.picture {
+                    top: 5px;
+                    right: 5px;
+                    transition: 0.3s;
+                }
+
+                &:hover {
+                    background-color: $pluto-deep-blue;
+                }
+            }
 
             img {
                 border-radius: 8px;
@@ -4239,6 +4270,7 @@ $background-color_8: #4f6ebd;
                 margin-bottom: 5px;
             }
         }
+
 
     }
 
@@ -4312,6 +4344,14 @@ $background-color_8: #4f6ebd;
             .card-info {
                 .table-name {
                     color: $pluto-pink;
+                }
+            }
+
+            .card-img {
+                .edit-btn {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translateX(0px);
                 }
             }
         }
@@ -4406,6 +4446,27 @@ $background-color_8: #4f6ebd;
     }
 }
 
+.edit-table-picture-modal {
+    .modal-body {
+        .table-picture {
+            margin-bottom: 20px;
+
+            img {
+                aspect-ratio: 72 / 29;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+
+        .image-preview {
+            img {
+                width: 200px;
+            }
+        }
+    }
+}
+
 .table-create-modal {
     .modal-body {
         padding: 0;
@@ -4413,14 +4474,77 @@ $background-color_8: #4f6ebd;
 
     .table-create-form {
 
-        // display: flex;
-        // .left{
-        //     flex-basis: 30%;
-        //     background-color: $pluto-deep-blue;
-        // }
+        display: flex;
+        min-height: 400px;
+
+        .left {
+            flex-basis: 30%;
+            background-color: $pluto-deep-blue;
+
+            .step-wrapper {
+                height: 100%;
+
+                .step-info {
+                    align-items: end;
+                    justify-content: space-evenly;
+                    margin-right: -15px;
+                    height: 100%;
+
+                    .nav-item {
+
+                        .step-count {
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+
+                            .title {
+                                font-weight: 700;
+                                text-transform: capitalize;
+                                color: $white;
+                            }
+
+                            .number {
+                                border-radius: 100%;
+                                width: 30px;
+                                height: 30px;
+                                background-color: $pluto-white;
+                                border: 1px solid $pluto-pink;
+                                color: $pluto-pink;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 14px;
+                                font-weight: 600;
+
+                                &.acive {
+                                    background-color: $pluto-pink;
+                                    color: $white;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
         .right {
-            // flex-basis: 70%;
-            padding: 20px;
+            flex-basis: 70%;
+            padding: 20px 50px;
+
+            .title-wrapper {
+                position: relative;
+
+                h4 {
+                    color: $pluto-pink;
+                    font-size: 24px;
+                }
+                .btn-close {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+            }
         }
     }
 }

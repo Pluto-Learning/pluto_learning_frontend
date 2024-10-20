@@ -333,6 +333,15 @@ export const fetchAllTable = async () => {
   }
 };
 
+export const fetchTableById = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetTableByRoomId+'/'+id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const fetchAllTableDetails = async () => {
   try {
     const response = await apiClient.get(routes.GetAllTableDetails);
@@ -349,6 +358,18 @@ export const createTable = async (data) => {
     return response.data;
   } catch (error) {
     toast.error('Error creating table.');
+    console.log(error)
+    throw error;
+  }
+};
+
+export const updateTable = async (id, data) => {
+  try {
+    const response = await apiClient.put(routes.UpdateTableInformation+'/'+id, data);
+    toast.success('Table Updated successfully');
+    return response.data;
+  } catch (error) {
+    toast.error('Error update table.');
     console.log(error)
     throw error;
   }
