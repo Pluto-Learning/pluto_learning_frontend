@@ -8,9 +8,18 @@ import store from "@/store";
 import NextAuthProvider from "@/Providers/NextAuthProvider";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Ensure this line is added
+import { useEffect, useState } from "react";
+import PreLoader from "@/components/PreLoader";
 
 
 export default function RootLayout({ children }) {
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 3000)
+  }, [])
+
   return (
     <html lang="en">
       <head>
@@ -30,10 +39,17 @@ export default function RootLayout({ children }) {
       <body>
         <Provider store={store}>
           <NextAuthProvider>
-            <main>
-              <ToastContainer />
-              {children}
-            </main>
+            {
+              !loading ? (
+                <main>
+                  <ToastContainer />
+                  {children}
+                </main>
+              ) : (
+                <PreLoader />
+              )
+            }
+
           </NextAuthProvider>
         </Provider>
         {/* <script

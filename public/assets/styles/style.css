@@ -3517,4 +3517,54 @@ h6 {
 }
 .table-create-modal .table-create-form .right {
   padding: 20px;
+}
+
+/* HTML: <div class="loader"></div> */
+.preloader {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preloader .loader {
+  width: 76px;
+  height: 50px;
+  position: relative;
+  animation: flippx 2s infinite linear;
+}
+.preloader .loader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #F72585;
+  transform-origin: -50px 50%;
+  animation: spin 1s infinite linear;
+}
+.preloader .loader::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #F72585;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+@keyframes flippx {
+  0%, 49% {
+    transform: scaleX(1);
+  }
+  50%, 100% {
+    transform: scaleX(-1);
+  }
+}
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }/*# sourceMappingURL=style.css.map */
