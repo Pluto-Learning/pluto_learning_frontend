@@ -158,7 +158,7 @@ export default function Page() {
             </div>
 
             <div className='profile pt_50 pb_50'>
-                <div className="container mt-5">
+                <div className="container my-5">
                     <div className="row g-4">
                         <div className="col-lg-3">
                             <div className="card shadow h-100">
@@ -195,7 +195,7 @@ export default function Page() {
                                         </div>
                                     </div>
 
-                                    <h5 className='text-center text-capitalize mt-2 fw-light'>{session?.user?.name}</h5>
+                                    <h5 className='text-center text-capitalize mt-2 fw-light'>{singleUserProfile?.userID}</h5>
 
                                 </div>
                             </div>
@@ -203,7 +203,12 @@ export default function Page() {
                         <div className="col-lg-9">
                             <div className="card shadow h-100">
                                 <div className="card-body">
-                                    <h2 className='text-center mb-xxl-4'>User Info</h2>
+                                    <div className="title-wrapper position-relative">
+                                        <h2 className='text-center mb-xxl-4'>User Info</h2>
+                                        <Link href={`profile/edit/info`} className="edit-btn text-end position-absolute z-3 top-50 end-0">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </Link>
+                                    </div>
                                     <ul className="list-group list-group-flush">
                                         <li className="list-group-item">
                                             <strong>User ID: </strong> {singleUserProfile?.userID}
@@ -514,8 +519,8 @@ export default function Page() {
                 </div>
 
 
-            </div> 
-             </>
+            </div>
+        </>
         </HomeLayout>
     )
 }

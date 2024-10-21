@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className="row g-4">
                     <div className="col-lg-4">
                         <div className="footer-logo">
-                            <img src="/assets/images/pluto-learning-logo.svg" alt="" className="img-fluid" />
+                            <img src="/assets/images/Pluto-footer-logo.png" alt="" className="img-fluid" />
                         </div>
                     </div>
                     <div className="col-lg-4">

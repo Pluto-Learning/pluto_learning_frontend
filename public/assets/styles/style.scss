@@ -1131,7 +1131,6 @@
 
         &.course {
             form {
-
                 .course-add-section {
                     margin-bottom: 20px;
                     padding: 25px;
@@ -1146,15 +1145,34 @@
 
 
                     .course-input {
-                        flex-basis: 40%;
+                        flex-basis: 45%;
+                        position: relative;
 
                         .form-control {
                             padding: 8px 16px;
                         }
+
+                        .course-dropdown {
+                            position: absolute;
+                            background: $white;
+                            width: 100%;
+                            padding: 20px 0;
+                            box-shadow: 0px 0px 10px 0px rgba(51, 15, 126, 0.2509803922);
+
+                            .dropdown-item{
+                                padding: 8px 20px;
+                                cursor: pointer;
+                                &:hover {
+                                    background-color: $pluto-white;
+                                }
+                            }
+
+
+                        }
                     }
 
                     .section-input {
-                        flex-basis: 40%;
+                        flex-basis: 45%;
 
                         .form-select {
                             padding: 8px 16px;
@@ -4166,12 +4184,34 @@ $background-color_8: #4f6ebd;
 .profile-edit {
     .card {
         .card-body {
+            padding: 40px;
+
             form {
                 .form-control {
                     @include login-input-control;
+                    border-color: $pluto-deep-blue;
+                    color: $pluto-black;
                 }
+
+                .form-control[type="file"] {
+                    @include login-input-control;
+                    border-color: $pluto-deep-blue;
+                    // color: $pluto-black;
+                    height: unset;
+
+                }
+
                 .form-select {
                     @include login-input-control;
+                    border-color: $pluto-deep-blue;
+                    color: $pluto-black;
+                }
+
+                .btn {
+                    margin-top: 10px;
+                    padding: 12px;
+                    font-size: 16px;
+                    font-weight: 700;
                 }
             }
         }

@@ -277,7 +277,7 @@ export default function page() {
                                             onChange={handleChange}
                                         />
                                     </div> */}
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                    <button type="submit" className="btn pluto-deep-blue-btn btn-lg w-100">Submit</button>
                                 </form>
                             </div>
                         </div>

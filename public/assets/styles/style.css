@@ -240,6 +240,9 @@ h6 {
     transform: rotate(360deg);
   }
 }
+.preloader .lottie-loader {
+  max-width: 500px;
+}
 
 .nav-bar {
   display: flex;
@@ -1176,13 +1179,28 @@ h6 {
   box-shadow: 0px 0px 10px 0px rgba(51, 15, 126, 0.2509803922);
 }
 .multistep-form-step.course form .course-add-section .course-input {
-  flex-basis: 40%;
+  flex-basis: 45%;
+  position: relative;
 }
 .multistep-form-step.course form .course-add-section .course-input .form-control {
   padding: 8px 16px;
 }
+.multistep-form-step.course form .course-add-section .course-input .course-dropdown {
+  position: absolute;
+  background: #fff;
+  width: 100%;
+  padding: 20px 0;
+  box-shadow: 0px 0px 10px 0px rgba(51, 15, 126, 0.2509803922);
+}
+.multistep-form-step.course form .course-add-section .course-input .course-dropdown .dropdown-item {
+  padding: 8px 20px;
+  cursor: pointer;
+}
+.multistep-form-step.course form .course-add-section .course-input .course-dropdown .dropdown-item:hover {
+  background-color: #F9F9F9;
+}
 .multistep-form-step.course form .course-add-section .section-input {
-  flex-basis: 40%;
+  flex-basis: 45%;
 }
 .multistep-form-step.course form .course-add-section .section-input .form-select {
   padding: 8px 16px;
@@ -3413,6 +3431,9 @@ h6 {
   top: 0;
 }
 
+.profile-edit .card .card-body {
+  padding: 40px;
+}
 .profile-edit .card .card-body form .form-control {
   border: 0;
   color: #c7c8ca;
@@ -3423,6 +3444,21 @@ h6 {
   width: 100% !important;
   background-color: #F7F7F7;
   border-left: 4px solid #4361ee;
+  border-color: #3A0CA3;
+  color: #000000;
+}
+.profile-edit .card .card-body form .form-control[type=file] {
+  border: 0;
+  color: #c7c8ca;
+  font-weight: 500;
+  letter-spacing: 0.93px;
+  white-space: nowrap;
+  height: 3rem;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  border-left: 4px solid #4361ee;
+  border-color: #3A0CA3;
+  height: unset;
 }
 .profile-edit .card .card-body form .form-select {
   border: 0;
@@ -3434,6 +3470,14 @@ h6 {
   width: 100% !important;
   background-color: #F7F7F7;
   border-left: 4px solid #4361ee;
+  border-color: #3A0CA3;
+  color: #000000;
+}
+.profile-edit .card .card-body form .btn {
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .backendLayout {
