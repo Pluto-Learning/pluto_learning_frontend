@@ -55,7 +55,6 @@ export default function page() {
     const handleUserProfileSave = async () => {
         try {
             await saveUserProfile(formData);
-
             resetForm();
         } catch (error) {
             console.error("Error saving user profile:", error);
@@ -239,7 +238,7 @@ export default function page() {
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="mb-3">
+                                    {/* <div className="mb-3">
                                         <label htmlFor="studentYear" className="form-label">Student Year</label>
                                         <input
                                             type="text"
@@ -249,7 +248,24 @@ export default function page() {
                                             value={formData.studentYear}
                                             onChange={handleChange}
                                         />
+                                    </div> */}
+                                    <div className="mb-3">
+                                        <label htmlFor="studentYear" className="form-label">Student Year</label>
+                                        <select
+                                            className="form-select"
+                                            id="studentYear"
+                                            name="studentYear"
+                                            value={formData.studentYear}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="">Select Student Year</option>
+                                            <option value="freshman">Freshman</option>
+                                            <option value="sophomore">Sophomore</option>
+                                            <option value="junior">Junior</option>
+                                            <option value="senior">Senior</option>
+                                        </select>
                                     </div>
+
                                     {/* <div className="mb-3">
                                         <label htmlFor="status" className="form-label">Status</label>
                                         <input

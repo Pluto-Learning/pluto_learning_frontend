@@ -168,8 +168,12 @@ export default function () {
                     }}
                 >
                     <h1>Popular Tables</h1>
-                    <PopularTableSlider table={allTableDetails} />
+                    {
+                        allTableDetails?.length > 0 && <PopularTableSlider table={allTableDetails} />
+                    }
+                    
                 </div>
+
                 <div className="recent-table-wrapper" style={{ background: "url('/assets/images/recent-tables/recent-table-bg.png')" }}>
                     <div className="container">
                         <h2>Recent Tables</h2>
@@ -293,7 +297,8 @@ export default function () {
                                     {/* </Link> */}
                                 </div>
                                 {
-                                    allTableDetails != null && allTableDetails?.length > 0 && allTableDetails?.map((item) => {
+                                    allTableDetails != null && allTableDetails?.length > 0 ? 
+                                    allTableDetails?.map((item) => {
                                         console.log('itemitemitemitemitem', item)
                                         return (
                                             <>
@@ -358,7 +363,11 @@ export default function () {
 
                                             </>
                                         )
-                                    })
+                                    }) : 
+                                    <div className="col-lg-3">
+
+                                    <h4>No Table Found</h4>
+                                    </div>
                                 }
 
                                 {/* <div className="col-lg-3">

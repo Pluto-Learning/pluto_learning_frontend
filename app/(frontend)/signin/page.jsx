@@ -55,7 +55,7 @@ export default function Signin() {
       if (userProfileData) {
         // Redirect to desired page
         await getSession();
-        router.push('/popular-table');
+        router.push('/table-discovery');
         
       } else {
         await getSession();

@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import { createTable, fetchCourse } from '@/app/api/crud';
+import { addTableMember, createTable, fetchCourse } from '@/app/api/crud';
+import { useSession } from 'next-auth/react';
 
 export default function StepOne({ onNextStep }) {
+
+  const {data: session} = useSession()
+  console.log('session: ', session)
+
   const [formData, setFormData] = useState({
     roomId: 'string',
     roomName: '',
@@ -65,7 +70,13 @@ export default function StepOne({ onNextStep }) {
   // Handle Create Table
   const handleCreateTable = async () => {
     try {
-      await createTable(formData);
+      const responseData = await createTable(formData);
+      console.log('Response Data:', responseData); 
+      await addTableMember({
+        memberId: session?.user?.id,
+        roomId: responseData?.roomId,
+        role: "student"
+      })
       onNextStep(); // Proceed to step 2 on success
     } catch (error) {
       console.error("Error creating Table:", error);
@@ -134,7 +145,7 @@ export default function StepOne({ onNextStep }) {
         <textarea className="form-control" id="longDescription" name="longDescription" value={formData.longDescription} onChange={handleChange} required />
       </div>
 
-      <button type="submit" className="btn pluto-pink-btn">Submit Step 1</button>
+      <button type="submit" className="btn pluto-pink-btn">Submit</button>
     </form>
   );
 }

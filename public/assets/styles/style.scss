@@ -2456,19 +2456,7 @@
                         // width: 100%;
 
                         .form-control {
-                            border: 0;
-                            color: #c7c8ca;
-                            // font-family: var(--font-family-nunito);
-                            // font-size: var(--font-size-xl);
-                            font-weight: 500;
-                            letter-spacing: 0.93px;
-                            // padding: 0;
-                            white-space: nowrap;
-                            // min-width: 20rem;
-                            height: 3rem;
-                            width: 100% !important;
-                            background-color: #F7F7F7;
-                            border-left: 4px solid #4361ee;
+                            @include login-input-control;
                         }
                     }
                 }
@@ -3625,381 +3613,6 @@ $background-color_8: #4f6ebd;
 }
 
 
-// =================== BACKEND STARTS ======================= //
-
-.backendLayout {
-    // display: flex;
-    // min-height: 100vh;
-    // background-color: $pluto-white;
-
-    // Sidebar Styles
-    .sidebar {
-        width: 240px;
-        background-color: $white;
-        // color: #fff;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        scrollbar-width: thin;
-        // overflow: hidden;
-        // overflow-y: auto;
-        position: relative;
-        transition: 0.5s ease;
-
-        &.hide-sidebar {
-            margin-left: -240px;
-        }
-
-        .toggle-btn {
-            position: absolute;
-            right: -40px;
-            top: 10px;
-            z-index: 999999;
-            background-color: $white;
-            color: $pluto-deep-blue;
-        }
-
-        &-logo {
-            padding: 1rem 1.5rem;
-            width: 150px;
-        }
-
-        .nav {
-
-            li.nav-item {
-
-                a.nav-link {
-                    color: $pluto-dark-gray;
-                    text-decoration: none;
-                    font-weight: bold;
-                    transition: color 0.3s ease;
-                    transition: 0.5s;
-
-                    &:hover {
-                        background-color: $pluto-white-2;
-                    }
-
-                }
-
-                .collapse {
-                    .sub-nav {
-                        .nav-item {
-                            .nav-link {}
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-
-    // Main Content Area
-    .main-content {
-        flex: 1;
-        padding: 20px 50px;
-        // background-color: #f5f5f5;
-        width: calc(100% - 240px);
-        transition: 0.5s ease;
-
-        &.full-width {
-            width: 100%;
-        }
-
-        header {
-            // border-bottom: 1px solid #ddd;
-            // padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        main {
-            // background: #fff;
-            // padding: 20px;
-            // border-radius: 8px;
-            // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-            .university-list {
-                .card {
-                    border: none;
-                    box-shadow: 0 .1875rem .75rem 0 rgba(47, 43, 61, .14);
-                    overflow: hidden;
-                    border-radius: 8px;
-
-                    .card-header {
-                        background-color: $white;
-                        padding: 20px;
-                        border-color: $pluto-white-2;
-
-                        h4 {
-                            margin-bottom: 0;
-                        }
-                    }
-                }
-
-                .table {
-                    margin-bottom: 0;
-
-                    thead {
-                        tr {
-                            th {
-                                font-weight: 600;
-                                text-transform: uppercase;
-                                font-size: 0.85rem;
-                                padding: 20px;
-                                align-content: center;
-                                color: $pluto-dark-gray;
-                            }
-                        }
-                    }
-
-                    tbody {
-                        tr {
-                            th {
-                                padding: .782rem 1.25rem;
-                                align-content: center;
-                            }
-
-                            td {
-                                padding: .782rem 1.25rem;
-                                align-content: center;
-                                color: $pluto-gray;
-                                font-size: 0.93rem;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    a,
-    a:hover,
-    a:focus {
-        color: inherit;
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-
-    .navbar {
-        padding: 15px 10px;
-        background: #fff;
-        border: none;
-        border-radius: 0;
-        margin-bottom: 40px;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar-btn {
-        box-shadow: none;
-        outline: none !important;
-        border: none;
-    }
-
-    .line {
-        width: 100%;
-        height: 1px;
-        border-bottom: 1px dashed #ddd;
-        margin: 40px 0;
-    }
-
-    /* ---------------------------------------------------
-    SIDEBAR STYLE
------------------------------------------------------ */
-
-    .wrapper {
-        display: flex;
-        width: 100%;
-        align-items: stretch;
-    }
-
-    #sidebar {
-        min-width: 250px;
-        max-width: 250px;
-        transition: all 0.3s;
-        border-right: 1px solid #f2f2f2;
-    }
-
-    #sidebar.active {
-        margin-left: -250px;
-    }
-
-    #sidebar .sidebar-header {
-        padding: 20px;
-        background: $white;
-    }
-
-    #sidebar ul.components {
-        padding: 20px 0;
-        // border-bottom: 1px solid #47748b;
-    }
-
-    #sidebar ul li a {
-        padding: 10px;
-        font-size: 14px;
-        display: block;
-    }
-
-    #sidebar ul li a:hover {
-        color: $white;
-        background: $pluto-deep-blue;
-    }
-
-    #sidebar ul li.active>a,
-    a[aria-expanded="true"] {
-        color: #fff;
-        background: $pluto-deep-blue;
-    }
-
-    a[data-toggle="collapse"] {
-        position: relative;
-    }
-
-    .dropdown-toggle::after {
-        display: block;
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
-    }
-
-    .dropdown__lvl1 li a {
-        font-size: 0.9em !important;
-        padding-left: 30px !important;
-        background: $white;
-        color: $pluto-deep-blue;
-    }
-
-    a.download {
-        background: #fff;
-        color: #7386d5;
-    }
-
-    a.article,
-    a.article:hover {
-        background: #6d7fcc !important;
-        color: #fff !important;
-    }
-
-    /* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
-
-    #content {
-        width: calc(100% - 250px);
-        padding: 20px;
-        min-height: 100vh;
-        transition: all 0.3s;
-        background: $pluto-white;
-
-        &.active {
-            width: 100%;
-        }
-
-        .toggle-btn {
-            background-color: $pluto-deep-blue;
-            color: $white;
-        }
-
-        main {
-            // background: #fff;
-            // padding: 20px;
-            // border-radius: 8px;
-            // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-            .university-list {
-                .card {
-                    border: none;
-                    box-shadow: 0 .1875rem .75rem 0 rgba(47, 43, 61, .14);
-                    overflow: hidden;
-                    border-radius: 8px;
-
-                    .card-header {
-                        background-color: $white;
-                        padding: 20px;
-                        border-color: $pluto-white-2;
-
-                        h4 {
-                            font-family: $common-font;
-                            margin-bottom: 0;
-                            font-size: 20px;
-                            font-weight: 700;
-                            color: $pluto-black;
-                        }
-
-                        .create-btn {
-                            background-color: $pluto-blue;
-                            color: $white;
-                            font-weight: 700;
-                            font-size: 14px;
-                        }
-                    }
-                }
-
-                .table-responsive {
-                    scrollbar-width: thin;
-                }
-
-                .table {
-                    margin-bottom: 0;
-
-                    thead {
-                        tr {
-                            th {
-                                font-weight: 600;
-                                text-transform: uppercase;
-                                font-size: 14px;
-                                padding: 20px;
-                                align-content: center;
-                                color: $pluto-dark-gray;
-                            }
-                        }
-                    }
-
-                    tbody {
-                        tr {
-                            th {
-                                padding: .782rem 1.25rem;
-                                align-content: center;
-                            }
-
-                            td {
-                                padding: .782rem 1.25rem;
-                                align-content: center;
-                                color: $pluto-gray;
-                                font-size: 14px;
-
-                                .btn-wrapper {
-                                    width: 150px;
-                                    margin: 0 auto;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
-
-    @media (max-width: 768px) {
-        #sidebar {
-            margin-left: -250px;
-        }
-
-        #sidebar.active {
-            margin-left: 0;
-        }
-
-        #sidebarCollapse span {
-            display: none;
-        }
-    }
-}
-
-// =================== BACKEND ENDS ======================= //
-
 .popular-tables {
 
 
@@ -4539,6 +4152,7 @@ $background-color_8: #4f6ebd;
                     color: $pluto-pink;
                     font-size: 24px;
                 }
+
                 .btn-close {
                     position: absolute;
                     right: 0;
@@ -4549,66 +4163,400 @@ $background-color_8: #4f6ebd;
     }
 }
 
+.profile-edit {
+    .card {
+        .card-body {
+            form {
+                .form-control {
+                    @include login-input-control;
+                }
+                .form-select {
+                    @include login-input-control;
+                }
+            }
+        }
+    }
+}
 
-// Preloader
-/* HTML: <div class="loader"></div> */
 
-.preloader {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    .loader {
-        width: calc(100px - 24px);
-        height: 50px;
+
+
+
+
+
+
+// =================== BACKEND STARTS ======================= //
+
+.backendLayout {
+    // display: flex;
+    // min-height: 100vh;
+    // background-color: $pluto-white;
+
+    // Sidebar Styles
+    .sidebar {
+        width: 240px;
+        background-color: $white;
+        // color: #fff;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        scrollbar-width: thin;
+        // overflow: hidden;
+        // overflow-y: auto;
         position: relative;
-        animation: flippx 2s infinite linear;
+        transition: 0.5s ease;
 
-        &::before {
-            content: "";
+        &.hide-sidebar {
+            margin-left: -240px;
+        }
+
+        .toggle-btn {
             position: absolute;
-            inset: 0;
-            margin: auto;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: $pluto-pink;
-            transform-origin: -50px 50%;
-            animation: spin 1s infinite linear;
+            right: -40px;
+            top: 10px;
+            z-index: 999999;
+            background-color: $white;
+            color: $pluto-deep-blue;
         }
 
-        &::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: $pluto-pink;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+        &-logo {
+            padding: 1rem 1.5rem;
+            width: 150px;
         }
 
-        @keyframes flippx {
+        .nav {
 
-            0%,
-            49% {
-                transform: scaleX(1);
-            }
+            li.nav-item {
 
-            50%,
-            100% {
-                transform: scaleX(-1);
-            }
-        }
+                a.nav-link {
+                    color: $pluto-dark-gray;
+                    text-decoration: none;
+                    font-weight: bold;
+                    transition: color 0.3s ease;
+                    transition: 0.5s;
 
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
+                    &:hover {
+                        background-color: $pluto-white-2;
+                    }
+
+                }
+
+                .collapse {
+                    .sub-nav {
+                        .nav-item {
+                            .nav-link {}
+                        }
+                    }
+                }
+
             }
         }
     }
 
+    // Main Content Area
+    .main-content {
+        flex: 1;
+        padding: 20px 50px;
+        // background-color: #f5f5f5;
+        width: calc(100% - 240px);
+        transition: 0.5s ease;
 
+        &.full-width {
+            width: 100%;
+        }
+
+        header {
+            // border-bottom: 1px solid #ddd;
+            // padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        main {
+            // background: #fff;
+            // padding: 20px;
+            // border-radius: 8px;
+            // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            .university-list {
+                .card {
+                    border: none;
+                    box-shadow: 0 .1875rem .75rem 0 rgba(47, 43, 61, .14);
+                    overflow: hidden;
+                    border-radius: 8px;
+
+                    .card-header {
+                        background-color: $white;
+                        padding: 20px;
+                        border-color: $pluto-white-2;
+
+                        h4 {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+
+                .table {
+                    margin-bottom: 0;
+
+                    thead {
+                        tr {
+                            th {
+                                font-weight: 600;
+                                text-transform: uppercase;
+                                font-size: 0.85rem;
+                                padding: 20px;
+                                align-content: center;
+                                color: $pluto-dark-gray;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        tr {
+                            th {
+                                padding: .782rem 1.25rem;
+                                align-content: center;
+                            }
+
+                            td {
+                                padding: .782rem 1.25rem;
+                                align-content: center;
+                                color: $pluto-gray;
+                                font-size: 0.93rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    a,
+    a:hover,
+    a:focus {
+        color: inherit;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .navbar {
+        padding: 15px 10px;
+        background: #fff;
+        border: none;
+        border-radius: 0;
+        margin-bottom: 40px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-btn {
+        box-shadow: none;
+        outline: none !important;
+        border: none;
+    }
+
+    .line {
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px dashed #ddd;
+        margin: 40px 0;
+    }
+
+    /* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+    .wrapper {
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    #sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        transition: all 0.3s;
+        border-right: 1px solid #f2f2f2;
+    }
+
+    #sidebar.active {
+        margin-left: -250px;
+    }
+
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: $white;
+    }
+
+    #sidebar ul.components {
+        padding: 20px 0;
+        // border-bottom: 1px solid #47748b;
+    }
+
+    #sidebar ul li a {
+        padding: 10px;
+        font-size: 14px;
+        display: block;
+    }
+
+    #sidebar ul li a:hover {
+        color: $white;
+        background: $pluto-deep-blue;
+    }
+
+    #sidebar ul li.active>a,
+    a[aria-expanded="true"] {
+        color: #fff;
+        background: $pluto-deep-blue;
+    }
+
+    a[data-toggle="collapse"] {
+        position: relative;
+    }
+
+    .dropdown-toggle::after {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+    }
+
+    .dropdown__lvl1 li a {
+        font-size: 0.9em !important;
+        padding-left: 30px !important;
+        background: $white;
+        color: $pluto-deep-blue;
+    }
+
+    a.download {
+        background: #fff;
+        color: #7386d5;
+    }
+
+    a.article,
+    a.article:hover {
+        background: #6d7fcc !important;
+        color: #fff !important;
+    }
+
+    /* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+    #content {
+        width: calc(100% - 250px);
+        padding: 20px;
+        min-height: 100vh;
+        transition: all 0.3s;
+        background: $pluto-white;
+
+        &.active {
+            width: 100%;
+        }
+
+        .toggle-btn {
+            background-color: $pluto-deep-blue;
+            color: $white;
+        }
+
+        main {
+            // background: #fff;
+            // padding: 20px;
+            // border-radius: 8px;
+            // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            .university-list {
+                .card {
+                    border: none;
+                    box-shadow: 0 .1875rem .75rem 0 rgba(47, 43, 61, .14);
+                    overflow: hidden;
+                    border-radius: 8px;
+
+                    .card-header {
+                        background-color: $white;
+                        padding: 20px;
+                        border-color: $pluto-white-2;
+
+                        h4 {
+                            font-family: $common-font;
+                            margin-bottom: 0;
+                            font-size: 20px;
+                            font-weight: 700;
+                            color: $pluto-black;
+                        }
+
+                        .create-btn {
+                            background-color: $pluto-blue;
+                            color: $white;
+                            font-weight: 700;
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                .table-responsive {
+                    scrollbar-width: thin;
+                }
+
+                .table {
+                    margin-bottom: 0;
+
+                    thead {
+                        tr {
+                            th {
+                                font-weight: 600;
+                                text-transform: uppercase;
+                                font-size: 14px;
+                                padding: 20px;
+                                align-content: center;
+                                color: $pluto-dark-gray;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        tr {
+                            th {
+                                padding: .782rem 1.25rem;
+                                align-content: center;
+                            }
+
+                            td {
+                                padding: .782rem 1.25rem;
+                                align-content: center;
+                                color: $pluto-gray;
+                                font-size: 14px;
+
+                                .btn-wrapper {
+                                    width: 150px;
+                                    margin: 0 auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+    @media (max-width: 768px) {
+        #sidebar {
+            margin-left: -250px;
+        }
+
+        #sidebar.active {
+            margin-left: 0;
+        }
+
+        #sidebarCollapse span {
+            display: none;
+        }
+    }
 }
+
+// =================== BACKEND ENDS ======================= //

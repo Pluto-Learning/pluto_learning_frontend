@@ -61,7 +61,7 @@ export default function StepTwo({ GetAllTableDetails }) {
             // Handle success, maybe go to next step or show success message
             toast.success('Image uploaded successfully!');
             setPreview(null); // Clear preview after successful upload
-            router.push('/popular-table');
+            router.push('/table-discovery');
             GetAllTableDetails()
             window.location.reload();
         } catch (error) {
@@ -89,7 +89,7 @@ export default function StepTwo({ GetAllTableDetails }) {
                 <div className="mb-3">
                     <input className='form-control' type="file" onChange={handleFileChange} accept="image/*" />
                 </div>
-                <button type="submit" className='btn pluto-pink-btn' data-bs-dismiss="modal" aria-label="Close">Submit Step 2</button>
+                <button type="submit" className='btn pluto-pink-btn' data-bs-dismiss="modal" aria-label="Close">Upload</button>
 
                 {preview && (
                     <div className='mt-3'>
