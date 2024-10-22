@@ -52,7 +52,7 @@ export default function HomeNavbar() {
         getUserData();
     }, [currentUserId]);
 
-    console.log('userData: ', userData)
+    // console.log('userData: ', userData)
 
     return (
         <>
@@ -120,6 +120,12 @@ export default function HomeNavbar() {
                                             status === 'authenticated' &&
                                             <li class="nav-item ">
                                                 <Link class="nav-link" href="/table-discovery">Table Discovery</Link>
+                                            </li>
+                                        }
+                                        {
+                                            status === 'authenticated' &&
+                                            <li class="nav-item ">
+                                                <Link class="nav-link" href="/profile/course-selection">Course Selection</Link>
                                             </li>
                                         }
 

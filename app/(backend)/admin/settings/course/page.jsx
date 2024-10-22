@@ -135,8 +135,8 @@ export default function page() {
                     <th scope="col" className='text-center'>courseId</th>
                     <th scope="col" className='text-center'>courseName</th>
                     <th scope="col" className='text-center'>courseNumber</th>
-                    <th scope="col" className='text-center'>sectionNumber</th>
-                    <th scope="col" className='text-center'>sectionTime</th>
+                    {/* <th scope="col" className='text-center'>sectionNumber</th> */}
+                    {/* <th scope="col" className='text-center'>sectionTime</th> */}
                     <th scope="col" className='text-center'>college</th>
                     <th scope="col" className='text-center'>yearOfCourse</th>
                     <th scope="col" className='text-center'>universityId</th>
@@ -154,8 +154,8 @@ export default function page() {
                           <td className='text-center'>{courseId}</td>
                           <td className='text-center'>{courseName}</td>
                           <td className='text-center'>{courseNumber}</td>
-                          <td className='text-center'>{sectionNumber}</td>
-                          <td className='text-center'>{sectionTime}</td>
+                          {/* <td className='text-center'>{sectionNumber}</td> */}
+                          {/* <td className='text-center'>{sectionTime}</td> */}
                           <td className='text-center'>{college}</td>
                           <td className='text-center'>{yearOfCourse}</td>
                           <td className='text-center'>{universityId}</td>
@@ -199,10 +199,10 @@ export default function page() {
                       <label for="course-name" class="form-label" >courseName</label>
                       <input type="text" class="form-control" id="course-name" aria-describedby="emailHelp" onChange={handleChange} value={formData.courseName} name={'courseName'} />
                     </div>
-                    <div class="mb-3">
+                    {/* <div class="mb-3">
                       <label for="course-number" class="form-label" >courseNumber</label>
                       <input type="text" class="form-control" id="course-number" aria-describedby="emailHelp" onChange={handleChange} value={formData.courseNumber} name={'courseNumber'} />
-                    </div>
+                    </div> */}
                     <div class="mb-3">
                       <label for="college" class="form-label" >college</label>
                       <input type="text" class="form-control" id="college" aria-describedby="emailHelp" onChange={handleChange} value={formData.college} name={'college'} />

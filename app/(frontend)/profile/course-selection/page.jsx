@@ -1,5 +1,6 @@
 "use client"
 import { fetchCourse, fetchSection } from '@/app/api/crud'
+import CourseSelection from '@/components/CourseSelection'
 import InviteFriendsPopup from '@/components/InviteFriendsPopup'
 import MultiStepForm from '@/components/MultiStepForm'
 import MyCalendar from '@/components/MyCalendar'
@@ -89,6 +90,7 @@ export default function page() {
         getAllCourse()
         getAllSection()
     }, [])
+    
 
     // Helper function to format dates
     const formatDate = (dateString) => {
@@ -109,82 +111,7 @@ export default function page() {
                                 <h5 className='greetings'>Hi Ethan, lets start with telling us a bit about yourself</h5>
                                 <h4 className='question'>What year are you in?</h4>
                                 <div className="multistep-form">
-                                    <div>
-                                        <div className='multistep-form-step course'>
-                                            <form onSubmit={handleSubmit}>
-                                                <div className="course-add-section">
-                                                    <div className='course-input'>
-                                                        <input
-                                                            type="text"
-                                                            className='form-control'
-                                                            placeholder='Type your course name'
-                                                            value={searchTerm}
-                                                            onChange={handleCourseSearch}
-                                                        />
-
-                                                        {/* Render filtered courses as a dropdown */}
-                                                        {filteredCourses.length > 0 && (
-                                                            <ul className="course-dropdown">
-                                                                {filteredCourses.map((c) => (
-                                                                    <li
-                                                                        key={c.courseId}
-                                                                        onClick={() => handleCourseSelect(c)}
-                                                                        className="dropdown-item"
-                                                                    >
-                                                                        {c.courseName} ({c.courseNumber})
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                    </div>
-
-                                                    <div className='section-input'>
-                                                        <select
-                                                            className="form-select"
-                                                            aria-label="Select section"
-                                                            name="section"
-                                                            value={formData.section}
-                                                            onChange={(e) => {
-                                                                const selectedSection = section.find(sec => sec.sectionId === e.target.value);
-                                                                handleSectionSelect(selectedSection);
-                                                            }}
-                                                        >
-                                                            <option value="">Select Section</option>
-                                                            {section.map(sec => (
-                                                                <option key={sec.sectionId} value={sec.sectionId}>
-                                                                    {sec.sectionName} ({formatDate(sec.sectionStartTime)} - {formatDate(sec.sectionEndTime)})
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                    </div>
-
-                                                    {/* <div className='form-group'>
-                                                        <label htmlFor="fromTime">From Time</label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            name="fromTime"
-                                                            value={formData.fromTime}
-                                                            readOnly
-                                                        />
-                                                    </div>
-
-                                                    <div className='form-group'>
-                                                        <label htmlFor="toTime">To Time</label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            name="toTime"
-                                                            value={formData.toTime}
-                                                            readOnly
-                                                        />
-                                                    </div> */}
-
-                                                    <button className="btn pluto-pink-btn">Add</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    <CourseSelection />
                                 </div>
                             </div>
                             <div className="col-lg-6">

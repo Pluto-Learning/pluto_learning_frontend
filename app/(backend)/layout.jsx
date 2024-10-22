@@ -49,7 +49,7 @@ const BackendLayout = ({ children }) => {
   console.log('collapse: ', collapse)
 
   return (
-    
+
     <div className='backendLayout'>
       <div class="wrapper">
         {/* <!-- Sidebar  --> */}
@@ -84,7 +84,7 @@ const BackendLayout = ({ children }) => {
             </li> */}
             <li>
               <a href="#pageSubmenu" data-bs-toggle="collapse" aria-expanded="false"
-                class="dropdown-toggle d-flex justify-content-between">Settings
+                class="dropdown-toggle d-flex justify-content-between align-items-center">Settings
                 <i class="fa-solid fa-chevron-down"></i></a>
               <ul class="collapse list-unstyled dropdown__lvl1" id="pageSubmenu">
                 <li className="nav-item">
@@ -108,13 +108,13 @@ const BackendLayout = ({ children }) => {
                   </Link>
                 </li> */}
                 <li className="nav-item">
-                  <Link href="/admin/settings/course-section-details" className="nav-link ps-4">
-                    Course Section Details
+                  <Link href="/admin/settings/course-section-binding-details" className="nav-link ps-4">
+                    Course Section Binding Details
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/admin/settings/student-course-section-details" className="nav-link ps-4">
-                    Student Course Section Details
+                  <Link href="/admin/settings/student-course-section-binding-details" className="nav-link ps-4">
+                    Student Course Section Binding Details
                   </Link>
                 </li>
                 {/* <li>

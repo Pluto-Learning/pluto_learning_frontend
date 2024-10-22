@@ -168,9 +168,7 @@ export default function Page() {
                                     <div className="profile-image-wrapper">
 
                                         <div className="edit-image-icon">
-                                            <Link href={'/profile/edit/picture'}
-
-                                            >
+                                            <Link href={'/profile/edit/picture'}>
                                                 <i class="fa-solid fa-camera"></i>
                                             </Link>
                                         </div>

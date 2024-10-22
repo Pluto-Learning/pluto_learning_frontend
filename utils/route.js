@@ -2,46 +2,48 @@ export const routes = {
   login: `${process.env.NEXT_PUBLIC_API_URL}/Login`,
   signup: `${process.env.NEXT_PUBLIC_API_URL}/UserSetup`,
 
-  // University routes
+  // University Routes
   GetAllUniversity: '/University/GetAllUniversityList',
   GetUniversityById: '/University/GetUniversityBy',
   CreateUniversity: '/University/SaveUniversityData',
   UpdateUniversity: '/University/UpdateUniversityData',
   DeleteUniversity: '/University/DeleteUniversityByUniversityId',
 
-  // Section routes
+  // Section Routes
   GetAllSection: '/Section/GetAllSections',
   GetSectionById: '/Section/GetAllSectionsById',
   CreateSection: '/Section/SaveSectionData',
   UpdateSection: '/Section/UpdateSectionData',
   DeleteSection: '/Section/DeleteSectionData',
 
-  // Course routes
+  // Course Routes
   GetAllCourse: '/Course/GetAllCourse',
   GetCourseById: '/Course/GetCourseByCourseId',
   CreateCourse: '/Course/SaveCourse',
   UpdateCourse: '/Course/UpdateCourse',
   DeleteCourse: '/Course/DeleteCourseByCourseId',
 
-  // Course Section
-  GetAllCourseSectionMapping: '/Course/GetAllCourseSection',
-  saveCourseSectionMapping: '/Course/saveCourseSection',
-  UpdateCourseSectionData: '/Course/UpdateCourseSectionData',
-  GetAllCourseSectionDetails: '/Course/GetAllCourseSectionDetails',
-  GetCourseSectionDetailsById: '/Course/GetCourseSectionDetailsById',
-  GetAllStudentCourseSectionDetails: '/Course/GetAllStudentCourseSectionDetails',
-  GetStudentCourseSectionDetailsById: '/Course/GetStudentCourseSectionDetailsById',
+  // Course Section Binding Routes
+  saveCourseSectionBinding: '/Course/SaveCourseSectionBinding',
+  updateCourseSectionBinding: '/Course/UpdateCourseSectionBinding',
+  GetAllCourseSectionDetails: '/Course/GetAllCourseSectionBindingDetails',
+  GetCourseSectionDetailsById: '/Course/GetCourseSectionBindingDetailsById',
 
-  // User Registration
+  // Student Course Section Binding Routes
+  SaveStudentCourseSectionBinding: '/Course/SaveStudentCourseSectionBinding',
+  GetAllStudentCourseSectionDetails: '/Course/GetAllStudentCourseSectionBindingDetails',
+  GetStudentCourseSectionBindingDetailsById: '/Course/GetStudentCourseSectionBindingDetailsById',
+
+  // User Registration Routes
   GetAllUser: '/UserSetup/GetAllUserSetup',
   CreateUser: '/UserSetup/SaveRegistrationSetup',
 
-  // User Profile
+  // User Profile Routes
   GetUserProfileById: '/UserProfile/GetUserProfileById?UserId=',
   SaveUserProfile: '/UserProfile/SaveUserProfile',
   UpdateProfilePicture: '/UserProfile/UpdateProfilePicture/',
 
-  // Tables
+  // Tables Routes
   GetAllTable: '/Table/GetAllTable',
   GetTableByRoomId: '/Table/GetTableByRoomId',
   SaveTableInformation: '/Table/SaveTableInformation',
@@ -51,7 +53,7 @@ export const routes = {
   GetAllTableDetails: '/Table/GetAllTableDetails',
   GetTableDetailById: '/Table/GetTableDetailById',
 
-  // Table Member
+  // Table Member Routes
   AddTableMember: '/Table/AddTableMember',
   UpdateAddTableMember: '/Table/UpdateTableMember',
   GetTableMembersDetailsById: '/Table/GetTableMembersDetailsById',

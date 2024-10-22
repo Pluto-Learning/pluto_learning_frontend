@@ -1,20 +1,27 @@
 "use client"
-import { createCourse, deleteCourse, fetchAllCourseSectionDetails, fetchCourse, fetchCourseById, fetchGetAllCourseSectionMapping, updateCourse } from '@/app/api/crud';
+import { createCourse, createCourseSectionBinding, deleteCourse, fetchAllCourseSectionDetails, fetchCourse, fetchCourseById, fetchCourseSectionDetailsById, fetchGetAllCourseSectionMapping, fetchSection, updateCourse, updateCourseSection } from '@/app/api/crud';
+import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 
 export default function page() {
 
+    const { data: session } = useSession()
+    console.log('session: ', session)
+
     const [isUpdateing, setIsUpdateing] = useState(false);
-    const [currentCourseId, setCurrentCourseId] = useState(null);
+    // const [currentCourseId, setCurrentCourseId] = useState(null);
+    const [currentCourseSectionId, setCurrentCourseSectionId] = useState(null);
     const [allCourseSectionDetails, setAllCourseSectionDetails] = useState([]);
 
-    const [formData, setFormData] = useState({
-        courseId: '',
-        courseName: '',
-        courseNumber: '',
-        college: '',
-        yearOfCourse: '',
+    const [course, setCourse] = useState([])
+    const [sections, setSections] = useState([])
 
+    const [formData, setFormData] = useState({
+        // courseSectionId: '',
+        courseId: '',
+        sectionId: '',
+        createBy: '',
+        updateBy: '',
     });
 
     const handleChange = (e) => {
@@ -27,11 +34,11 @@ export default function page() {
 
     const handleCreate = async (e) => {
         try {
-            await createCourse(formData);
+            await createCourseSectionBinding(formData);
             resetForm();
-            // getAllCourse();
+            getAllCourseSectionDetails();
         } catch (error) {
-            console.error("Error creating university:", error);
+            console.error("Error Course Sectin Binding:", error);
         }
     };
 
@@ -43,11 +50,10 @@ export default function page() {
 
     const handleUpdate = async () => {
         try {
-            await updateCourse(currentCourseId, formData);  // Pass the current course ID and form data
+            await updateCourseSection(currentCourseSectionId, formData);  // Pass the current course ID and form data
             resetForm();   // Reset the form after update
-            // getAllCourse();  // Refresh the course list
-
-            console.log(currentCourseId, formData)
+            getAllCourseSectionDetails();  // Refresh the course list
+            console.log('sssssssssssssss',currentCourseSectionId, formData)
         } catch (error) {
             console.error("Error updating course:", error);
         }
@@ -62,24 +68,44 @@ export default function page() {
         }
     }
 
-    const getCourseById = async (id) => {
+    const getCourseSectionBindingById = async (id) => {
         try {
             setIsUpdateing(true);
-            setCurrentCourseId(id);
-            const data = await fetchCourseById(id);
+            setCurrentCourseSectionId(id);
+            const data = await fetchCourseSectionDetailsById(id);
+            console.log(id)
             console.log(data)
+
             setFormData({
+                courseSectionId: data?.courseSectionId,
                 courseId: data?.courseId,
-                courseName: data?.courseName,
-                courseNumber: data?.courseNumber,
-                college: data?.college,
-                yearOfCourse: data?.yearOfCourse,
+                sectionId: data?.sectionId,
+                createBy: '',
+                updateBy: '',
             });
+
         } catch (error) {
             console.error("Error fetching university by ID:", error);
         }
     };
 
+    const getAllCourse = async () => {
+        try {
+            const data = await fetchCourse();
+            setCourse(data);
+        } catch (error) {
+            console.error('Error fetching Course:', error);
+        }
+    }
+
+    const getAllSection = async () => {
+        try {
+            const data = await fetchSection();
+            setSections(data);
+        } catch (error) {
+            console.error('Error fetching universities:', error);
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -99,21 +125,31 @@ export default function page() {
 
     useEffect(() => {
         getAllCourseSectionDetails();
+        getAllCourse();
+        getAllSection();
     }, []);
+
+    // useEffect(() => {
+    //     setFormData((prev) => ({
+    //         ...prev,
+    //         createBy: session?.user?.id,
+    //         updateBy: session?.user?.id,
+    //     }));
+    // }, [session]);
 
     const resetForm = () => {
         setFormData({
+            courseSectionId: '',
             courseId: '',
-            courseName: '',
-            courseNumber: '',
-            college: '',
-            yearOfCourse: '',
+            sectionId: '',
+            createBy: '',
+            updateBy: '',
         });
         setIsUpdateing(false);
-        setCurrentCourseId(null);
+        setCurrentCourseSectionId(null);
     };
 
-    // console.log('course: ', course)
+    console.log('formData: ', formData)
 
     return (
         <div className='university-list'>
@@ -132,17 +168,17 @@ export default function page() {
                                 <thead>
                                     <tr>
                                         <th scope="col" className='text-center'>SL</th>
-                                        <th scope="col" className='text-center'>courseSectionId</th>
-                                        <th scope="col" className='text-center'>courseId</th>
-                                        <th scope="col" className='text-center'>sectionId</th>
-                                        <th scope="col" className='text-center'>courseName</th>
-                                        <th scope="col" className='text-center'>courseNumber</th>
+                                        <th scope="col" className='text-center'>course Section Id</th>
+                                        <th scope="col" className='text-center'>course Id</th>
+                                        <th scope="col" className='text-center'>section Id</th>
+                                        <th scope="col" className='text-center'>course Name</th>
+                                        <th scope="col" className='text-center'>course Number</th>
                                         <th scope="col" className='text-center'>college</th>
-                                        <th scope="col" className='text-center'>yearOfCourse</th>
-                                        <th scope="col" className='text-center'>sectionNumber</th>
-                                        <th scope="col" className='text-center'>sectionName</th>
-                                        <th scope="col" className='text-center'>sectionStartTime</th>
-                                        <th scope="col" className='text-center'>sectionEndTime</th>
+                                        <th scope="col" className='text-center'>year Of Course</th>
+                                        <th scope="col" className='text-center'>section Number</th>
+                                        <th scope="col" className='text-center'>section Name</th>
+                                        <th scope="col" className='text-center'>section Start Time</th>
+                                        <th scope="col" className='text-center'>section EndT ime</th>
                                         <th scope="col" className='text-center'>Action</th>
                                     </tr>
                                 </thead>
@@ -182,7 +218,7 @@ export default function page() {
                                                                 className='btn btn-sm pluto-yellow-btn me-md-2'
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#exampleModal"
-                                                                onClick={() => getCourseById(item.courseId)}
+                                                                onClick={() => getCourseSectionBindingById(item.courseSectionId)}
                                                             >Update</button>
                                                             <button className='btn btn-sm pluto-pink-btn' onClick={() => handleDelete(courseId)}>Delete</button>
                                                         </div>
@@ -209,18 +245,38 @@ export default function page() {
                                 <div class="modal-body">
                                     <form onSubmit={handleSubmit}>
                                         {/* <div class="mb-3">
-                      <label for="course-id" class="form-label" >Course ID</label>
-                      <input type="text" class="form-control" id="course-id" aria-describedby="emailHelp" onChange={handleChange} value={formData.courseId} name={'courseId'} />
-                    </div> */}
+                                            <label for="course-id" class="form-label" >Course Section ID</label>
+                                            <input type="text" class="form-control" id="course-id" aria-describedby="emailHelp" onChange={handleChange} value={formData.courseSectionId} name={'courseSectionId'} />
+                                        </div> */}
                                         <div class="mb-3">
-                                            <label for="course-name" class="form-label" >courseName</label>
-                                            <input type="text" class="form-control" id="course-name" aria-describedby="emailHelp" onChange={handleChange} value={formData.courseName} name={'courseName'} />
+                                            <label for="course-name" class="form-label" >course</label>
+                                            {/* <input type="text" class="form-control" id="course-name" aria-describedby="emailHelp" onChange={handleChange} value={formData.courseName} name={'courseName'} /> */}
+                                            <select class="form-select" aria-label="Default select example" onChange={handleChange} value={formData.courseId} name="courseId">
+                                                <option value="">Select Course</option>
+                                                {
+                                                    course && course?.length > 0 && course?.map((item) => {
+                                                        return (
+                                                            <option value={item?.courseId} >{item?.courseName}</option>
+                                                        )
+                                                    })
+                                                }
+                                            </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="course-number" class="form-label" >courseNumber</label>
-                                            <input type="text" class="form-control" id="course-number" aria-describedby="emailHelp" onChange={handleChange} value={formData.courseNumber} name={'courseNumber'} />
+                                            <label for="course-number" class="form-label" >Section</label>
+                                            {/* <input type="text" class="form-control" id="course-number" aria-describedby="emailHelp" onChange={handleChange} value={formData.courseNumber} name={'courseNumber'} /> */}
+                                            <select class="form-select" aria-label="Default select example" onChange={handleChange} value={formData.sectionId} name="sectionId">
+                                                <option value="">Select Section</option>
+                                                {
+                                                    sections && sections?.length > 0 && sections?.map((item) => {
+                                                        return (
+                                                            <option value={item?.sectionId} >{item?.sectionId}</option>
+                                                        )
+                                                    })
+                                                }
+                                            </select>
                                         </div>
-                                        <div class="mb-3">
+                                        {/* <div class="mb-3">
                                             <label for="college" class="form-label" >college</label>
                                             <input type="text" class="form-control" id="college" aria-describedby="emailHelp" onChange={handleChange} value={formData.college} name={'college'} />
                                         </div>
@@ -233,7 +289,7 @@ export default function page() {
                                                 <option value="junior">Junior</option>
                                                 <option value="senior">Senior</option>
                                             </select>
-                                        </div>
+                                        </div> */}
                                         <button type="submit" className="btn btn-primary">{isUpdateing ? "Update" : "Create"}</button>
                                     </form>
                                 </div>

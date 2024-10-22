@@ -189,37 +189,37 @@ export const deleteCourse = async (id) => {
 
 
 
-//==================== CRUD FOR COURSE SECTION MAPPING ====================
-export const fetchGetAllCourseSectionMapping = async () => {
-  try {
-    const response = await apiClient.get(routes.GetAllCourseSectionMapping);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+// //==================== CRUD FOR COURSE SECTION MAPPING ====================
+// export const fetchGetAllCourseSectionMapping = async () => {
+//   try {
+//     const response = await apiClient.get(routes.GetAllCourseSectionMapping);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
-export const createCourseSectionMapping = async (data) => {
-  try {
-    const response = await apiClient.post(routes.saveCourseSectionMapping, data);
-    toast.success('Section created successfully!');
-    return response.data;
-  } catch (error) {
-    toast.error('Error creating the section.');
-    throw error;
-  }
-};
+// export const createCourseSectionMapping = async (data) => {
+//   try {
+//     const response = await apiClient.post(routes.saveCourseSectionMapping, data);
+//     toast.success('Section created successfully!');
+//     return response.data;
+//   } catch (error) {
+//     toast.error('Error creating the section.');
+//     throw error;
+//   }
+// };
 
-export const updateCourseSectionData = async (id, data) => {
-  try {
-    const response = await apiClient.put(`${routes.updateCourseSectionData}/${id}`, data);
-    toast.success('Section updated successfully!');
-    return response.data;
-  } catch (error) {
-    toast.error('Error updating the section.');
-    throw error;
-  }
-};
+// export const updateCourseSectionData = async (id, data) => {
+//   try {
+//     const response = await apiClient.put(`${routes.updateCourseSectionData}/${id}`, data);
+//     toast.success('Section updated successfully!');
+//     return response.data;
+//   } catch (error) {
+//     toast.error('Error updating the section.');
+//     throw error;
+//   }
+// };
 
 
 
@@ -242,6 +242,28 @@ export const fetchCourseSectionDetailsById = async (id) => {
   }
 };
 
+export const createCourseSectionBinding = async (data) => {
+  try {
+    const response = await apiClient.post(routes.saveCourseSectionBinding, data);
+    toast.success('Successfully Binding Course Section');
+    return response.data;
+  } catch (error) {
+    toast.error('Error Binding the course section.');
+    throw error;
+  }
+}
+
+export const updateCourseSection = async (id, data) => {
+  try {
+    const response = await apiClient.put(routes.updateCourseSectionBinding + '/' + id, data);
+    toast.success('Successfully Updatd Course Section Binding');
+    return response.data;
+  } catch (error) {
+    toast.error('Error Course Section Binding');
+    throw error;
+  }
+}
+
 
 
 //==================== CRUD FOR STUDENT COURSE SECTION DETAILS ====================
@@ -259,6 +281,18 @@ export const fetchStudentCourseSectionDetailsById = async (id) => {
     const response = await apiClient.get(`${routes.GetStudentCourseSectionDetailsById}/${id}`);
     return response.data;
   } catch (error) {
+    throw error;
+  }
+};
+
+export const createStudentCourseSectionBinding = async (data) => {
+  try {
+    const response = await apiClient.post(routes.SaveStudentCourseSectionBinding, data);
+    toast.success('Student Course Section Binding successfully');
+    return response.data;
+  } catch (error) {
+    toast.error('Error Student Course Section Binding.');
+    console.log(error)
     throw error;
   }
 };
@@ -335,7 +369,7 @@ export const fetchAllTable = async () => {
 
 export const fetchTableById = async (id) => {
   try {
-    const response = await apiClient.get(routes.GetTableByRoomId+'/'+id);
+    const response = await apiClient.get(routes.GetTableByRoomId + '/' + id);
     return response?.data;
   } catch (error) {
     throw error;
@@ -365,7 +399,7 @@ export const createTable = async (data) => {
 
 export const updateTable = async (id, data) => {
   try {
-    const response = await apiClient.put(routes.UpdateTableInformation+'/'+id, data);
+    const response = await apiClient.put(routes.UpdateTableInformation + '/' + id, data);
     toast.success('Table Updated successfully');
     return response.data;
   } catch (error) {
