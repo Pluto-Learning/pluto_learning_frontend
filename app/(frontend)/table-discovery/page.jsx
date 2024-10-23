@@ -19,15 +19,15 @@ import EditTableInfo from '@/components/popular-table/EditTableInfo';
 
 export default function () {
 
-    const token = useSelector((state) => state.auth.token);
-    const user = useSelector((state) => state.auth.user);
+    // const token = useSelector((state) => state.auth.token);
+    // const user = useSelector((state) => state.auth.user);
     const [alltable, setAllTable] = useState(null);
     const [allTableDetails, setAllTableDetails] = useState(null);
 
-    useEffect(() => {
-        console.log('xxxx User:', user);
-        console.log('xxxx Token:', token);
-    }, [user, token]);
+    // useEffect(() => {
+    //     console.log('xxxx User:', user);
+    //     console.log('xxxx Token:', token);
+    // }, [user, token]);
 
     // const tables = [
     //     {

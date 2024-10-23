@@ -41,7 +41,7 @@ export default function Signin() {
 
     console.log('nextAuthData: ', nextAuthData)
 
-    if (nextAuthData?.ok) {
+    if (nextAuthData?.error == null) {
       // toast.success("Successfully signed in")
       // Manually refresh session to update without page reload
       const session = await getSession();
@@ -56,14 +56,16 @@ export default function Signin() {
         // Redirect to desired page
         await getSession();
         router.push('/table-discovery');
-        
+
       } else {
         await getSession();
         router.push('/profile/edit/info');
-        
+
       }
+      toast.success(`Successfully Logged In`);
     } else {
       console.log("Login failed:", nextAuthData.error);
+      toast.error(`Invalid username or password`);
     }
   };
 

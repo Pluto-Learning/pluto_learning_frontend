@@ -10,6 +10,7 @@ import NextAuthProvider from "@/Providers/NextAuthProvider";
 import PreLoader from "@/components/PreLoader";
 import Loader from "@/components/Loader/Loader";
 import Script from "next/script";
+import { ToastContainer } from "react-toastify";
 
 
 export default function RootLayout({ children }) {
@@ -40,7 +41,7 @@ export default function RootLayout({ children }) {
           <NextAuthProvider>
             <main>
               {children}
-              {/* <ToastContainer /> */}
+              <ToastContainer />
             </main>
 
           </NextAuthProvider>

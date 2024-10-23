@@ -1,5 +1,5 @@
 "use client"
-import { fetchCourse, fetchSection } from '@/app/api/crud'
+import { fetchAllStudentCourseSectionDetails, fetchCourse, fetchSection } from '@/app/api/crud'
 import CourseSelection from '@/components/CourseSelection'
 import InviteFriendsPopup from '@/components/InviteFriendsPopup'
 import MultiStepForm from '@/components/MultiStepForm'
@@ -14,6 +14,8 @@ export default function page() {
 
     const [course, setAllCourse] = useState([])
     const [section, setAllSection] = useState([])
+    const [studentCourseSection, setStudentCourseSection] = useState([])
+    const [myEvent, setMyEvent] = useState([])
 
     const [filteredCourses, setFilteredCourses] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
@@ -86,9 +88,19 @@ export default function page() {
         }
     }
 
+    const getAllStudentCourseSection = async () => {
+        try {
+            const data = await fetchAllStudentCourseSectionDetails()
+            setStudentCourseSection(data)
+        } catch (error) {
+            console.log('Error Fetching student course section details', error)
+        }
+    }
+
     useEffect(() => {
         getAllCourse()
         getAllSection()
+        getAllStudentCourseSection()
     }, [])
     
 
@@ -111,11 +123,11 @@ export default function page() {
                                 <h5 className='greetings'>Hi Ethan, lets start with telling us a bit about yourself</h5>
                                 <h4 className='question'>What year are you in?</h4>
                                 <div className="multistep-form">
-                                    <CourseSelection />
+                                    <CourseSelection getAllStudentCourseSection={getAllStudentCourseSection}/>
                                 </div>
                             </div>
                             <div className="col-lg-6">
-                                <MyCalendar />
+                                <MyCalendar studentCourseSection={studentCourseSection} />
                             </div>
                         </div>
                         <div className="row">

@@ -78,8 +78,6 @@ export default function CourseSelection() {
     const handleCreate = async (e) => {
         try {
             await createStudentCourseSectionBinding(formData)
-            resetForm()
-            setFilteredCourses([]);
         } catch (error) {
             console.log("Error creating Student Course Section Binding: ", error)
         }
@@ -87,10 +85,19 @@ export default function CourseSelection() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleCreate()
+
+        // Validate required fields
+        if (!formData.courseId || !formData.sectionId) {
+            toast.error("Please select both a course and a section before submitting.");
+            return; // Don't submit if validation fails
+        }
+
+        handleCreate();
+        resetForm();
+        setSearchTerm('');
+        getAllStudentCourseSection()
         console.log('Form submitted', formData);
     };
-
 
     const getAllCourseSectionDetails = async () => {
         try {
@@ -137,7 +144,7 @@ export default function CourseSelection() {
             sectionId: "",
             sectionNumber: ""
         });
-      };
+    };
 
 
     // Helper function to format dates
@@ -187,7 +194,7 @@ export default function CourseSelection() {
                                 className="form-select"
                                 aria-label="Select section"
                                 name="section"
-                                value={formData.section}
+                                value={formData.sectionId}
                                 onChange={(e) => {
                                     const selectedSection = section.find(sec => sec.sectionId === e.target.value);
                                     handleSectionSelect(selectedSection);
