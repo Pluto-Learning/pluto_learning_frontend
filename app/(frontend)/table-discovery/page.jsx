@@ -8,7 +8,7 @@ import AvatarGroup from '@mui/material/AvatarGroup';
 import PopularTableSlider from '@/components/popular-table/PopularTableSlider';
 import VirtualTableCard from '@/components/popular-table/VirtualTableCard';
 import HomeLayout from '@/layouts/homeLayout/HomeLayout';
-import { fetchAllTable, fetchAllTableDetails } from '@/app/api/crud';
+import { fetchAllTable, fetchAllTableDetails, FetchTableMembersDetailsById } from '@/app/api/crud';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import StepOne from '@/components/popular-table/createTable/StepOne';
@@ -23,6 +23,7 @@ export default function () {
     // const user = useSelector((state) => state.auth.user);
     const [alltable, setAllTable] = useState(null);
     const [allTableDetails, setAllTableDetails] = useState(null);
+    const [getTableMemberById, setGetTableMemberById] = useState([])
 
     // useEffect(() => {
     //     console.log('xxxx User:', user);
@@ -154,6 +155,19 @@ export default function () {
         setCurrentStep(currentStep + 1);
     };
 
+    const getTableMember = async (e) => {
+        try {
+            const response = await FetchTableMembersDetailsById(roomId)
+            setGetTableMemberById(response)
+        } catch (error) {
+            console.log('Error Fetching Table Member By Id', error)
+        }
+    }
+
+    useEffect(() => {
+        getTableMember()
+    }, [])
+
 
 
     return (
@@ -171,7 +185,7 @@ export default function () {
                     {
                         allTableDetails?.length > 0 && <PopularTableSlider table={allTableDetails} />
                     }
-                    
+
                 </div>
 
                 <div className="recent-table-wrapper" style={{ background: "url('/assets/images/recent-tables/recent-table-bg.png')" }}>
@@ -297,77 +311,74 @@ export default function () {
                                     {/* </Link> */}
                                 </div>
                                 {
-                                    allTableDetails != null && allTableDetails?.length > 0 ? 
-                                    allTableDetails?.map((item) => {
-                                        console.log('itemitemitemitemitem', item)
-                                        return (
-                                            <>
-
-                                                <div className="col-lg-3">
-                                                    <VirtualTableCard tableData={item} />
-                                                    {/* ===================== Join Table Start ================ */}
-                                                    <div class="modal fade join-table-modal" id={`joinTable-${item?.roomId}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-xl">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <div>
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Welcome Back, {session?.user?.name}</h5>
-                                                                        <p>Take a look your learning progress for today September 22, 2024</p>
+                                    allTableDetails != null && allTableDetails?.length > 0 ?
+                                        allTableDetails?.map((item) => {
+                                            console.log('itemitemitemitemitem', item)
+                                            return (
+                                                <>
+                                                    <div className="col-lg-3">
+                                                        <VirtualTableCard tableData={item} />
+                                                        {/* ===================== Join Table Start ================ */}
+                                                        <div class="modal fade join-table-modal" id={`joinTable-${item?.roomId}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-xl">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <div>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Welcome Back, {session?.user?.name}</h5>
+                                                                            <p>Take a look your learning progress for today September 22, 2024</p>
+                                                                        </div>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <JoinATablePopup tableData={item} session={session} />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {/* ===================== Join Table End ================ */}
-
-                                                    {/* ===================== Edit Table Start ================ */}
-                                                    <div class="modal fade" id={`editTable-${item?.roomId}`} tabindex="-1" aria-labelledby="editTableModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="editTableModalLabel">Edit Table Info</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <EditTableInfo tableData={item} GetAllTableDetails={GetAllTableDetails} />
+                                                                    <div class="modal-body">
+                                                                        <JoinATablePopup tableData={item} session={session} />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    {/* ===================== Edit Table End ================ */}
+                                                        {/* ===================== Join Table End ================ */}
 
-                                                    {/* ===================== Edit Profile Picture Start ================ */}
-                                                    <div class="modal edit-table-picture-modal fade" id={`editTableImage-${item?.roomId}`} tabindex="-1" aria-labelledby="editTableImageModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="editTableImageModalLabel">{item?.roomName}</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        {/* ===================== Edit Table Info Start ================ */}
+                                                        <div class="modal fade" id={`editTable-${item?.roomId}`} tabindex="-1" aria-labelledby="editTableModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="editTableModalLabel">Edit Table Info</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <EditTableInfo tableData={item} GetAllTableDetails={GetAllTableDetails} />
+                                                                    </div>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <EditTablePicture tableData={item} />
-                                                                </div>
-                                                                {/* <div class="modal-footer">
+                                                            </div>
+                                                        </div>
+                                                        {/* ===================== Edit Table Info End ================ */}
+
+                                                        {/* ===================== Edit Profile Picture Start ================ */}
+                                                        <div class="modal edit-table-picture-modal fade" id={`editTableImage-${item?.roomId}`} tabindex="-1" aria-labelledby="editTableImageModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="editTableImageModalLabel">{item?.roomName}</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <EditTablePicture tableData={item} />
+                                                                    </div>
+                                                                    {/* <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                     <button type="button" class="btn btn-primary">Save changes</button>
                                                                 </div> */}
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        {/* ===================== Edit Profile Picture End ================ */}
                                                     </div>
-                                                    {/* ===================== Edit Profile Picture End ================ */}
-                                                </div>
-
-                                            </>
-                                        )
-                                    }) : 
-                                    <div className="col-lg-3">
-
-                                    <h4>No Table Found</h4>
-                                    </div>
+                                                </>
+                                            )
+                                        }) :
+                                        <div className="col-lg-3">
+                                            <h4>No Table Found</h4>
+                                        </div>
                                 }
 
                                 {/* <div className="col-lg-3">

@@ -7,18 +7,18 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 // Configure moment localizer
 const localizer = momentLocalizer(moment);
 
-export default function MyCalendar({studentCourseSection}) {
+export default function MyCalendar({ studentCourseSection }) {
 
-  
+
   const formattedEvents = studentCourseSection.map(item => ({
     title: item.courseName || item.courseNumber,
     allDay: false,
     start: new Date(item.sectionStartTime),
     end: new Date(item.sectionEndTime),
   }));
-  
+
   console.log('studentCourseSection: ', formattedEvents)
-  
+
   const [events, setEvents] = useState([
     {
       title: "CSE 1310",

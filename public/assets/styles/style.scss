@@ -1159,9 +1159,10 @@
                             padding: 20px 0;
                             box-shadow: 0px 0px 10px 0px rgba(51, 15, 126, 0.2509803922);
 
-                            .dropdown-item{
+                            .dropdown-item {
                                 padding: 8px 20px;
                                 cursor: pointer;
+
                                 &:hover {
                                     background-color: $pluto-white;
                                 }
@@ -3804,24 +3805,24 @@ $background-color_8: #4f6ebd;
         position: relative;
 
         .status {
-            background: $white;
+            background: #fff;
             position: absolute;
             z-index: 9;
             left: 30px;
             top: 30px;
-            height: 30px;
-            width: 100px;
-            border-radius: 8px;
+            height: 24px;
+            width: 80px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 6px;
 
 
             &-light {
                 display: inline-block;
-                width: 8px;
-                height: 8px;
+                width: 6px;
+                height: 6px;
                 border-radius: 100%;
 
                 &.unavailable {
@@ -3884,14 +3885,35 @@ $background-color_8: #4f6ebd;
         }
 
         .card-info {
-            .table-name {
-                font-size: 18px;
-                font-weight: 700;
-                font-family: $common-font;
-                margin-bottom: 5px;
-                color: $pluto-dark-blue;
-                transition: all 0.3s;
-                cursor: pointer;
+            .title-wrapper {
+                overflow: hidden;
+                display: flex;
+                justify-content: space-between;
+
+                .table-name {
+                    font-size: 18px;
+                    font-weight: 700;
+                    font-family: $common-font;
+                    margin-bottom: 5px;
+                    color: $pluto-dark-blue;
+                    transition: all 0.3s;
+                    max-width: 80%;
+                }
+
+                .btn {
+                    &.join {
+                        height: 25px;
+                        padding: 0 15px;
+                        padding-top: 1px;
+                        margin-right: -90px;
+                        transition: 0.7s;
+
+                        @media (max-width: 767px) {
+                            margin-right: 0px;
+
+                        }
+                    }
+                }
             }
 
             .college-name {
@@ -3973,8 +3995,18 @@ $background-color_8: #4f6ebd;
 
         .card-body {
             .card-info {
-                .table-name {
-                    color: $pluto-pink;
+
+                .title-wrapper {
+
+                    .table-name {
+                        color: $pluto-pink;
+                    }
+
+                    .btn {
+                        &.join {
+                            margin-right: 0px;
+                        }
+                    }
                 }
             }
 
@@ -4032,11 +4064,18 @@ $background-color_8: #4f6ebd;
 
 .whiteboard-area {
     overflow: hidden;
-
+    
     // height: 100vh;
     .whiteboard {
+        position: relative;
         height: 89vh;
         width: 100%;
+
+        .leave-button {
+            position: fixed;
+            right: 30px;
+            bottom: 50px;
+        }
     }
 }
 
@@ -4216,6 +4255,10 @@ $background-color_8: #4f6ebd;
             }
         }
     }
+}
+
+.full-calendar {
+    .full-calendar-modal {}
 }
 
 

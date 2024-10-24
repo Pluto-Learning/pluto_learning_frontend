@@ -410,6 +410,20 @@ export const updateTable = async (id, data) => {
 };
 
 
+//==================== TABLE ACTIVE STATUS ====================
+export const updateTableLastTime = async (id) => {
+  try {
+    const response = await apiClient.put(routes.UpdateTableLastActiveTimeStatus + '/' + id)
+    // toast.success('Table Time Updated successfully');
+    return response;
+  } catch (error) {
+    toast.error('Error update table time status.');
+    console.log(error)
+    throw error;
+  }
+}
+
+
 //==================== CRUD FOR TABLE MEMBER ====================
 export const FetchTableMembersDetailsById = async (id) => {
   try {

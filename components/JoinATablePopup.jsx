@@ -1,5 +1,5 @@
 'use state'
-import { addTableMember } from '@/app/api/crud';
+import { addTableMember, updateTableLastTime } from '@/app/api/crud';
 import { Rating } from '@mui/material'
 import { useSession } from 'next-auth/react';
 import Link from 'next/link'
@@ -51,14 +51,21 @@ export default function JoinATablePopup({ tableData = {} }) {
         })
     }, [tableData, session])
 
+    const updateTableLastActive = async () => {
+        try {
+            await updateTableLastTime(roomId)
+        } catch (error) {
+            console.error("Error Update Table Last Active:", error);
+        }
+    }
+
     const handleJoinMember = async (e) => {
         try {
             await addTableMember(formData);
             toast.success("Successfully joined");
-    
-    
             // Navigate to the virtual table
             router.push(`/virtual-table/${roomId}`);
+            updateTableLastActive()
         } catch (error) {
             console.error("Error Join Table:", error);
         }

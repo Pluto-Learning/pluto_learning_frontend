@@ -53,6 +53,9 @@ export const routes = {
   GetAllTableDetails: '/Table/GetAllTableDetails',
   GetTableDetailById: '/Table/GetTableDetailById',
 
+  // Table Last Active
+  UpdateTableLastActiveTimeStatus: '/Table/UpdateTableLastActiveTimeStatus',
+
   // Table Member Routes
   AddTableMember: '/Table/AddTableMember',
   UpdateAddTableMember: '/Table/UpdateTableMember',

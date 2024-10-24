@@ -70,7 +70,10 @@ export default function VirtualTableCard({ tableData = {} }) {
                         {/* <img src={"/assets/images/image-placeholder.jpg"} alt="" className='img-fluid card-img-top' /> */}
                     </div>
                     <div className="card-info">
-                        <h4 className="card-title table-name" data-bs-toggle="modal" data-bs-target={`#joinTable-${roomId}`}>{roomName}</h4>
+                        <div className="title-wrapper ">
+                            <h4 className="card-title table-name">{roomName}</h4>
+                            <button className="btn btn-sm pluto-pink-btn join" data-bs-toggle="modal" data-bs-target={`#joinTable-${roomId}`}>Join +</button>
+                        </div>
                         <p className="college-name">{college}</p>
                         <p className="description">{shortDescription}</p>
                     </div>

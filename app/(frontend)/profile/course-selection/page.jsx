@@ -1,6 +1,7 @@
 "use client"
 import { fetchAllStudentCourseSectionDetails, fetchCourse, fetchSection } from '@/app/api/crud'
 import CourseSelection from '@/components/CourseSelection'
+import FullCalendarIo from '@/components/FullCalendarIo'
 import InviteFriendsPopup from '@/components/InviteFriendsPopup'
 import MultiStepForm from '@/components/MultiStepForm'
 import MyCalendar from '@/components/MyCalendar'
@@ -102,7 +103,7 @@ export default function page() {
         getAllSection()
         getAllStudentCourseSection()
     }, [])
-    
+
 
     // Helper function to format dates
     const formatDate = (dateString) => {
@@ -123,11 +124,12 @@ export default function page() {
                                 <h5 className='greetings'>Hi Ethan, lets start with telling us a bit about yourself</h5>
                                 <h4 className='question'>What year are you in?</h4>
                                 <div className="multistep-form">
-                                    <CourseSelection getAllStudentCourseSection={getAllStudentCourseSection}/>
+                                    <CourseSelection />
                                 </div>
                             </div>
                             <div className="col-lg-6">
-                                <MyCalendar studentCourseSection={studentCourseSection} />
+                                {/* <MyCalendar studentCourseSection={studentCourseSection} /> */}
+                                <FullCalendarIo studentCourseSection={studentCourseSection} />
                             </div>
                         </div>
                         <div className="row">
