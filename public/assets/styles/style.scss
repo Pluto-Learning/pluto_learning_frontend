@@ -48,6 +48,10 @@
                     // justify-content: center;
                     gap: 20px;
 
+                    @media screen and (max-width: 1199px) {
+                        gap: 0px;
+                    }
+
                     @media screen and (max-width: 991px) {
                         gap: 0px;
                     }
@@ -63,6 +67,11 @@
                             font-weight: 700;
                             position: relative;
                             font-size: 18px;
+
+                            @media screen and (max-width:1199px) {
+                            font-size: 16px;
+
+                            }
 
                             @media screen and (max-width: 991px) {
                                 color: $pluto-deep-blue;
@@ -115,6 +124,11 @@
                         cursor: pointer;
                         transition: 0.5s ease;
 
+                        @media screen and (max-width:1199px){
+                            padding: 0.3rem 1.8rem;
+                            
+                        }
+
                         @media screen and (max-width: 991px) {
                             background: $pluto-deep-blue;
                             width: 100%;
@@ -124,6 +138,10 @@
                             color: $white;
                             transition: 0.5s ease;
                             font-weight: 600;
+                            @media screen and (max-width:1199px){
+                                font-size: 15px;
+                                
+                            }
                         }
 
                         &:hover {
@@ -3636,11 +3654,23 @@ $background-color_8: #4f6ebd;
 
 
     .popular-table-slider {
-        padding: 100px 0 100px 0;
+        padding: 100px 0px 100px 0px;
         // height: 100vh;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
+
+        @media (max-width:991px) {
+            padding: 80px 0px 80px 0px;
+        }
+
+        @media (max-width:767px) {
+            padding: 40px 30px 80px 30px;
+        }
+
+        @media (max-width:575px) {
+            padding: 40px 30px 70px 30px;
+        }
 
         h1 {
             text-align: center;
@@ -3649,6 +3679,18 @@ $background-color_8: #4f6ebd;
             color: $white;
             font-size: 60px;
             font-weight: 700;
+
+            @media screen and (max-width:767px) {
+                font-size: 48px;
+            }
+
+            @media screen and (max-width:575px) {
+                font-size: 40px;
+            }
+
+            @media screen and (max-width:414px) {
+                font-size: 36px;
+            }
         }
 
         .swiper {
@@ -3656,6 +3698,21 @@ $background-color_8: #4f6ebd;
             padding-top: 100px;
             padding-bottom: 100px;
             overflow: unset;
+
+            @media (max-width: 991px) {
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+
+            @media (max-width: 767px) {
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+
+            @media (max-width: 575px) {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
 
             .swiper-pagination {
                 background: $white;
@@ -3665,6 +3722,18 @@ $background-color_8: #4f6ebd;
                 bottom: -50px;
                 padding: 20px;
                 border-radius: 10px;
+
+                @media (max-width:991px) {
+                    padding: 10px;
+                }
+
+                @media (max-width:767px) {
+                    padding: 8px;
+                }
+
+                @media (max-width:575px) {
+                    padding: 8px;
+                }
 
                 .swiper-pagination-bullet {
                     &.swiper-pagination-bullet-active {
@@ -3681,8 +3750,11 @@ $background-color_8: #4f6ebd;
             // height: 300px;
             transition: 0.3s;
 
+
             &.swiper-slide-active {
-                transform: scale(1.2);
+                @media (min-width: 768px) {
+                    transform: scale(1.2);
+                }
             }
 
             .popular-table-card {
@@ -3708,11 +3780,20 @@ $background-color_8: #4f6ebd;
         background-size: cover !important;
         padding: 50px 0 80px 0;
 
+        @media (max-width: 575px) {
+            padding: 30px 0 50px 0;
+        }
+
         h2 {
             margin-bottom: 40px;
             font-family: $common-font;
             font-size: 40px;
             font-weight: 700;
+
+            @media (max-width: 414px) {
+                font-size: 30px;
+                margin-bottom: 25px;
+            }
         }
 
         .recent-tables {
@@ -3721,17 +3802,52 @@ $background-color_8: #4f6ebd;
             align-items: center;
             gap: 50px;
             flex-wrap: wrap;
+
+            @media (max-width: 991px) {
+                gap: 30px;
+            }
+
+            @media (max-width: 767px) {
+                gap: 30px;
+            }
+
+            @media (max-width: 575px) {
+                gap: 30px;
+            }
+
+            .recent-card {
+
+                @media (max-width:991px) {
+                    width: 20rem;
+                }
+
+                @media (max-width:767px) {
+                    width: 25rem;
+                }
+
+                @media (max-width:575px) {
+                    width: 25rem;
+                }
+            }
         }
     }
 
     .all-popular-table-main {
         padding: 80px 0;
 
+        @media (max-width:575px) {
+            padding: 30px 0;
+        }
+
         .top {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 50px;
+
+            @media (max-width:575px) {
+                gap: 20px;
+            }
 
             .single {
                 text-align: center;
@@ -3748,8 +3864,18 @@ $background-color_8: #4f6ebd;
                     justify-content: center;
                     margin-bottom: 10px;
 
+                    @media (max-width:575px) {
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 10px;
+                    }
+
                     img {
                         width: 50px;
+
+                        @media (max-width:575px) {
+                            width: 30px;
+                        }
                     }
                 }
 
@@ -3758,6 +3884,10 @@ $background-color_8: #4f6ebd;
                         font-family: $common-font;
                         font-size: 18px;
                         font-weight: 700;
+
+                        @media (max-width:575px) {
+                            font-size: 14px;
+                        }
                     }
                 }
 
@@ -3779,6 +3909,10 @@ $background-color_8: #4f6ebd;
                         width: 100%;
                         border: none;
                         padding: 20px 40px;
+
+                        @media (max-width: 575px) {
+                            padding: 15px 25px;
+                        }
                     }
                 }
 
@@ -3787,6 +3921,16 @@ $background-color_8: #4f6ebd;
                         width: 200px;
                         float: right;
                         border: none;
+                        box-shadow: 4.83px 4.83px 24.15px 3.62px #0000001A;
+                        padding: 20px 30px;
+
+                        @media (max-width: 767px) {
+                            width: 100%;
+                        }
+
+                        @media (max-width: 575px) {
+                            padding: 15px 25px;
+                        }
                     }
                 }
             }
@@ -3900,6 +4044,7 @@ $background-color_8: #4f6ebd;
                     max-width: 80%;
                 }
 
+
                 .btn {
                     &.join {
                         height: 25px;
@@ -3920,6 +4065,10 @@ $background-color_8: #4f6ebd;
                 font-size: 14px;
                 font-weight: 500;
                 color: $pluto-gray;
+                margin-bottom: 5px;
+            }
+
+            .description {
                 margin-bottom: 5px;
             }
         }
@@ -3943,6 +4092,7 @@ $background-color_8: #4f6ebd;
     &.create-card {
         cursor: pointer;
         transition: 0.5s ease;
+        min-height: 19rem;
 
         .card-body {
             display: flex;
@@ -4064,7 +4214,7 @@ $background-color_8: #4f6ebd;
 
 .whiteboard-area {
     overflow: hidden;
-    
+
     // height: 100vh;
     .whiteboard {
         position: relative;

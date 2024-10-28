@@ -190,9 +190,9 @@ export default function () {
 
                 <div className="recent-table-wrapper" style={{ background: "url('/assets/images/recent-tables/recent-table-bg.png')" }}>
                     <div className="container">
-                        <h2>Recent Tables</h2>
+                        <h2 className='text-center'>Recent Tables</h2>
                         <div className="recent-tables" >
-                            <div className="popular-table-card card" style={{ width: '25rem' }}>
+                            <div className="popular-table-card recent-card card" >
                                 <div className="card-body">
                                     <div className="status">
                                         <span className="status-light available"></span>
@@ -207,7 +207,7 @@ export default function () {
                                     </div>
                                 </div>
                             </div>
-                            <div className="popular-table-card card" style={{ width: '25rem' }}>
+                            <div className="popular-table-card recent-card card" >
                                 <div className="card-body">
                                     <div className="status">
                                         <span className="status-light available"></span>
@@ -222,7 +222,7 @@ export default function () {
                                     </div>
                                 </div>
                             </div>
-                            <div className="popular-table-card card" style={{ width: '25rem' }}>
+                            <div className="popular-table-card recent-card card" >
                                 <div className="card-body">
                                     <div className="status">
                                         <span className="status-light available"></span>
@@ -272,15 +272,15 @@ export default function () {
                         </div>
                         <div className="all-popular-table-card-wrapper">
                             <div className="filter-section">
-                                <div className="row align-items-center">
-                                    <div className="col-6">
+                                <div className="row align-items-center g-md-0 g-4">
+                                    <div className="col-md-6">
                                         <div className="search">
                                             <input type="search" className='form-control rounded-pill' placeholder='Classes, Communities etc' />
                                         </div>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-md-6">
                                         <div className="sort">
-                                            <select class="form-select" aria-label="Default select example">
+                                            <select class="form-select rounded-pill" aria-label="Default select example">
                                                 <option selected>
                                                     Filter
                                                 </option>
@@ -293,8 +293,8 @@ export default function () {
                                 </div>
                             </div>
 
-                            <div className="row g-5">
-                                <div className="col-lg-3">
+                            <div className="row g-lg-4 g-md-3 g-3">
+                                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                     {/* <Link href={`/popular-table/create`} prefetch={true}> */}
                                     <div class="popular-table-card card create-card h-100" data-bs-toggle="modal" data-bs-target="#createTableModal">
                                         <div class="card-body">
@@ -316,7 +316,7 @@ export default function () {
                                             console.log('itemitemitemitemitem', item)
                                             return (
                                                 <>
-                                                    <div className="col-lg-3">
+                                                    <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                                         <VirtualTableCard tableData={item} />
                                                         {/* ===================== Join Table Start ================ */}
                                                         <div class="modal fade join-table-modal" id={`joinTable-${item?.roomId}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

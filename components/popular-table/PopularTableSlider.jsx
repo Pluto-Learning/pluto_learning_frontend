@@ -16,15 +16,25 @@ export default function PopularTableSlider({ table }) {
     return (
         <>
             <Swiper
-                slidesPerView={2}
+                slidesPerView={1}
                 centeredSlides={true}
-                spaceBetween={200}
+                spaceBetween={30}
                 loop={false}
                 pagination={{
                     clickable: true,
                 }}
                 modules={[Pagination]}
                 className="mySwiper"
+                breakpoints={{
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 100,
+                    },
+                    992: {
+                        slidesPerView: 2,
+                        spaceBetween: 200,
+                    },
+                }}
             >
                 {
                     table?.length > 0 && table?.map((item) => {

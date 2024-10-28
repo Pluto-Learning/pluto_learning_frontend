@@ -134,7 +134,7 @@ export default function page() {
             console.log('Image uploaded successfully:', response.data);
             toast.success('Image uploaded successfully!');
             setPreview(null)
-            router.push('/table-discovery')
+            router.push('/profile/course-selection')
         } catch (error) {
             console.error('Error uploading image:', error.response ? error.response.data : error);
             toast.error('Error uploading image: ' + (error.response ? error.response.data.title : error.message));

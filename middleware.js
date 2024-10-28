@@ -28,6 +28,7 @@ export const config = {
         "/profile/edit",
         "/profile/edit/info",
         "/profile/edit/picture",
+        "/profile/course-selection",
         '/admin/settings/:path*',
         '/admin/dashboard/:path*'
     ],

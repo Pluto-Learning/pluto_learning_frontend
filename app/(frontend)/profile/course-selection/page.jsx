@@ -126,6 +126,9 @@ export default function page() {
                                 <div className="multistep-form">
                                     <CourseSelection />
                                 </div>
+                                <div className="btn-wrapper text-center">
+                                    <Link href={'/table-discovery'} type='button' className='btn pluto-deep-blue-btn'>Next</Link>
+                                </div>
                             </div>
                             <div className="col-lg-6">
                                 {/* <MyCalendar studentCourseSection={studentCourseSection} /> */}

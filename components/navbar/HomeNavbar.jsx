@@ -58,7 +58,7 @@ export default function HomeNavbar() {
         <>
             <div className={`nav-bar ${pathname == '/' ? 'fixed-top' : 'navbar-scrolled'} ${isScrolled && pathname !== '/virtual-table' ? 'navbar-scrolled fixed-top' : ''}`}>
                 <div className="container">
-                    <div className='nav-bar-links d-none'>
+                    {/* <div className='nav-bar-links d-none'>
                         <div className='nav-bar_logo'>
                             <Link href="/">
                                 <img src={'/assets/images/plutologowhite.svg'} alt='logo' className="img-fluid" />
@@ -87,7 +87,7 @@ export default function HomeNavbar() {
                             </button>
                         </div>
 
-                    </div>
+                    </div> */}
 
                     <nav class="navbar navbar-expand-lg nav-bar-links">
                         <div class="container-fluid">
@@ -97,7 +97,7 @@ export default function HomeNavbar() {
                                 </Link>
                             </a>
 
-                            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar-offcanvas" aria-controls="offcanvasExample">
+                            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar-offcanvas" aria-controls="offcanvasExample">
                                 {/* <span class="navbar-toggler-icon"></span> */}
                                 <i class="fa-solid fa-bars"></i>
                             </button>
@@ -132,22 +132,27 @@ export default function HomeNavbar() {
                                         <li class="nav-item ">
                                             <Link class="nav-link" href="/about">About</Link>
                                         </li>
-                                        <li class="nav-item ">
-                                            <Link class="nav-link" href="/help">Help</Link>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <Link class="nav-link" href="/premium">Premium</Link>
-                                        </li>
                                     </ul>
-                                    <div className='nav-bar-links-signup d-lg-none'>
+                                    {/* <div className='nav-bar-links-signup d-lg-none'>
                                         <button type="button">
                                             <Link href="/login">Sign in</Link>
                                         </button>
+                                    </div> */}
+                                    <div className='nav-bar-links-signup '>
+                                        {
+                                            status === 'unauthenticated' ?
+                                                <button type="button">
+                                                    <Link href="/login">Sign in</Link>
+                                                </button> :
+                                                <button type="button">
+                                                    <a href="javascript:void(0)" onClick={() => signOut()}>Sign out</a>
+                                                </button>
+                                        }
                                     </div>
                                 </div>
                             </div>
 
-                            <div className='nav-bar-links-signup d-none d-lg-block'>
+                            {/* <div className='nav-bar-links-signup d-none d-lg-block'>
                                 {
                                     status === 'unauthenticated' ?
                                         <button type="button">
@@ -157,22 +162,32 @@ export default function HomeNavbar() {
                                             <a href="javascript:void(0)" onClick={() => signOut()}>Sign out</a>
                                         </button>
                                 }
-                            </div>
+                            </div> */}
 
 
-                                {
-                                    status === 'authenticated' &&  <div class="btn-group ms-3 " style={{cursor: "pointer"}}>
-                                {/* <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            {
+                                status === 'authenticated' && <div class="btn-group ms-3" style={{ cursor: "pointer" }}>
+                                    {/* <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Action
                                 </button> */}
-                                <Avatar alt={userData?.userID} src={userData?.awsFileUrl} data-bs-toggle="dropdown" aria-expanded="false" className='border border-3' sx={{ width: 56, height: 56 }}/>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item text-capitalize" href="javascript:void(0)"><strong>{userData?.userID}</strong></a></li>
-                                    <li><Link class="dropdown-item" href="/profile">Profile</Link></li>
-                                </ul>
-                            </div>
-                                }
-                          
+                                    <Avatar
+                                        alt={userData?.userID}
+                                        src={userData?.awsFileUrl}
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                        className='avatar'
+                                        sx={{
+                                            width: { xs: 35, sm: 48, md: 48, lg: 56, xl: 56 },
+                                            height: { xs: 35, sm: 48, md: 48, lg: 56, xl: 56 },
+                                        }}
+                                    />
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item text-capitalize" href="javascript:void(0)"><strong>{userData?.userID}</strong></a></li>
+                                        <li><Link class="dropdown-item" href="/profile">Profile</Link></li>
+                                    </ul>
+                                </div>
+                            }
+
 
                         </div>
                     </nav>
