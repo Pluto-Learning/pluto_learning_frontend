@@ -21,7 +21,7 @@ export default function HomeLayout({ children }) {
 
                 {children}
                 {
-                    pathname !== '/virtual-table' && <Footer />
+                    !pathname.includes('/virtual-table') && <Footer />
                 }
 
             </div>

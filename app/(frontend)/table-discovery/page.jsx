@@ -461,7 +461,7 @@ export default function () {
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         {currentStep === 1 && <StepOne onNextStep={handleNextStep} />}
-                                        {currentStep === 2 && <StepTwo setCurrentStep GetAllTableDetails={GetAllTableDetails} />}
+                                        {currentStep === 2 && <StepTwo setCurrentStep={setCurrentStep} GetAllTableDetails={GetAllTableDetails} />}
                                     </div>
                                 </div>
                             </div>

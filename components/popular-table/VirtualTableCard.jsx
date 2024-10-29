@@ -78,6 +78,8 @@ export default function VirtualTableCard({ tableData = {}, updateAllTableDetails
     }
 
 
+    console.log('session: ', session)
+
 
 
 
@@ -105,7 +107,10 @@ export default function VirtualTableCard({ tableData = {}, updateAllTableDetails
                     <div className="card-info">
                         <div className="title-wrapper ">
                             <h4 className="card-title table-name">{roomName}</h4>
-                            <button className="btn btn-sm pluto-pink-btn join" data-bs-toggle="modal" data-bs-target={`#joinTable-${roomId}`}>Join +</button>
+                            {
+                                session?.user?.token && <button className="btn btn-sm pluto-pink-btn join" data-bs-toggle="modal" data-bs-target={`#joinTable-${roomId}`}>Join +</button>
+                            }
+                            
                         </div>
                         <p className="college-name">{college}</p>
                         <p className="description">{shortDescription}</p>
