@@ -111,7 +111,6 @@
                         margin-top: 20px;
                     }
 
-
                     button {
                         padding: 0.5rem 3rem;
                         // color: #FFFFFF;
@@ -156,7 +155,6 @@
                 }
             }
 
-
         }
 
         .nav-bar-links-signup {
@@ -168,7 +166,6 @@
                 justify-content: flex-start;
                 margin-top: 20px;
             }
-
 
             button {
                 padding: 0.5rem 3rem;
@@ -254,7 +251,6 @@
         //     }
         // }
 
-
         .nav-bar-links-container p,
         .nav-bar-links-signup p {
             color: #FFFFFF;
@@ -271,7 +267,6 @@
     &.navbar-scrolled {
         background-color: $pluto-deep-blue;
         padding: 5px 20px;
-
 
         .nav-bar_logo {
             // margin-right: 0rem;
@@ -1051,7 +1046,6 @@
                 border-radius: 8px;
                 box-shadow: 0px 0px 4px 0px #3A0CA340;
 
-
                 .user-img {
                     height: 40px;
                     width: 40px;
@@ -1170,7 +1164,6 @@
                     border-radius: 8px;
                     box-shadow: 0px 0px 10px 0px #330F7E40;
 
-
                     .course-input {
                         flex-basis: 45%;
                         position: relative;
@@ -1194,7 +1187,6 @@
                                     background-color: $pluto-white;
                                 }
                             }
-
 
                         }
                     }
@@ -1298,7 +1290,6 @@
         gap: 20px;
     }
 
-
     .step-btn {
 
         font-size: 18px;
@@ -1335,7 +1326,6 @@
                 color: $white;
             }
         }
-
 
     }
 }
@@ -1474,7 +1464,6 @@
                     font-size: 28px;
                     font-family: $title-font;
 
-
                 }
 
                 .user-follower {
@@ -1508,7 +1497,6 @@
     .friend-request-card {
         border: none;
         box-shadow: 15px 15px 20px 0px #6262621A;
-
 
         .card-body {
             padding: 30px;
@@ -1633,8 +1621,6 @@
                 }
             }
 
-
-
             .group-join {
 
                 &-lists {
@@ -1739,7 +1725,6 @@
         }
     }
 }
-
 
 .invite-friends-modal {
     .modal-dialog {
@@ -1870,8 +1855,6 @@
                                 box-shadow: 0px 0px 4px 0px #3A0CA340;
                             }
                         }
-
-
 
                         .group-join {
 
@@ -2032,7 +2015,6 @@
             padding: 4rem;
         }
 
-
         @media (max-width: 991px) {
             padding: 5rem;
         }
@@ -2151,7 +2133,6 @@
             }
         }
 
-
         .switch-account {
             color: $white;
             // margin-top: auto;
@@ -2177,7 +2158,6 @@
         background-size: cover;
         padding: 10rem;
 
-
         @media (max-width: 1399px) {
             padding: 4rem;
         }
@@ -2185,7 +2165,6 @@
         @media (max-width: 1199px) {
             padding: 4rem;
         }
-
 
         @media (max-width: 991px) {
             padding: 0 8rem;
@@ -2199,7 +2178,6 @@
         @media (max-width: 575px) {
             padding: 0 2rem;
         }
-
 
         &-content {
             flex: 1;
@@ -2240,7 +2218,6 @@
                     }
                 }
             }
-
 
             .login-btn-wrapper {
                 display: flex;
@@ -2441,7 +2418,6 @@
         @media (max-width: 1199px) {
             padding: 4rem;
         }
-
 
         @media (max-width: 991px) {
             padding: 0 8rem;
@@ -3011,7 +2987,6 @@
     z-index: 8;
     padding: 15px;
 
-
     .input-group {
         position: relative;
 
@@ -3077,7 +3052,6 @@
         }
     }
 
-
 }
 
 .dashboard-sidebar {
@@ -3092,7 +3066,6 @@
     @media (max-width: 575px) {
         width: 200px;
     }
-
 
     .sidebar-nav {
         height: 70vh;
@@ -3202,13 +3175,6 @@
         padding-bottom: 65px;
     }
 }
-
-
-
-
-
-
-
 
 // ======================== MESSENGER =========================
 /* App.scss */
@@ -3327,10 +3293,6 @@
 // .input-container .send-button:hover {
 //     background-color: #006bbd;
 // }
-
-
-
-
 
 // ===================
 // Chatbox
@@ -3658,9 +3620,7 @@ $background-color_8: #4f6ebd;
     cursor: pointer;
 }
 
-
 .popular-tables {
-
 
     .popular-table-slider {
         padding: 100px 0px 100px 0px;
@@ -3759,7 +3719,6 @@ $background-color_8: #4f6ebd;
             // height: 300px;
             transition: 0.3s;
 
-
             &.swiper-slide-active {
                 @media (min-width: 768px) {
                     transform: scale(1.2);
@@ -3779,7 +3738,6 @@ $background-color_8: #4f6ebd;
             display: block;
             width: 100%;
         }
-
 
     }
 
@@ -3971,7 +3929,6 @@ $background-color_8: #4f6ebd;
             justify-content: center;
             gap: 6px;
 
-
             &-light {
                 display: inline-block;
                 width: 6px;
@@ -4023,7 +3980,6 @@ $background-color_8: #4f6ebd;
                     transition: 0.5s;
                 }
 
-
                 &:hover {
                     background-color: $pluto-deep-blue;
                 }
@@ -4053,7 +4009,6 @@ $background-color_8: #4f6ebd;
                     transition: all 0.3s;
                     max-width: 80%;
                 }
-
 
                 .btn {
                     &.join {
@@ -4105,7 +4060,6 @@ $background-color_8: #4f6ebd;
                 }
             }
         }
-
 
     }
 
@@ -4264,6 +4218,12 @@ $background-color_8: #4f6ebd;
             right: 30px;
             bottom: 50px;
         }
+        .ai-chat {
+            position: fixed;
+            left: 30px;
+            top: 180px;
+        }
+
     }
 }
 
@@ -4448,14 +4408,6 @@ $background-color_8: #4f6ebd;
 .full-calendar {
     .full-calendar-modal {}
 }
-
-
-
-
-
-
-
-
 
 // =================== BACKEND STARTS ======================= //
 
@@ -4829,5 +4781,23 @@ $background-color_8: #4f6ebd;
         }
     }
 }
+
+.toggle-chat-button {
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark text color */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s;
+    z-index: 10;
+    position: absolute;
+    top: 770px;
+    left: 600px;
+} /* Smooth background color transition */
+
+  .toggle-chat-button:hover {
+    background-color: #e0e0e0; /* Darker gray on hover */
+  }
 
 // =================== BACKEND ENDS ======================= //

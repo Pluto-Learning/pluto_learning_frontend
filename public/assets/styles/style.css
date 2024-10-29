@@ -685,6 +685,9 @@ h6 {
 .community-main .search-input::-webkit-placeholder {
   color: #C4CFFD;
 }
+.community-main .search-input::-moz-placeholder {
+  color: #C4CFFD;
+}
 .community-main .search-input::placeholder {
   color: #C4CFFD;
 }
@@ -3389,7 +3392,8 @@ h6 {
   aspect-ratio: 72/29;
   width: 100%;
   height: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .popular-table-card .card-body .card-info .title-wrapper {
   overflow: hidden;
@@ -3543,7 +3547,8 @@ h6 {
   aspect-ratio: 1/1;
   width: 100%;
   height: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .whiteboard-area {
@@ -3558,6 +3563,11 @@ h6 {
   position: fixed;
   right: 30px;
   bottom: 50px;
+}
+.whiteboard-area .whiteboard .ai-chat {
+  position: fixed;
+  left: 30px;
+  top: 180px;
 }
 
 .about-main {
@@ -3589,7 +3599,8 @@ h6 {
   aspect-ratio: 72/29;
   width: 100%;
   height: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .edit-table-picture-modal .modal-body .image-preview img {
   width: 200px;
@@ -3963,4 +3974,21 @@ h6 {
   .backendLayout #sidebarCollapse span {
     display: none;
   }
+}
+
+.toggle-chat-button {
+  background-color: #f0f0f0; /* Light gray background */
+  color: #333; /* Dark text color */
+  border: none; /* No border */
+  padding: 10px 15px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s;
+  z-index: 10;
+  position: absolute;
+  top: 770px;
+  left: 600px;
+} /* Smooth background color transition */
+.toggle-chat-button:hover {
+  background-color: #e0e0e0; /* Darker gray on hover */
 }/*# sourceMappingURL=style.css.map */
