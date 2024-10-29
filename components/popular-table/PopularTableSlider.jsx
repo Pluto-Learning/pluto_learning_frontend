@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import VirtualTableCard from './VirtualTableCard';
 
-export default function PopularTableSlider({ table }) {
+export default function PopularTableSlider({ table, updateAllTableDetails  }) {
 
     console.log('tablesssssss: ', table)
 
@@ -40,7 +40,7 @@ export default function PopularTableSlider({ table }) {
                     table?.length > 0 && table?.map((item) => {
                         return (
                             <SwiperSlide>
-                                <VirtualTableCard tableData={item} />
+                                <VirtualTableCard tableData={item} updateAllTableDetails />
                             </SwiperSlide>
                         )
                     })

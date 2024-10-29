@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 
 export default function StepOne({ onNextStep }) {
 
-  const {data: session} = useSession()
+  const { data: session } = useSession()
   console.log('session: ', session)
 
   const [formData, setFormData] = useState({
@@ -71,7 +71,7 @@ export default function StepOne({ onNextStep }) {
   const handleCreateTable = async () => {
     try {
       const responseData = await createTable(formData);
-      console.log('Response Data:', responseData); 
+      console.log('Response Data:', responseData);
       await addTableMember({
         memberId: session?.user?.id,
         roomId: responseData?.roomId,

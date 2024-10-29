@@ -278,7 +278,7 @@ export const fetchAllStudentCourseSectionDetails = async () => {
 
 export const fetchStudentCourseSectionDetailsById = async (id) => {
   try {
-    const response = await apiClient.get(`${routes.GetStudentCourseSectionDetailsById}/${id}`);
+    const response = await apiClient.get(routes.GetStudentCourseSectionBindingDetailsById + '/' + id);
     return response.data;
   } catch (error) {
     throw error;
@@ -434,7 +434,6 @@ export const FetchTableMembersDetailsById = async (id) => {
   }
 };
 
-
 export const addTableMember = async (data) => {
   try {
     const response = await apiClient.post(routes.AddTableMember, data);
@@ -443,3 +442,13 @@ export const addTableMember = async (data) => {
     throw error;
   }
 };
+
+export const removeTableMember = async (memberId, roomId) => {
+  try {
+    await apiClient.delete(`${routes.RemoveTableMember}/${memberId}/${roomId}`);
+    toast.success('Successfully Left the table!');
+  } catch (error) {
+    toast.error('Error Left the table');
+    throw error;
+  }
+}

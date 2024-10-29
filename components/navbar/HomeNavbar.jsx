@@ -114,24 +114,26 @@ export default function HomeNavbar() {
                                 <div className="offcanvas-body">
                                     <ul class="navbar-nav m-lg-auto nav-bar-links-container">
                                         <li class="nav-item ">
-                                            <Link class="nav-link" href="/">Home</Link>
+                                            <Link class="nav-link" href="/dashboard">Dashboard</Link>
                                         </li>
                                         {
                                             status === 'authenticated' &&
                                             <li class="nav-item ">
-                                                <Link class="nav-link" href="/table-discovery">Table Discovery</Link>
+                                                <Link class="nav-link" href="/table-discovery">For You</Link>
                                             </li>
                                         }
+                                        <li class="nav-item ">
+                                            <Link class="nav-link" href="#">Everyone</Link>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <Link class="nav-link" href="#">Your Files</Link>
+                                        </li>
                                         {
                                             status === 'authenticated' &&
                                             <li class="nav-item ">
                                                 <Link class="nav-link" href="/profile/course-selection">Course Selection</Link>
                                             </li>
                                         }
-
-                                        <li class="nav-item ">
-                                            <Link class="nav-link" href="/about">About</Link>
-                                        </li>
                                     </ul>
                                     {/* <div className='nav-bar-links-signup d-lg-none'>
                                         <button type="button">

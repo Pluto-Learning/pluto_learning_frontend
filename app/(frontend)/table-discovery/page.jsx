@@ -183,7 +183,7 @@ export default function () {
                 >
                     <h1>Popular Tables</h1>
                     {
-                        allTableDetails?.length > 0 && <PopularTableSlider table={allTableDetails} />
+                        allTableDetails?.length > 0 && <PopularTableSlider table={allTableDetails} updateAllTableDetails={GetAllTableDetails}  />
                     }
 
                 </div>
@@ -317,7 +317,7 @@ export default function () {
                                             return (
                                                 <>
                                                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                                                        <VirtualTableCard tableData={item} />
+                                                        <VirtualTableCard tableData={item} updateAllTableDetails={GetAllTableDetails} />
                                                         {/* ===================== Join Table Start ================ */}
                                                         <div class="modal fade join-table-modal" id={`joinTable-${item?.roomId}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-xl">

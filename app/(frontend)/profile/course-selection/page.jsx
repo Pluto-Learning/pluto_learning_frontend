@@ -1,5 +1,5 @@
 "use client"
-import { fetchAllStudentCourseSectionDetails, fetchCourse, fetchSection } from '@/app/api/crud'
+import { fetchAllStudentCourseSectionDetails, fetchCourse, fetchSection, fetchStudentCourseSectionDetailsById } from '@/app/api/crud'
 import CourseSelection from '@/components/CourseSelection'
 import FullCalendarIo from '@/components/FullCalendarIo'
 import InviteFriendsPopup from '@/components/InviteFriendsPopup'
@@ -7,12 +7,14 @@ import MultiStepForm from '@/components/MultiStepForm'
 import MyCalendar from '@/components/MyCalendar'
 import HomeLayout from '@/layouts/homeLayout/HomeLayout'
 import ProfileLayout from '@/layouts/profileLayout/ProfileLayout'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 export default function page() {
 
+    const { data: session, status } = useSession();
     const [course, setAllCourse] = useState([])
     const [section, setAllSection] = useState([])
     const [studentCourseSection, setStudentCourseSection] = useState([])
@@ -91,7 +93,7 @@ export default function page() {
 
     const getAllStudentCourseSection = async () => {
         try {
-            const data = await fetchAllStudentCourseSectionDetails()
+            const data = await fetchStudentCourseSectionDetailsById(session?.user?.id)
             setStudentCourseSection(data)
         } catch (error) {
             console.log('Error Fetching student course section details', error)
@@ -103,6 +105,10 @@ export default function page() {
         getAllSection()
         getAllStudentCourseSection()
     }, [])
+    
+    useEffect(() => {
+        getAllStudentCourseSection()
+    }, [session])
 
 
     // Helper function to format dates
@@ -112,7 +118,8 @@ export default function page() {
     }
 
 
-    console.log('course: ', course)
+    console.log('session: ', session)
+    console.log('studentCourseSection: ', studentCourseSection)
 
     return (
         <HomeLayout>
@@ -124,10 +131,10 @@ export default function page() {
                                 <h5 className='greetings'>Hi Ethan, lets start with telling us a bit about yourself</h5>
                                 <h4 className='question'>What year are you in?</h4>
                                 <div className="multistep-form">
-                                    <CourseSelection />
+                                    <CourseSelection updateStudentCourseSection={getAllStudentCourseSection}/>
                                 </div>
                                 <div className="btn-wrapper text-center">
-                                    <Link href={'/table-discovery'} type='button' className='btn pluto-deep-blue-btn'>Next</Link>
+                                    <Link href={'/table-discovery'} type='button' className='btn pluto-deep-blue-btn w-50'>Next</Link>
                                 </div>
                             </div>
                             <div className="col-lg-6">

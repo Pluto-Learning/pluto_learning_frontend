@@ -60,5 +60,6 @@ export const routes = {
   AddTableMember: '/Table/AddTableMember',
   UpdateAddTableMember: '/Table/UpdateTableMember',
   GetTableMembersDetailsById: '/Table/GetTableMembersDetailsById',
+  RemoveTableMember: '/Table/RemoveTableMember',
 
 };

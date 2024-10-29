@@ -1,11 +1,11 @@
 "use client"
-import { FetchTableMembersDetailsById } from '@/app/api/crud'
+import { addTableMember, FetchTableMembersDetailsById, removeTableMember } from '@/app/api/crud'
 import { Avatar, AvatarGroup, Tooltip } from '@mui/material'
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 import JoinATablePopup from '../JoinATablePopup';
 
-export default function VirtualTableCard({ tableData = {} }) {
+export default function VirtualTableCard({ tableData = {}, updateAllTableDetails }) {
 
     const { data: session, status } = useSession();
 
@@ -45,9 +45,40 @@ export default function VirtualTableCard({ tableData = {} }) {
         }
     };
 
+
+
+
     useEffect(() => {
         getTableMembersDetailsById()
     }, [])
+
+    const [isTableMember, setIsTableMember] = useState(false);
+
+    useEffect(() => {
+        const member = tableMembersDetailsById?.find(
+            (member) => member?.userID === session?.user?.id
+        );
+
+        if (member) {
+            setIsTableMember(true);
+        }
+    }, [tableMembersDetailsById, session]);
+
+    console.log('isTableMember: ', isTableMember)
+
+    const handleLeftTable = async (memberId, roomId) => {
+        console.log('handleLeftTable', memberId, roomId)
+        try {
+            await removeTableMember(memberId, roomId)
+            getTableMembersDetailsById()
+            updateAllTableDetails()
+        } catch (error) {
+            console.error("Error Leave From Table ", error)
+        }
+    }
+
+
+
 
 
     return (
@@ -66,6 +97,8 @@ export default function VirtualTableCard({ tableData = {} }) {
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 
+
+
                         <img src={!roomImg ? "/assets/images/image-placeholder.jpg" : roomImg} alt="" className='img-fluid card-img-top' />
                         {/* <img src={"/assets/images/image-placeholder.jpg"} alt="" className='img-fluid card-img-top' /> */}
                     </div>
@@ -77,6 +110,18 @@ export default function VirtualTableCard({ tableData = {} }) {
                         <p className="college-name">{college}</p>
                         <p className="description">{shortDescription}</p>
                     </div>
+                    {
+                        isTableMember && <div class="dropdown settings-dropdown">
+                            <button class="btn settings" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-gear"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="javascript:void(0)" onClick={() => handleLeftTable(session?.user?.id, roomId)}>Leave</a></li>
+                            </ul>
+                        </div>
+                    }
+
+
                 </div>
                 <div className="card-footer border-0">
                     <div className="avatar">

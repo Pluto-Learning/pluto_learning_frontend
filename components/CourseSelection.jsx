@@ -5,7 +5,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-export default function CourseSelection() {
+export default function CourseSelection({updateStudentCourseSection}) {
 
     const { data: session } = useSession();
     const [filteredCourses, setFilteredCourses] = useState([])
@@ -78,6 +78,7 @@ export default function CourseSelection() {
     const handleCreate = async (e) => {
         try {
             await createStudentCourseSectionBinding(formData)
+            updateStudentCourseSection()
         } catch (error) {
             console.log("Error creating Student Course Section Binding: ", error)
         }
@@ -95,7 +96,6 @@ export default function CourseSelection() {
         handleCreate();
         resetForm();
         setSearchTerm('');
-        getAllStudentCourseSection()
         console.log('Form submitted', formData);
     };
 

@@ -10,7 +10,7 @@ import { login } from '@/store/slices/authSlice';
 import { signIn } from "next-auth/react"
 
 export default function AdminLogin() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const router = useRouter();
 
   const [formData, setFormData] = useState({

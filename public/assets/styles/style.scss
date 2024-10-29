@@ -69,7 +69,7 @@
                             font-size: 18px;
 
                             @media screen and (max-width:1199px) {
-                            font-size: 16px;
+                                font-size: 16px;
 
                             }
 
@@ -124,9 +124,9 @@
                         cursor: pointer;
                         transition: 0.5s ease;
 
-                        @media screen and (max-width:1199px){
+                        @media screen and (max-width:1199px) {
                             padding: 0.3rem 1.8rem;
-                            
+
                         }
 
                         @media screen and (max-width: 991px) {
@@ -138,9 +138,10 @@
                             color: $white;
                             transition: 0.5s ease;
                             font-weight: 600;
-                            @media screen and (max-width:1199px){
+
+                            @media screen and (max-width:1199px) {
                                 font-size: 15px;
-                                
+
                             }
                         }
 
@@ -1100,6 +1101,14 @@
         color: $pluto-black;
         font-size: 36px;
         margin-bottom: 24px;
+    }
+
+    .btn-wrapper {
+        .btn {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 700;
+        }
     }
 }
 
@@ -4002,17 +4011,18 @@ $background-color_8: #4f6ebd;
                 // right: 0px;
                 transform: translateX(30px);
 
+                &.picture {
+                    top: 5px;
+                    right: 5px;
+                    transition: 0.3s;
+                }
+
                 &.info {
                     top: 35px;
                     right: 5px;
                     transition: 0.5s;
                 }
 
-                &.picture {
-                    top: 5px;
-                    right: 5px;
-                    transition: 0.3s;
-                }
 
                 &:hover {
                     background-color: $pluto-deep-blue;
@@ -4070,6 +4080,29 @@ $background-color_8: #4f6ebd;
 
             .description {
                 margin-bottom: 5px;
+            }
+        }
+
+        .settings-dropdown{
+            position: absolute;
+            bottom: 130px;
+            left: 30px;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            
+            .btn {
+                font-size: 12px;
+                background-color: $pluto-pink;
+                color: $white;
+                padding: 3px 6px;
+                border: none;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: $pluto-deep-blue;
+                }
             }
         }
 
@@ -4166,6 +4199,11 @@ $background-color_8: #4f6ebd;
                     opacity: 1;
                     transform: translateX(0px);
                 }
+            }
+
+            .settings-dropdown{
+                opacity: 1;
+                visibility: visible;
             }
         }
     }
