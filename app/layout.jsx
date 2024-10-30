@@ -1,17 +1,16 @@
 'use client'
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import "./globals.css";
-// import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { Provider } from "react-redux";
-import store from "@/store";
-import NextAuthProvider from "@/Providers/NextAuthProvider";
+// import { Provider } from "react-redux";
+// import store from "@/store";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Ensure this line is added
-import PreLoader from "@/components/PreLoader";
-import Loader from "@/components/Loader/Loader";
-import Script from "next/script";
+// import PreLoader from "@/components/PreLoader";
+// import Loader from "@/components/Loader/Loader";
+// import Script from "next/script";
 import { ToastContainer } from "react-toastify";
+import NextAuthProvider from "@/Providers/NextAuthProvider";
 
 
 export default function RootLayout({ children }) {

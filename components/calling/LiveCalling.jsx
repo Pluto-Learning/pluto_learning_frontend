@@ -6,6 +6,7 @@ import {
     ParticipantTile,
     RoomAudioRenderer,
     useTracks,
+    VideoConference,
 } from '@livekit/components-react';
 import '@livekit/components-styles';
 import { Track } from 'livekit-client';
@@ -13,7 +14,7 @@ import { Rnd } from 'react-rnd';
 
 export default function LiveCalling({ username = 'quickstart-user', roomId = 'quickstart-room' }) {
     const [token, setToken] = useState('');
-    const [rnd, setRnd] = useState({ width: '100px', height: '100px', x: 300, y: 100 });
+    const [rnd, setRnd] = useState({ width: 100, height: 100, x: 0, y: 0 });
 
     const getToken = async () => {
         try {
@@ -27,14 +28,15 @@ export default function LiveCalling({ username = 'quickstart-user', roomId = 'qu
 
     useEffect(() => {
         getToken();
+
+        // Set initial position to the bottom-right corner after mounting
+        const initialX = window.innerWidth - 450; // window width - element width (100px) - margin
+        const initialY = window.innerHeight - 265; // window height - element height (100px) - margin
+        setRnd({ width: 100, height: 100, x: initialX, y: initialY });
     }, []);
 
     if (token === '') {
-        return (
-            <>
-                <div class="voice-call-loader"></div>
-            </>
-        );
+        return <div className="voice-call-loader"></div>;
     }
 
     const setPosition = (e, { x, y }) => {
@@ -52,13 +54,12 @@ export default function LiveCalling({ username = 'quickstart-user', roomId = 'qu
 
     return (
         <Rnd
-            // style={{ backgroundColor: 'pink' }}
             size={{ width: rnd.width, height: rnd.height }}
             position={{ x: rnd.x, y: rnd.y }}
             onDragStop={setPosition}
             onResizeStop={setSize}
         >
-            <div className='live-call' style={{ width: '100%', height: '100%' }}>
+            <div className="live-call" style={{ width: '100%', height: '100%' }}>
                 <LiveKitRoom
                     video
                     audio
@@ -86,7 +87,7 @@ function MyVideoConference() {
     );
 
     return (
-        <GridLayout tracks={tracks} style={{ height: 'calc(100vh - var(--lk-control-bar-height))' }}>
+        <GridLayout  tracks={tracks} style={{ height: 'calc(100vh - var(--lk-control-bar-height))' }}>
             <ParticipantTile />
         </GridLayout>
     );

@@ -36,12 +36,17 @@ export const routes = {
 
   // User Registration Routes
   GetAllUser: '/UserSetup/GetAllUserSetup',
+  GetAllUserSetupByUserId: '/UserSetup/GetAllUserSetupByUserId',
   CreateUser: '/UserSetup/SaveRegistrationSetup',
+  UpdateRegistrationUserRegistrationData: '/UserSetup/UpdateRegistrationUserRegistrationData',
+  UpdateUserPassword: '/UserSetup/UpdateUserPassword',
+
 
   // User Profile Routes
   GetUserProfileById: '/UserProfile/GetUserProfileById?UserId=',
   SaveUserProfile: '/UserProfile/SaveUserProfile',
-  UpdateProfilePicture: '/UserProfile/UpdateProfilePicture/',
+  UpdateProfilePicture: '/UserProfile/UpdateProfilePicture',
+
 
   // Tables Routes
   GetAllTable: '/Table/GetAllTable',
@@ -62,4 +67,11 @@ export const routes = {
   GetTableMembersDetailsById: '/Table/GetTableMembersDetailsById',
   RemoveTableMember: '/Table/RemoveTableMember',
 
+
+  // Friends Routes
+  AddFriend: '/Friend/AddFriend',
+  GetPendingFriendListByMainId: '/Friend/GetPendingFriendListByMainId',
+  UpdateFriendRequest: '/Friend/UpdateFriendRequest',
+  GetAcceptedFriendListByMainId: '/Friend/GetAcceptedFriendListByMainId',
+  GetSuggestPersonListByMainId: '/Friend/GetSuggestPersonListByMainId',
 };

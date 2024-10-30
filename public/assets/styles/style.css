@@ -1464,7 +1464,7 @@ h6 {
 }
 
 .invite-friends {
-  padding-bottom: 100px;
+  padding: 50px 0;
 }
 .invite-friends .friend-suggestion-top {
   display: flex;
@@ -1550,6 +1550,12 @@ h6 {
   height: 56px;
   border-radius: 8px;
   overflow: hidden;
+}
+.invite-friends .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .left .friend-img img {
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 .invite-friends .friend-request-card .card-body .friend-request-list ul.nav li.nav-item .friend-request .left .friend-info .friend-name {
   font-size: 14px;
@@ -3092,7 +3098,7 @@ h6 {
 }
 
 .popular-tables .popular-table-slider {
-  padding: 100px 0px 100px 0px;
+  padding: 160px 0px 100px 0px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -3114,10 +3120,10 @@ h6 {
 }
 .popular-tables .popular-table-slider h1 {
   text-align: center;
-  margin-bottom: 0;
+  margin-bottom: 0px;
   font-family: "Nunito", sans-serif;
   color: #fff;
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 700;
 }
 @media screen and (max-width: 767px) {
@@ -3136,8 +3142,8 @@ h6 {
   }
 }
 .popular-tables .popular-table-slider .swiper {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 80px;
+  padding-bottom: 40px;
   overflow: unset;
 }
 @media (max-width: 991px) {
@@ -3163,8 +3169,8 @@ h6 {
   width: unset;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -50px;
-  padding: 20px;
+  bottom: -65px;
+  padding: 10px;
   border-radius: 10px;
 }
 @media (max-width: 991px) {
@@ -3190,7 +3196,7 @@ h6 {
 }
 @media (min-width: 768px) {
   .popular-tables .popular-table-slider .swiper-slide.swiper-slide-active {
-    transform: scale(1.2);
+    transform: scale(1.15);
   }
 }
 .popular-tables .popular-table-slider .swiper-slide .popular-table-card {
@@ -3602,8 +3608,8 @@ h6 {
 }
 .whiteboard-area .whiteboard .leave-button {
   position: fixed;
-  right: 30px;
-  bottom: 50px;
+  left: 110px;
+  bottom: 10px;
 }
 
 .about-main {

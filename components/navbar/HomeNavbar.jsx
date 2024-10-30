@@ -56,7 +56,7 @@ export default function HomeNavbar() {
 
     return (
         <>
-            <div className={`nav-bar ${pathname == '/' ? 'fixed-top' : 'navbar-scrolled'} ${isScrolled && pathname !== '/virtual-table' ? 'navbar-scrolled fixed-top' : ''}`}>
+            <div className={`nav-bar ${pathname == '/table-discovery' || pathname == '/' ? 'fixed-top' : 'navbar-scrolled'} ${isScrolled && pathname !== '/virtual-table' ? 'navbar-scrolled fixed-top' : ''}`}>
                 <div className="container">
                     {/* <div className='nav-bar-links d-none'>
                         <div className='nav-bar_logo'>
