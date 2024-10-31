@@ -10,6 +10,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Ensure this line is added
 // import Loader from "@/components/Loader/Loader";
 // import Script from "next/script";
 import { ToastContainer } from "react-toastify";
+import 'remixicon/fonts/remixicon.css'
 import NextAuthProvider from "@/Providers/NextAuthProvider";
 
 

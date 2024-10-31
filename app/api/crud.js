@@ -507,3 +507,12 @@ export const updateFriendRequest = async (mainPersonId, friendId, status) => {
     throw error;
   }
 }
+
+export const acceptedFriendListByMainId = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetAcceptedFriendListByMainId + '/' + id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+}

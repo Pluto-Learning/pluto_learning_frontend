@@ -123,7 +123,7 @@ export default function HomeNavbar() {
                                             </li>
                                         }
                                         <li class="nav-item ">
-                                            <Link class="nav-link" href="#">Everyone</Link>
+                                            <Link class="nav-link" href="/everyone">Everyone</Link>
                                         </li>
                                         <li class="nav-item ">
                                             <Link class="nav-link" href="#">Your Files</Link>

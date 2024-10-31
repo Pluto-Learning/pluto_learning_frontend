@@ -1,5 +1,5 @@
 "use client"
-import { addFriend, pendingFriendListByMainId, suggestedPersonListByMainId, updateFriendRequest } from '@/app/api/crud'
+import { acceptedFriendListByMainId, addFriend, pendingFriendListByMainId, suggestedPersonListByMainId, updateFriendRequest } from '@/app/api/crud'
 import InviteFriendsPopup from '@/components/InviteFriendsPopup'
 import HomeLayout from '@/layouts/homeLayout/HomeLayout'
 import ProfileLayout from '@/layouts/profileLayout/ProfileLayout'
@@ -12,6 +12,7 @@ export default function page() {
     const { data: session } = useSession()
     const [userData, setUserData] = useState({})
     const [pendingFriendList, setPendingFriendList] = useState([])
+    const [acceptedFriendList, setAcceptedFriendList] = useState([])
     const [suggestedPersonList, setSuggestedPersonList] = useState([])
 
     const handlePendingFriendData = async () => {
@@ -51,12 +52,23 @@ export default function page() {
         }
     }
 
+    const handleAcceptFriend = async () => {
+        try {
+            const data = await acceptedFriendListByMainId(session?.user?.id)
+            setAcceptedFriendList(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         handlePendingFriendData()
         handleSuggestedPersonData()
+        handleAcceptFriend()
     }, [session])
 
     console.log("pendingFriendList: ", pendingFriendList)
+    console.log("acceptedFriendList: ", acceptedFriendList)
 
     return (
         <HomeLayout>
@@ -64,23 +76,28 @@ export default function page() {
                 <div className="container">
                     <div className="invite-friends">
                         <div className="row g-4">
-                            <div className="col-lg-9">
+                            <div className="col-lg-12">
                                 <div className="row g-4">
                                     <div className="col-12">
                                         <div className="friend-suggestion-top">
                                             <div className="left">
                                                 <div className="user-info">
-                                                    <h4 className="user-name">Ethan Debnath</h4>
-                                                    <p className='user-follower'>3k Follower | 1.5k Following</p>
+                                                    <h4 className="user-name text-capitalize">{acceptedFriendList?.mainPerson?.firstName} {acceptedFriendList?.mainPerson?.lastName}</h4>
+                                                    <p className='user-follower'>3k Follower | {acceptedFriendList?.friends?.length} Following</p>
                                                 </div>
                                             </div>
                                             <div className="right">
                                                 <div className="serach-msg">
-                                                    <div className="position-relative me-3">
+                                                    <div className="position-relative me-3 search">
                                                         <input type="text" className='form-control' placeholder='Search' />
-                                                        <i class="ri-search-2-line "></i>
+                                                        {/* <i class="ri-search-2-line "></i> */}
                                                     </div>
-                                                    <Link href="" className='msg-btn'>Message</Link>
+                                                    <div className='message'>
+                                                        <div className="notification-count">12</div>
+                                                        <Link type='button' href="" className='msg-btn btn'>
+                                                            <i class="ri-message-2-fill"></i>
+                                                        </Link>
+                                                    </div>
                                                     <div>
                                                     </div>
                                                 </div>
@@ -94,9 +111,6 @@ export default function page() {
                                                 <div className="card-body">
                                                     <div className="card-top d-flex justify-content-between align-items-center">
                                                         <h6>Friend Request</h6>
-                                                        <h6>
-                                                            <Link href=''>View sent request</Link>
-                                                        </h6>
                                                     </div>
                                                     <div className="friend-request-list">
                                                         <ul class="nav">
@@ -228,7 +242,7 @@ export default function page() {
 
                                 </div>
                             </div>
-                            <div className="col-lg-3">
+                            {/* <div className="col-lg-3">
                                 <div className="card friend-request-card suggest-people-card">
                                     <div className="card-body">
                                         <div className="search-group">
@@ -347,7 +361,7 @@ export default function page() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

@@ -1491,15 +1491,53 @@
                 display: flex;
                 align-items: center;
 
-                .form-control {
-                    @include input-control;
-                    border-top: 1px solid #3A0CA3;
-                    // border-left: 1px solid #3A0CA3;
-                    border-right: 1px solid #3A0CA3;
-                    border-bottom: 1px solid #3A0CA3;
-                    border-color: #3A0CA3;
-                    box-shadow: 0px 0px 4px 0px #3A0CA340;
+                .search {
+                    .form-control {
+                        @include input-control;
+                        border-top: 1px solid $pluto-white !important;
+                        // border-left: 1px solid #3A0CA3;
+                        border-right: 1px solid $pluto-white !important;
+                        border-bottom: 1px solid $pluto-white !important;
+                        border-color: #3A0CA3;
+                        box-shadow: 0px 0px 4px 0px #3A0CA340;
 
+                    }
+                }
+
+                .message {
+
+                    position: relative;
+
+                    .notification-count {
+                        width: 17px;
+                        height: 17px;
+                        border-radius: 100%;
+                        background-color: #F72585;
+                        position: absolute;
+                        font-size: 10px;
+                        color: #fff;
+                        font-weight: 700;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        top: 3px;
+                        right: 3px;
+                    }
+
+                    .btn {
+                        border: 1px solid $pluto-white !important;
+                        box-shadow: 0px 0px 4px 0px #3A0CA340;
+                        height: 100%;
+                        border-radius: 8px;
+                        height: 3rem;
+                        width: 3rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 20px;
+                        padding: 0;
+                        color: $pluto-deep-blue;
+                    }
                 }
             }
         }
@@ -1631,10 +1669,10 @@
 
                 input {
                     @include input-control;
-                    border-top: 1px solid #3A0CA3;
+                    border-top: 1px solid $pluto-white !important;
                     // border-left: 1px solid #3A0CA3;
-                    border-right: 1px solid #3A0CA3;
-                    border-bottom: 1px solid #3A0CA3;
+                    border-right: 1px solid $pluto-white !important;
+                    border-bottom: 1px solid $pluto-white !important;
                     border-color: #3A0CA3;
                     box-shadow: 0px 0px 4px 0px #3A0CA340;
                 }
@@ -4842,4 +4880,260 @@ $background-color_8: #4f6ebd;
 
 .tl-watermark_SEE-LICENSE {
     display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+.chat-message {
+    padding: 20px 0;
+
+    .people-list {
+        max-height: calc(100vh - 250px);
+        overflow: hidden;
+        overflow-y: auto;
+        gap: 20px;
+
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-width: 991px) {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+        }
+
+        .people {
+            border-left: 4px solid transparent !important;
+            padding: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+
+            @media (max-width: 991px) {
+                padding: 0;
+                border: none !important;
+                overflow: unset;
+            }
+
+            &:hover {
+                background-color: $pluto-white ;
+                border-color: $pluto-purple !important;
+
+                @media (max-width: 991px) {
+                    background-color: transparent !important;
+                    border: none !important;
+                }
+            }
+
+            &.active {
+                background-color: $pluto-white !important;
+                border-color: $pluto-purple !important;
+
+                @media (max-width: 991px) {
+                    background-color: transparent !important;
+                    border: none !important;
+                }
+            }
+
+            .people-img {
+                position: relative;
+
+                .small {
+                    position: absolute;
+                    top: -8px;
+                    right: 0;
+
+                    .chat-online,
+                    .chat-offline {
+                        border: 2px solid $white;
+                        border-radius: 50%;
+                    }
+                }
+            }
+
+            @media (max-width: 991px) {
+                .people-info {
+                    display: none;
+                }
+            }
+        }
+
+        .people-wrapper {
+            &.group {
+                flex-basis: 30%;
+
+                .people-list {
+                    max-height: 200px;
+                    overflow: hidden;
+                    overflow-y: auto;
+                }
+            }
+
+            &.people {
+                flex-basis: 70%;
+
+                .people-list {
+                    height: 100%;
+                    overflow: hidden;
+                    overflow-y: auto;
+                }
+            }
+        }
+    }
+
+    .chat-online {
+        color: #34ce57;
+        font-size: 8px;
+    }
+
+    .chat-offline {
+        color: #e4606d;
+        font-size: 8px;
+    }
+
+    .chat-messages {
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100vh - 320px);
+        /* Adjust as needed to fit within the viewport */
+        overflow-y: auto;
+        /* Allows scrolling only within the chat-messages section */
+
+        /* Hide scrollbar for Chrome, Safari, and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+
+        /* IE and Edge */
+        &::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, and Edge */
+        }
+
+    }
+
+    .chat-message-left,
+    .chat-message-right {
+        display: flex;
+        flex-shrink: 0;
+
+        .message {
+            padding: 20px;
+        }
+    }
+
+    .chat-message-left {
+        margin-right: auto;
+
+        .message {
+            background-color: $pluto-white !important;
+            border-radius: 0px 20px 20px 20px;
+        }
+    }
+
+    .chat-message-right {
+        flex-direction: row-reverse;
+        margin-left: auto;
+
+        .message {
+            background-color: $pluto-chat-message-1 !important;
+            color: $white;
+            border-radius: 20px 0px 20px 20px;
+        }
+    }
+
+    .card {
+        &-left {}
+
+        &-center {}
+
+        &-right {
+            .photos-wrapper {
+                display: flex;
+                flex-direction: column;
+                max-height: calc(100vh - 320px);
+                /* Adjust as needed to fit within the viewport */
+                overflow-y: auto;
+                /* Allows scrolling only within the chat-messages section */
+
+                /* Hide scrollbar for Chrome, Safari, and Edge */
+                scrollbar-width: none;
+                /* Firefox */
+                -ms-overflow-style: none;
+
+                /* IE and Edge */
+                &::-webkit-scrollbar {
+                    display: none;
+                    /* Chrome, Safari, and Edge */
+                }
+
+                .photos {
+
+                    max-height: 200px;
+                    overflow: hidden;
+                    overflow-y: auto;
+                    scrollbar-width: thin;
+                }
+            }
+
+            .file-wrapper {
+                .files {
+                    max-height: 200px;
+                    overflow: hidden;
+                    overflow-y: auto;
+                    /* Hide scrollbar for Chrome, Safari, and Edge */
+                    scrollbar-width: thin;
+
+                    /* Chrome, Safari, and Edge */
+                    .nav {
+                        gap: 10px;
+
+                        .nav-item {
+
+                            .document-card {
+                                background-color: $pluto-white;
+                                padding: 10px;
+                                border-radius: 8px;
+                                display: flex;
+                                align-items: center;
+                                gap: 15px;
+
+                                .document-icon {
+                                    flex-basis: 30px;
+                                    width: 30px;
+
+                                    img {}
+                                }
+
+                                .document-info {
+                                    flex-grow: 1;
+
+                                    small {
+                                        font-size: 12px;
+                                    }
+                                }
+
+                                .download {
+                                    flex-basis: 30px;
+                                    width: 30px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
