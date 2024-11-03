@@ -6,12 +6,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import { EffectCoverflow, Pagination } from 'swiper/modules';
+import 'swiper/css/autoplay';
+import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import VirtualTableCard from './VirtualTableCard';
 
-export default function PopularTableSlider({ table, updateAllTableDetails  }) {
-
-    console.log('tablesssssss: ', table)
+export default function PopularTableSlider({ table, updateAllTableDetails }) {
+    console.log('tablesssssss: ', table);
 
     return (
         <>
@@ -19,11 +19,15 @@ export default function PopularTableSlider({ table, updateAllTableDetails  }) {
                 slidesPerView={1}
                 centeredSlides={true}
                 spaceBetween={30}
-                loop={false}
+                loop={true}
+                autoplay={{
+                    delay: 3000,  // Set autoplay delay in milliseconds (e.g., 3000ms = 3 seconds)
+                    disableOnInteraction: false,  // Continue autoplay after interactions
+                }}
                 pagination={{
                     clickable: true,
                 }}
-                modules={[Pagination]}
+                modules={[Pagination, Autoplay]}
                 className="mySwiper"
                 breakpoints={{
                     768: {
@@ -36,40 +40,11 @@ export default function PopularTableSlider({ table, updateAllTableDetails  }) {
                     },
                 }}
             >
-                {
-                    table?.length > 0 && table?.map((item) => {
-                        return (
-                            <SwiperSlide>
-                                <VirtualTableCard tableData={item} updateAllTableDetails />
-                            </SwiperSlide>
-                        )
-                    })
-                }
-
-                {/* <SwiperSlide>
-                    <VirtualTableCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VirtualTableCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VirtualTableCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VirtualTableCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VirtualTableCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VirtualTableCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VirtualTableCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VirtualTableCard />
-                </SwiperSlide> */}
+                {table?.length > 0 && table?.map((item, index) => (
+                    <SwiperSlide key={index}>
+                        <VirtualTableCard tableData={item} updateAllTableDetails />
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </>
     );
