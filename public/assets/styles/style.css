@@ -598,19 +598,65 @@ h6 {
 .hero-main .link-down a {
   color: #fff;
   font-size: 4rem;
+  vertical-align: middle;
+  width: auto;
+  height: 7.5rem;
+  padding-left: 1.3rem;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 767px) {
+  .hero-main .link-down {
+    font-size: 6rem;
+  }
+  .hero-main .link-down .logo {
+    height: 5.5rem;
+    padding-left: 0.3rem;
+  }
+}
+@media screen and (max-width: 575px) {
+  .hero-main .link-down {
+    font-size: 4rem;
+  }
+  .hero-main .link-down .logo {
+    height: 3.5rem;
+    padding-left: 0.3rem;
+  }
+}
+.hero-main .subtitle {
+  font-size: 3rem;
+  color: #fff;
+}
+@media screen and (max-width: 767px) {
+  .hero-main .subtitle {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 575px) {
+  .hero-main .subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+.link-down {
+  text-align: center;
+  animation: moverAnimation 2s infinite alternate;
+}
+.link-down a {
+  color: #fff;
+  font-size: 4rem;
 }
 @media screen and (max-width: 991px) {
-  .hero-main .link-down a {
+  .link-down a {
     font-size: 3rem;
   }
 }
 @media screen and (max-width: 767px) {
-  .hero-main .link-down a {
+  .link-down a {
     font-size: 2.5rem;
   }
 }
 @media screen and (max-width: 575px) {
-  .hero-main .link-down a {
+  .link-down a {
     font-size: 2rem;
   }
 }
@@ -3667,8 +3713,13 @@ h6 {
 }
 .whiteboard-area .whiteboard .leave-button {
   position: fixed;
-  left: 110px;
-  bottom: 10px;
+  right: 30px;
+  bottom: 50px;
+}
+.whiteboard-area .whiteboard .ai-chat {
+  position: fixed;
+  left: 30px;
+  top: 180px;
 }
 
 .about-main {
@@ -4074,6 +4125,23 @@ h6 {
   .backendLayout #sidebarCollapse span {
     display: none;
   }
+}
+
+.toggle-chat-button {
+  background-color: #f0f0f0; /* Light gray background */
+  color: #333; /* Dark text color */
+  border: none; /* No border */
+  padding: 10px 15px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s;
+  z-index: 10;
+  position: absolute;
+  top: 770px;
+  left: 600px;
+} /* Smooth background color transition */
+.toggle-chat-button:hover {
+  background-color: #e0e0e0; /* Darker gray on hover */
 }
 
 .tl-watermark_SEE-LICENSE {

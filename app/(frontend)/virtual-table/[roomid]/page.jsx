@@ -7,10 +7,12 @@ import 'tldraw/tldraw.css';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import Loader from '@/components/Loader/Loader';
+
 import Link from 'next/link';
 import { updateTableLastTime } from '@/app/api/crud';
 import { Rnd } from 'react-rnd';
 import LiveCalling from '@/components/calling/LiveCalling';
+import AiChat from '@/components/AiChat/AiChat';
 
 export default function Page() {
 
@@ -20,7 +22,6 @@ export default function Page() {
   const uniqueRoomId = pathname.split("/").pop();
 
   console.log('pathnamepathname tableId:', uniqueRoomId);
-
 
   const { data: session } = useSession()
 
@@ -41,8 +42,6 @@ export default function Page() {
       // colorScheme: 'dark',
     })
   }, [session])
-
-
 
   // [2]
   const store = useSyncDemo({ roomId: uniqueRoomId, userInfo: userPreferences })
@@ -94,11 +93,13 @@ export default function Page() {
   //       }))
   //   }
 
+  // const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
     <HomeLayout>
       <div className="whiteboard-area">
         <div className="virtual-table whiteboard">
+
           {
             uniqueRoomId && session?.user?.id ?
               <>
@@ -116,7 +117,9 @@ export default function Page() {
                   onResizeStop={setSize}
                 >
                 </Rnd> */}
-                  <LiveCalling username={session?.user?.id} roomId={uniqueRoomId}/>
+                <LiveCalling username={session?.user?.id} roomId={uniqueRoomId} />
+                <Link href={'/table-discovery'} type='button' className="btn pluto-pink-btn leave-button ">Back to Table Discovery</Link>
+                <AiChat />
               </>
               :
               <>

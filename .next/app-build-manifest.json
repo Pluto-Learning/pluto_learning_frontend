@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/(frontend)/everyone/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(frontend)/everyone/page.js"
+    ],
+    "/(frontend)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(frontend)/layout.css",
+      "static/chunks/app/(frontend)/layout.js"
+    ],
+    "/(frontend)/dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(frontend)/dashboard/page.css",
+      "static/chunks/app/(frontend)/dashboard/page.js"
+    ],
+    "/(frontend)/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(frontend)/login/page.js"
+    ],
+    "/(frontend)/signin/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(frontend)/signin/page.js"
+    ],
+    "/(frontend)/table-discovery/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(frontend)/table-discovery/page.css",
+      "static/chunks/app/(frontend)/table-discovery/page.js"
+    ],
+    "/(frontend)/chat/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(frontend)/chat/page.js"
+    ],
+    "/(frontend)/virtual-table/[roomid]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(frontend)/virtual-table/[roomid]/page.css",
+      "static/chunks/app/(frontend)/virtual-table/[roomid]/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+    ]
+  }
+}
