@@ -86,14 +86,6 @@ export default function Page() {
                   user={user}
                 />
                 <Link href={'/table-discovery'} type='button' className="btn pluto-pink-btn leave-button ">Back to Table Discovery</Link>
-                {/* <button 
-                  onClick={() => setIsChatOpen(prev => !prev)}
-                  className="btn toggle-chat-button"
-                  style={{ zIndex: 10 }}
-                >
-                  {isChatOpen ? 'Hide Chat' : 'Show Chat'}
-                </button> */}
-                {/* {isChatOpen && <AiChat />} */}
                 <AiChat />
               </>
               :
