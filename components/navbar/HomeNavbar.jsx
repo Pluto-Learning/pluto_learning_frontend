@@ -23,7 +23,7 @@ export default function HomeNavbar() {
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            setIsScrolled(scrollY > 150); // Change 50 to the scroll threshold you want
+            setIsScrolled(scrollY > 200); // Change 200 to the scroll threshold you want
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -180,7 +180,7 @@ export default function HomeNavbar() {
                             <div class="dropdown notification-dropdown">
                                 <button class="btn notification-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-bell"></i>
-                                    <span className='notification-count'>{notification?.pendingPeople+notification?.unreadMessage}</span>
+                                    <span className='notification-count'>{notification?.pendingPeople + notification?.unreadMessage}</span>
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><Link class="dropdown-item" href="/everyone">Friend Request: {notification?.pendingPeople}</Link></li>
@@ -191,7 +191,8 @@ export default function HomeNavbar() {
 
 
                             {
-                                status === 'authenticated' && <div class="btn-group ms-3" style={{ cursor: "pointer" }}>
+                                status === 'authenticated' &&
+                                <div class="btn-group ms-3 profile-avatar" style={{ cursor: "pointer" }}>
                                     {/* <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Action
                                 </button> */}
@@ -200,7 +201,7 @@ export default function HomeNavbar() {
                                         src={userData?.awsFileUrl}
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
-                                        className='avatar'
+                                        className='avatar '
                                         sx={{
                                             width: { xs: 35, sm: 48, md: 48, lg: 48, xl: 48 },
                                             height: { xs: 35, sm: 48, md: 48, lg: 48, xl: 48 },
@@ -212,8 +213,6 @@ export default function HomeNavbar() {
                                     </ul>
                                 </div>
                             }
-
-
                         </div>
                     </nav>
                 </div>

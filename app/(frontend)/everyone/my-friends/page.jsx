@@ -49,7 +49,6 @@ export default function page() {
         // console.log(data)
         try {
             const a = await addFriend(data)
-            handleSuggestedPersonData()
         } catch (error) {
             console.log(error)
         }
@@ -119,19 +118,19 @@ export default function page() {
                                         </div>
                                     </div>
                                     {
-                                        pendingFriendList?.friends?.length > 0 && <div className="col-12">
+                                        acceptedFriendList?.friends?.length > 0 && <div className="col-12">
                                             <div className="card friend-request-card">
                                                 <div className="card-body">
                                                     <div className="card-top d-flex justify-content-between align-items-center">
-                                                        <h6>Friend Request</h6>
-                                                        <h6>
+                                                        <h6>My Friends List</h6>
+                                                        {/* <h6>
                                                             <Link href='everyone/sent-request'>View sent request</Link>
-                                                        </h6>
+                                                        </h6> */}
                                                     </div>
                                                     <div className="friend-request-list">
                                                         <ul class="nav">
                                                             {
-                                                                pendingFriendList?.friends?.length > 0 && pendingFriendList?.friends?.map((friends) => {
+                                                                acceptedFriendList?.friends?.length > 0 && acceptedFriendList?.friends?.map((friends) => {
                                                                     const {
                                                                         userID,
                                                                         firstName,
@@ -164,13 +163,13 @@ export default function page() {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div className="right">
+                                                                                {/* <div className="right">
                                                                                     <div class="d-flex justify-content-end btn-wrapper">
                                                                                         <button class="btn friend-request-btn dismiss shadow-0" type="button" onClick={() => handleUpdateFriendRequest(session?.user?.id, userID, 'Rejected')}>Dismiss</button>
                                                                                         <button class="btn friend-request-btn accept shadow-0" type="button" onClick={() => handleUpdateFriendRequest(session?.user?.id, userID, 'Accepted')}>Accept</button>
 
                                                                                     </div>
-                                                                                </div>
+                                                                                </div> */}
                                                                             </div>
                                                                         </li>
                                                                     )
@@ -184,7 +183,8 @@ export default function page() {
                                     }
 
                                     {
-                                        suggestedPersonList?.friends?.length > 0 && <div className="col-12">
+                                        suggestedPersonList?.friends?.length > 0 &&
+                                        <div className="col-12 d-none">
                                             <div className="card friend-request-card suggest-people-card">
                                                 <div className="card-body">
                                                     <div className="card-top d-flex justify-content-between align-items-center">
@@ -233,15 +233,15 @@ export default function page() {
                                                                                     <div class="d-flex justify-content-end btn-wrapper">
                                                                                         {/* <button class="btn friend-request-btn dismiss shadow-0" type="button">Dismiss</button> */}
                                                                                         <button
-                                                                                        class="btn friend-request-btn accept shadow-0"
-                                                                                        type="button"
-                                                                                        onClick={() => handleAddFriend({
-                                                                                            mainPersonId: session?.user.id,
-                                                                                            friendId: userID ,
-                                                                                            status: "Pending"
-                                                                                        })}>Follow</button>
-                                                                                        
-                                                                                        
+                                                                                            class="btn friend-request-btn accept shadow-0"
+                                                                                            type="button"
+                                                                                            onClick={() => handleAddFriend({
+                                                                                                mainPersonId: session?.user.id,
+                                                                                                friendId: userID,
+                                                                                                status: "Pending"
+                                                                                            })}>Follow</button>
+
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -260,6 +260,7 @@ export default function page() {
 
                                 </div>
                             </div>
+
                             <div className="col-lg-3">
                                 <div className="card friend-request-card suggest-people-card">
                                     <div className="card-body">

@@ -14,7 +14,7 @@ export default function HomeLayout({ children }) {
         <>
             <div className="home-layout">
                 {/* {
-                    pathname !== '/virtual-table' &&
+                    !pathname.includes('/virtual-table') &&
                 } */}
                 <HomeNavbar />
 

@@ -2,6 +2,7 @@
 import MyCalendar from '@/components/MyCalendar'
 import SimpleCalendar from '@/components/simpleCalendar/SimpleCalendar'
 import ProfileLayout from '@/layouts/profileLayout/ProfileLayout'
+import FullCalendarIo from '@/components/FullCalendarIo'
 
 
 export default function page() {
@@ -93,6 +94,7 @@ export default function page() {
                             </div>
                             <div className="col-xl-8">
                                 <MyCalendar />
+                                {/* <FullCalendarIo /> */}
                             </div>
                             <div className="col-xl-2">
                                 <div className="calendar-schedule-right">
