@@ -3,6 +3,8 @@ import { AtSign, X, MessageSquare } from 'lucide-react';
 import axios from 'axios';
 import { useStorage, useMutation, useSelf, useOthers } from '../../utils/liveblocks.config';
 
+
+
 export default function AiChat() {
   const messages = useStorage((root) => root.messages ?? []);
   const [input, setInput] = useState('');

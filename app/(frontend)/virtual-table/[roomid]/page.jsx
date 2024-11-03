@@ -11,6 +11,12 @@ import Loader from '@/components/Loader/Loader';
 import Link from 'next/link';
 import { updateTableLastTime } from '@/app/api/crud';
 import AiChat from '@/components/AiChat/AiChat';
+import { createClient } from "@liveblocks/client";
+import { RoomProvider } from "@/utils/liveblocks.config";
+
+const client = createClient({
+  publicApiKey: process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY
+});
 
 export default function Page() {
  
@@ -86,7 +92,9 @@ export default function Page() {
                   user={user}
                 />
                 <Link href={'/table-discovery'} type='button' className="btn pluto-pink-btn leave-button ">Back to Table Discovery</Link>
+                <RoomProvider client={client} id={uniqueRoomId}>
                 <AiChat />
+                </RoomProvider>
               </>
               :
               <>
