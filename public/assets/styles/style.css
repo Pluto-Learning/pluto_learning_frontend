@@ -480,6 +480,33 @@ h6 {
   margin: 0 1rem;
   cursor: pointer;
 }
+.nav-bar .notification-dropdown .notification-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #010231;
+  position: relative;
+  border: none;
+}
+.nav-bar .notification-dropdown .notification-btn .notification-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F72585;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+.nav-bar .notification-dropdown .dropdown-menu li .dropdown-item:active {
+  background-color: #F72585;
+}
 .nav-bar.navbar-scrolled {
   background-color: #3A0CA3;
   padding: 5px 20px;

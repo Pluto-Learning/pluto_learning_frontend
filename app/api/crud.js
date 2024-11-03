@@ -516,3 +516,13 @@ export const acceptedFriendListByMainId = async (id) => {
     throw error;
   }
 }
+
+//==================== NOTIFICATION ====================
+export const fetchNotifications = async (id) => {
+  try {
+    const response = await apiClient.get(routes.Notification + '/' + id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+}

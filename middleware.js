@@ -22,6 +22,8 @@ export const config = {
     matcher: [
         "/table-discovery",
         "/dashboard",
+        "/everyone",
+        "/chat",
         "/virtual-table",
         "/virtual-table/:path*",
         "/profile",

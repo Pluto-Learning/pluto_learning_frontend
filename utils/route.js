@@ -67,11 +67,13 @@ export const routes = {
   GetTableMembersDetailsById: '/Table/GetTableMembersDetailsById',
   RemoveTableMember: '/Table/RemoveTableMember',
 
-
   // Friends Routes
   AddFriend: '/Friend/AddFriend',
   GetPendingFriendListByMainId: '/Friend/GetPendingFriendListByMainId',
   UpdateFriendRequest: '/Friend/UpdateFriendRequest',
   GetAcceptedFriendListByMainId: '/Friend/GetAcceptedFriendListByMainId',
   GetSuggestPersonListByMainId: '/Friend/GetSuggestPersonListByMainId',
+
+  // Notifications Routes
+  Notification: '/Notification'
 };

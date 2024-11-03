@@ -268,6 +268,44 @@
 
     }
 
+    .notification-dropdown {
+        .notification-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: $white;
+            color: $pluto-dark-blue;
+            position: relative;
+            border: none;
+
+            .notification-count {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $pluto-pink;
+                color: $white;
+                font-size: 11px;
+                font-weight: 700;
+            }
+        }
+
+        .dropdown-menu {
+            li {
+                .dropdown-item {
+                    &:active {
+                        background-color: $pluto-pink;
+                    }
+                }
+            }
+        }
+    }
+
     &.navbar-scrolled {
         background-color: $pluto-deep-blue;
         padding: 5px 20px;
@@ -293,6 +331,7 @@
                 // height: auto;
             }
         }
+
     }
 }
 
