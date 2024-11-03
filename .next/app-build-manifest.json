@@ -1,5 +1,10 @@
 {
   "pages": {
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -18,20 +23,17 @@
       "static/css/app/(frontend)/layout.css",
       "static/chunks/app/(frontend)/layout.js"
     ],
-    "/page": [
+    "/(frontend)/profile/course-selection/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/css/app/(frontend)/profile/course-selection/page.css",
+      "static/chunks/app/(frontend)/profile/course-selection/page.js"
     ],
-    "/(frontend)/login/page": [
+    "/(frontend)/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(frontend)/login/page.js"
-    ],
-    "/(frontend)/signin/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(frontend)/signin/page.js"
+      "static/css/app/(frontend)/dashboard/page.css",
+      "static/chunks/app/(frontend)/dashboard/page.js"
     ],
     "/(frontend)/table-discovery/page": [
       "static/chunks/webpack.js",

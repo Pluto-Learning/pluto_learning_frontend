@@ -2,8 +2,8 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/(frontend)/profile/course-selection/page": "app/(frontend)/profile/course-selection/page.js",
+  "/(frontend)/dashboard/page": "app/(frontend)/dashboard/page.js",
   "/(frontend)/virtual-table/[roomid]/page": "app/(frontend)/virtual-table/[roomid]/page.js",
-  "/(frontend)/login/page": "app/(frontend)/login/page.js",
-  "/(frontend)/signin/page": "app/(frontend)/signin/page.js",
   "/(frontend)/table-discovery/page": "app/(frontend)/table-discovery/page.js"
 }

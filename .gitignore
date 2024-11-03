@@ -26,3 +26,6 @@
 *.njsproj
 *.sln
 *.sw?
+
+# Next.js build output
+.next
