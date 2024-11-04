@@ -176,8 +176,8 @@ export default function HomeNavbar() {
                                         </button>
                                 }
                             </div> */}
-
-                            <div class="dropdown notification-dropdown">
+                            {
+                                status === 'authenticated' && <div class="dropdown notification-dropdown">
                                 <button class="btn notification-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-bell"></i>
                                     <span className='notification-count'>{notification?.pendingPeople + notification?.unreadMessage}</span>
@@ -187,6 +187,8 @@ export default function HomeNavbar() {
                                     <li><Link class="dropdown-item" href="/chat">Message: {notification?.unreadMessage}</Link></li>
                                 </ul>
                             </div>
+                            }
+                            
 
 
 

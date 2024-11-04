@@ -13,15 +13,15 @@ export default function HomeLayout({ children }) {
     return (
         <>
             <div className="home-layout">
-                {/* {
-                    !pathname.includes('/virtual-table') &&
-                } */}
-                <HomeNavbar />
+                {
+                    !pathname.includes('/virtual-table') && <HomeNavbar />
+                }
+                {/* <HomeNavbar /> */}
 
 
                 {children}
                 {
-                    !pathname.includes('/virtual-table') || pathname !== '/chat' && <Footer />
+                    !pathname.includes('/virtual-table') || pathname !== '/virtual-table' || pathname !== '/chat' && <Footer />
                 }
 
             </div>

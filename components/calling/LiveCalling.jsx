@@ -31,7 +31,7 @@ export default function LiveCalling({ username = 'quickstart-user', roomId = 'qu
 
         // Set initial position to the bottom-right corner after mounting
         const initialX = window.innerWidth - 450; // window width - element width (100px) - margin
-        const initialY = window.innerHeight - 265; // window height - element height (100px) - margin
+        const initialY = window.innerHeight - 165; // window height - element height (100px) - margin
         setRnd({ width: 100, height: 100, x: initialX, y: initialY });
     }, []);
 

@@ -204,8 +204,7 @@
                 width: 100px;
             }
 
-            img {
-            }
+            img {}
         }
 
         .nav-bar-links-container p,
@@ -274,8 +273,7 @@
                 width: 100px;
             }
 
-            img {
-            }
+            img {}
         }
 
     }
@@ -356,68 +354,68 @@
             color: $white;
             font-size: 4rem;
 
-                vertical-align: middle;
-                width: auto;
-                height: 7.5rem;
-                padding-left: 1.3rem;
-                box-sizing: border-box;
-            }
+            vertical-align: middle;
+            width: auto;
+            height: 7.5rem;
+            padding-left: 1.3rem;
+            box-sizing: border-box;
+        }
 
-            @media screen and (max-width: 767px) {
-                font-size: 6rem;
+        @media screen and (max-width: 767px) {
+            font-size: 6rem;
 
-                .logo {
-                    height: 5.5rem;
-                    padding-left: 0.3rem;
-                }
-            }
-
-            @media screen and (max-width: 575px) {
-                font-size: 4rem;
-
-                .logo {
-                    height: 3.5rem;
-                    padding-left: 0.3rem;
-                }
+            .logo {
+                height: 5.5rem;
+                padding-left: 0.3rem;
             }
         }
 
-        .subtitle {
-            font-size: 3rem;
-            color: $white;
-
-            @media screen and (max-width: 767px) {
-                font-size: 2rem;
-            }
-
-            @media screen and (max-width: 575px) {
-                font-size: 1.5rem;
-            }
-        }
-
-    }
-
-    .link-down {
-        text-align: center;
-        animation: moverAnimation 2s infinite alternate;
-
-        a {
-            color: $white;
+        @media screen and (max-width: 575px) {
             font-size: 4rem;
 
-            @media screen and (max-width:991px) {
-                font-size: 3rem;
-            }
-
-            @media screen and (max-width:767px) {
-                font-size: 2.5rem;
-            }
-
-            @media screen and (max-width:575px) {
-                font-size: 2rem;
+            .logo {
+                height: 3.5rem;
+                padding-left: 0.3rem;
             }
         }
     }
+
+    .subtitle {
+        font-size: 3rem;
+        color: $white;
+
+        @media screen and (max-width: 767px) {
+            font-size: 2rem;
+        }
+
+        @media screen and (max-width: 575px) {
+            font-size: 1.5rem;
+        }
+    }
+
+}
+
+.link-down {
+    text-align: center;
+    animation: moverAnimation 2s infinite alternate;
+
+    a {
+        color: $white;
+        font-size: 4rem;
+
+        @media screen and (max-width:991px) {
+            font-size: 3rem;
+        }
+
+        @media screen and (max-width:767px) {
+            font-size: 2.5rem;
+        }
+
+        @media screen and (max-width:575px) {
+            font-size: 2rem;
+        }
+    }
+}
 
 
 .community-main {
@@ -3706,12 +3704,14 @@ $background-color_8: #4f6ebd;
 
 .popular-tables {
 
-    .popular-table-slider {
-        padding: 160px 0px 100px 0px;
+    .popular-table-slider-wrapper {
+        // padding: 160px 0px 100px 0px;
         // height: 100vh;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
+        height: 100vh;
+        position: relative;
 
         @media (max-width:991px) {
             padding: 80px 0px 80px 0px;
@@ -3723,6 +3723,14 @@ $background-color_8: #4f6ebd;
 
         @media (max-width:575px) {
             padding: 40px 30px 70px 30px;
+        }
+
+        .popular-table-slider-content{
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         h1 {
@@ -4294,19 +4302,55 @@ $background-color_8: #4f6ebd;
     // height: 100vh;
     .whiteboard {
         position: relative;
-        height: 89vh;
+        height: 100vh;
         width: 100%;
+
+        .logo {
+            position: fixed;
+            left: 30px;
+            top: 120px;
+            z-index: 1;
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: $white;
+            box-shadow: 0px 4px 25px 0px #00000040;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+
+            img{
+                width: 50px;
+            }
+            
+            svg {
+                path {
+                    transition: 0.3s;
+                }
+            }
+
+            &:hover {
+                transform: translateY(-10px);
+                svg {
+                    path {
+                        fill: $pluto-pink;
+                    }
+                }
+            }
+        }
 
         .leave-button {
             position: fixed;
-            right: 30px;
+            left: 30px;
             bottom: 50px;
         }
+
         .ai-chat {
             position: fixed;
             left: 30px;
             top: 180px;
-            z-index:100;
+            z-index: 100;
         }
 
     }
@@ -4868,22 +4912,31 @@ $background-color_8: #4f6ebd;
 }
 
 .toggle-chat-button {
-    background-color: #f0f0f0; /* Light gray background */
-    color: #333; /* Dark text color */
-    border: none; /* No border */
-    padding: 10px 15px; /* Padding around the text */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #f0f0f0;
+    /* Light gray background */
+    color: #333;
+    /* Dark text color */
+    border: none;
+    /* No border */
+    padding: 10px 15px;
+    /* Padding around the text */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
     transition: background-color 0.3s;
     z-index: 10;
     position: absolute;
     top: 770px;
     left: 600px;
-} /* Smooth background color transition */
+}
 
-  .toggle-chat-button:hover {
-    background-color: #e0e0e0; /* Darker gray on hover */
-  }
+/* Smooth background color transition */
+
+.toggle-chat-button:hover {
+    background-color: #e0e0e0;
+    /* Darker gray on hover */
+}
 
 // =================== BACKEND ENDS ======================= //
 
@@ -5147,13 +5200,3 @@ $background-color_8: #4f6ebd;
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

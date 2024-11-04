@@ -174,17 +174,19 @@ export default function () {
         <HomeLayout>
             <div className='popular-tables'>
 
-                <div className="popular-table-slider"
+                <div className="popular-table-slider-wrapper"
                     style={{
                         background: `linear-gradient(180deg, rgba(127, 0, 255, 0.5) 0%, rgba(225, 0, 255, 0.5) 100%), url('/assets/images/popular-tables/background.png')`,
                         backgroundSize: 'cover', // Optional: Ensures the image covers the div
                         backgroundPosition: 'center' // Optional: Centers the background image
                     }}
                 >
-                    <h1>Popular Tables</h1>
-                    {
-                        allTableDetails?.length > 0 && <PopularTableSlider table={allTableDetails} updateAllTableDetails={GetAllTableDetails}  />
-                    }
+                    <div className='popular-table-slider-content'>
+                        <h1>Popular Tables</h1>
+                        {
+                            allTableDetails?.length > 0 && <PopularTableSlider table={allTableDetails} updateAllTableDetails={GetAllTableDetails} />
+                        }
+                    </div>
 
                 </div>
 
