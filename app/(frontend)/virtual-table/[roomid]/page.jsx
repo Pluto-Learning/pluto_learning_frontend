@@ -123,9 +123,11 @@ export default function Page() {
                 </Rnd> */}
                 <LiveCalling username={session?.user?.id} roomId={uniqueRoomId} />
                 <Link href={'/table-discovery'} type='button' className="btn pluto-pink-btn leave-button ">Back to Table Discovery</Link>
-                <RoomProvider client={client} id={uniqueRoomId}>
-                <AiChat />
-                </RoomProvider>
+                {(editor) => (
+                  <RoomProvider client={client} id={uniqueRoomId}>
+                    <AiChat editor={editor} />
+                  </RoomProvider>
+                )}
               </>
               :
               <>
