@@ -96,7 +96,7 @@ export default function page() {
                                             <div className="left">
                                                 <div className="user-info">
                                                     <h4 className="user-name text-capitalize">{acceptedFriendList?.mainPerson?.firstName} {acceptedFriendList?.mainPerson?.lastName}</h4>
-                                                    <p className='user-follower'>{acceptedFriendList?.friends?.length} Following</p>
+                                                    <p className='user-follower'><Link href={'/everyone/my-friends'}>{acceptedFriendList?.friends?.length} Following</Link></p>
                                                 </div>
                                             </div>
                                             <div className="right">

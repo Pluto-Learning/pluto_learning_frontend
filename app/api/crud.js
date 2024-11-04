@@ -404,14 +404,18 @@ export const fetchAllTableDetails = async () => {
   }
 };
 
-export const createTable = async (data) => {
+export const createTable = async (data, token) => {
   try {
-    const response = await apiClient.post(routes.SaveTableInformation, data);
+    const response = await apiClient.post(routes.SaveTableInformation, data,{
+      headers: {
+        Authorization: `Bearer ${token}`, // Use the token from the session
+      },
+    });
     toast.success('Table Created successfully');
     return response.data;
   } catch (error) {
     toast.error('Error creating table.');
-    console.log(error)
+    console.log('Error creating table.', error)
     throw error;
   }
 };
@@ -453,9 +457,13 @@ export const FetchTableMembersDetailsById = async (id) => {
   }
 };
 
-export const addTableMember = async (data) => {
+export const addTableMember = async (data, token) => {
   try {
-    const response = await apiClient.post(routes.AddTableMember, data);
+    const response = await apiClient.post(routes.AddTableMember, data,{
+      headers: {
+        Authorization: `Bearer ${token}`, // Use the token from the session
+      },
+    });
     return response?.data;
   } catch (error) {
     throw error;

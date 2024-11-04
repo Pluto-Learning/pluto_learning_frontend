@@ -70,16 +70,27 @@ export default function StepOne({ onNextStep }) {
   // Handle Create Table
   const handleCreateTable = async () => {
     try {
-      const responseData = await createTable(formData);
+      if (!session || !session?.user?.token) {
+        toast.error('User not authenticated.');
+        return; // Prevent submission if not authenticated
+      }
+
+      // Pass the token to createTable
+      const responseData = await createTable(formData, session?.user?.token);
       console.log('Response Data:', responseData);
+
+      // Ensure addTableMember is defined and handles the token appropriately
       await addTableMember({
-        memberId: session?.user?.id,
+        memberId: session.user.id,
         roomId: responseData?.roomId,
-        role: "student"
-      })
+        role: "student",
+        // token: session.token // If addTableMember needs the token, pass it
+      }, session?.user?.token);
+
       onNextStep(); // Proceed to step 2 on success
     } catch (error) {
       console.error("Error creating Table:", error);
+      // toast.error('Error creating the table.'); // Notify user of the error
     }
   };
 

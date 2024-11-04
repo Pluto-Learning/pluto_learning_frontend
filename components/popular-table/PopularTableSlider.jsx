@@ -35,8 +35,8 @@ export default function PopularTableSlider({ table, updateAllTableDetails }) {
                         spaceBetween: 100,
                     },
                     992: {
-                        slidesPerView: 2,
-                        spaceBetween: 200,
+                        slidesPerView: 3,
+                        spaceBetween: 150,
                     },
                 }}
             >
