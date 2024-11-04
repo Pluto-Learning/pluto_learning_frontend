@@ -61,7 +61,11 @@ export default function JoinATablePopup({ tableData = {} }) {
 
     const handleJoinMember = async (e) => {
         try {
-            await addTableMember(formData);
+            if (!session || !session?.user?.token) {
+                toast.error('User not authenticated.');
+                return; // Prevent submission if not authenticated
+            }
+            await addTableMember(formData, session?.user?.token);
             toast.success("Successfully joined");
             // Navigate to the virtual table
             router.push(`/virtual-table/${roomId}`);
@@ -70,10 +74,10 @@ export default function JoinATablePopup({ tableData = {} }) {
             console.error("Error Join Table:", error);
         }
     };
-    
-    
-    
-    
+
+
+
+
 
 
     return (

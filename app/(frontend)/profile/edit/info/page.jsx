@@ -1,5 +1,5 @@
 "use client"
-import { fetchUserProfileById, saveUserProfile } from '@/app/api/crud';
+import { fetchAllUserSetupByUserId, fetchUserProfileById, saveUserProfile } from '@/app/api/crud';
 import HomeLayout from '@/layouts/homeLayout/HomeLayout';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -66,7 +66,7 @@ export default function page() {
         handleUserProfileSave();
         getUserData()
         console.log(formData);
-        router.push('/profile/edit/picture')
+        router.push('/profile')
     };
 
 
@@ -86,8 +86,18 @@ export default function page() {
 
     const getUserData = async () => {
         if (currentUserId) {
-            const data = await fetchUserProfileById(currentUserId);
+            const data = await fetchAllUserSetupByUserId(currentUserId);
             setSingleUserProfile(data);
+            setFormData((prev) => ({
+                ...prev,
+                gender: data?.gender,
+                mobile: data?.mobile,
+                dateOfBirth: data?.dateOfBirth,
+                studentYear: data?.studentYear,
+                status: data?.status,
+                // profilePictureName: data?.profilePictureName,
+                // awsFileUrl: data?.awsFileUrl,
+            }));
         }
     };
 
