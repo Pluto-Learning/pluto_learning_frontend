@@ -81,7 +81,7 @@ export default function EditTablePicture({ tableData }) {
             toast.success('Image uploaded successfully!');
             setPreview(null); // Clear preview after successful upload
             // router.push('/table-discovery');
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             console.error('Error updating table picture:', error);
             toast.error('Error uploading image: ' + (error.response ? error.response.data.title : error.message));

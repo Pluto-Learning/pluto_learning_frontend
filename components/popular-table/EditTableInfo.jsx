@@ -87,7 +87,7 @@ export default function EditTableInfo({tableData}) {
     const handleUpdateTable = async () => {
         try {
             await updateTable(roomId, formData);
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             console.error("Error creating Table:", error);
         }

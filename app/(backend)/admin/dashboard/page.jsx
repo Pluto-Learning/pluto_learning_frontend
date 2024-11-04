@@ -1,7 +1,7 @@
 // app/backend/dashboard/page.jsx
   import React from 'react'
   
-  function page() {
+export default function page() {
     return (
       <><div className="backend-dashboard">
       <h1>Dashboard</h1>
@@ -10,4 +10,3 @@
     )
   }
   
-  export default page

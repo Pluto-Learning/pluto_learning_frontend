@@ -92,9 +92,9 @@ export default function page() {
     // console.log(formData)
 
     // Close the modal after submission
-    const modalElement = document.getElementById('exampleModal');
-    const modalInstance = bootstrap.Modal.getInstance(modalElement); // Get the modal instance
-    modalInstance.hide(); // Hide the modal
+    // const modalElement = document.getElementById('exampleModal');
+    // const modalInstance = bootstrap.Modal.getInstance(modalElement); // Get the modal instance
+    // modalInstance.hide(); // Hide the modal
   };
 
   const resetForm = () => {
