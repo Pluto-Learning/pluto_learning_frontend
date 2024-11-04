@@ -14,14 +14,14 @@ export default function HomeLayout({ children }) {
         <>
             <div className="home-layout">
                 {/* {
-                    pathname !== '/virtual-table' &&
+                    !pathname.includes('/virtual-table') &&
                 } */}
                 <HomeNavbar />
 
 
                 {children}
                 {
-                    pathname !== '/virtual-table' && <Footer />
+                    !pathname.includes('/virtual-table') || pathname !== '/chat' && <Footer />
                 }
 
             </div>

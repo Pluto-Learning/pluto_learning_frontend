@@ -1,5 +1,5 @@
 "use client"
-import { fetchUserProfileById } from '@/app/api/crud';
+import { fetchNotifications, fetchUserProfileById } from '@/app/api/crud';
 import { Avatar } from '@mui/material';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
@@ -10,6 +10,7 @@ export default function HomeNavbar() {
 
     const [userData, setUserData] = useState([]);
     const [currentUserId, setCurrentUserId] = useState(null);
+    const [notification, setNotification] = useState(null);
 
     // const session = useSession();
 
@@ -22,7 +23,7 @@ export default function HomeNavbar() {
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            setIsScrolled(scrollY > 50); // Change 50 to the scroll threshold you want
+            setIsScrolled(scrollY > 200); // Change 200 to the scroll threshold you want
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -48,15 +49,25 @@ export default function HomeNavbar() {
         }
     };
 
+    const getNotifications = async () => {
+        try {
+            const data = await fetchNotifications(currentUserId)
+            setNotification(data)
+        } catch (error) {
+            console.log('Error get notification ', error)
+        }
+    }
+
     useEffect(() => {
         getUserData();
+        getNotifications();
     }, [currentUserId]);
 
-    // console.log('userData: ', userData)
+    console.log('notification: ', notification)
 
     return (
         <>
-            <div className={`nav-bar ${pathname == '/' ? 'fixed-top' : 'navbar-scrolled'} ${isScrolled && pathname !== '/virtual-table' ? 'navbar-scrolled fixed-top' : ''}`}>
+            <div className={`nav-bar ${pathname == '/table-discovery' || pathname == '/' ? 'fixed-top' : 'navbar-scrolled home-navbar'} ${isScrolled && pathname !== '/virtual-table' ? 'navbar-scrolled home-navbar fixed-top' : ''}`}>
                 <div className="container">
                     {/* <div className='nav-bar-links d-none'>
                         <div className='nav-bar_logo'>
@@ -123,7 +134,7 @@ export default function HomeNavbar() {
                                             </li>
                                         }
                                         <li class="nav-item ">
-                                            <Link class="nav-link" href="#">Everyone</Link>
+                                            <Link class="nav-link" href="/everyone">Everyone</Link>
                                         </li>
                                         <li class="nav-item ">
                                             <Link class="nav-link" href="#">Your Files</Link>
@@ -166,9 +177,22 @@ export default function HomeNavbar() {
                                 }
                             </div> */}
 
+                            <div class="dropdown notification-dropdown">
+                                <button class="btn notification-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-bell"></i>
+                                    <span className='notification-count'>{notification?.pendingPeople + notification?.unreadMessage}</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><Link class="dropdown-item" href="/everyone">Friend Request: {notification?.pendingPeople}</Link></li>
+                                    <li><Link class="dropdown-item" href="/chat">Message: {notification?.unreadMessage}</Link></li>
+                                </ul>
+                            </div>
+
+
 
                             {
-                                status === 'authenticated' && <div class="btn-group ms-3" style={{ cursor: "pointer" }}>
+                                status === 'authenticated' &&
+                                <div class="btn-group ms-3 profile-avatar" style={{ cursor: "pointer" }}>
                                     {/* <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Action
                                 </button> */}
@@ -177,10 +201,10 @@ export default function HomeNavbar() {
                                         src={userData?.awsFileUrl}
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
-                                        className='avatar'
+                                        className='avatar '
                                         sx={{
-                                            width: { xs: 35, sm: 48, md: 48, lg: 56, xl: 56 },
-                                            height: { xs: 35, sm: 48, md: 48, lg: 56, xl: 56 },
+                                            width: { xs: 35, sm: 48, md: 48, lg: 48, xl: 48 },
+                                            height: { xs: 35, sm: 48, md: 48, lg: 48, xl: 48 },
                                         }}
                                     />
                                     <ul class="dropdown-menu">
@@ -189,8 +213,6 @@ export default function HomeNavbar() {
                                     </ul>
                                 </div>
                             }
-
-
                         </div>
                     </nav>
                 </div>

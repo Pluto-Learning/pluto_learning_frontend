@@ -356,6 +356,19 @@ export const UserImageUpload = async (userID, imageFile) => {
 
 
 
+//==================== CRUD FOR USER SETUP ====================
+export const fetchAllUserSetupByUserId = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetAllUserSetupByUserId + '/' + id);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+
+
 //==================== CRUD FOR TABLE ====================
 
 export const fetchAllTable = async () => {
@@ -449,6 +462,67 @@ export const removeTableMember = async (memberId, roomId) => {
     toast.success('Successfully Left the table!');
   } catch (error) {
     toast.error('Error Left the table');
+    throw error;
+  }
+}
+
+//==================== CRUD FOR FRIEND ====================
+export const addFriend = async (data) => {
+  try {
+    const response = await apiClient.post(routes.AddFriend, data);
+    toast.success(`Successfully friend Request Sent`);
+    return response?.data;
+  } catch (error) {
+    toast.success(`Error Sending friend Request`);
+    throw error;
+  }
+}
+
+export const pendingFriendListByMainId = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetPendingFriendListByMainId + '/' + id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const suggestedPersonListByMainId = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetSuggestPersonListByMainId + '/' + id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const updateFriendRequest = async (mainPersonId, friendId, status) => {
+  try {
+    const response = await apiClient.put(routes.UpdateFriendRequest + '/' + mainPersonId + '/' + friendId + '/' + status)
+    toast.success(`You have ${status} ${friendId}'s friend Request`);
+    return response;
+  } catch (error) {
+    toast.error('Error update friend Request');
+    console.log(error)
+    throw error;
+  }
+}
+
+export const acceptedFriendListByMainId = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetAcceptedFriendListByMainId + '/' + id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//==================== NOTIFICATION ====================
+export const fetchNotifications = async (id) => {
+  try {
+    const response = await apiClient.get(routes.Notification + '/' + id);
+    return response?.data;
+  } catch (error) {
     throw error;
   }
 }

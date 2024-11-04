@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import HomeLayout from '@/layouts/homeLayout/HomeLayout';
 
-export default function StepTwo({ GetAllTableDetails }) {
+export default function StepTwo({ GetAllTableDetails, setCurrentStep }) {
     const router = useRouter();
     const [tableImage, setTableImage] = useState(null);
     const [preview, setPreview] = useState(null); // For image preview
@@ -63,7 +63,8 @@ export default function StepTwo({ GetAllTableDetails }) {
             setPreview(null); // Clear preview after successful upload
             router.push('/table-discovery');
             GetAllTableDetails()
-            window.location.reload();
+            setCurrentStep(1);
+            // window.location.reload();
         } catch (error) {
             console.error('Error updating table picture:', error);
             toast.error('Error uploading image: ' + (error.response ? error.response.data.title : error.message));

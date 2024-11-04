@@ -10,14 +10,14 @@ const localizer = momentLocalizer(moment);
 export default function MyCalendar({ studentCourseSection }) {
 
 
-  const formattedEvents = studentCourseSection.map(item => ({
-    title: item.courseName || item.courseNumber,
-    allDay: false,
-    start: new Date(item.sectionStartTime),
-    end: new Date(item.sectionEndTime),
-  }));
+  // const formattedEvents = studentCourseSection.map(item => ({
+  //   title: item.courseName || item.courseNumber,
+  //   allDay: false,
+  //   start: new Date(item.sectionStartTime),
+  //   end: new Date(item.sectionEndTime),
+  // }));
 
-  console.log('studentCourseSection: ', formattedEvents)
+  // console.log('studentCourseSection: ', formattedEvents)
 
   const [events, setEvents] = useState([
     {
@@ -41,7 +41,7 @@ export default function MyCalendar({ studentCourseSection }) {
     <div className="my-calendar">
       <Calendar
         localizer={localizer}
-        events={formattedEvents}
+        events={events}
         startAccessor="start"
         endAccessor="end"
         views={["month", "week", "day"]}
