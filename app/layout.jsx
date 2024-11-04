@@ -8,7 +8,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Ensure this line is added
 import 'remixicon/fonts/remixicon.css'
 import NextAuthProvider from "@/Providers/NextAuthProvider";
 
-
 import { RoomProvider } from "../utils/liveblocks.config";
 import { ToastContainer } from "react-toastify";
 import { createClient } from "@liveblocks/client";
@@ -29,14 +28,12 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/styles/style.css" />
       </head>
       <body>
-        <RoomProvider client={client} id="your-room-id">
           <NextAuthProvider>
             <main>
               {children}
               <ToastContainer />
             </main>
           </NextAuthProvider>
-        </RoomProvider>
       </body>
     </html>
   );

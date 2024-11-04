@@ -13,6 +13,12 @@ import { updateTableLastTime } from '@/app/api/crud';
 import { Rnd } from 'react-rnd';
 import LiveCalling from '@/components/calling/LiveCalling';
 import AiChat from '@/components/AiChat/AiChat';
+import { createClient } from "@liveblocks/client";
+import { RoomProvider } from "@/utils/liveblocks.config";
+
+const client = createClient({
+  publicApiKey: process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY
+});
 
 export default function Page() {
 
@@ -73,8 +79,6 @@ export default function Page() {
     return () => clearInterval(interval); // cleanup on component unmount
   }, []);
 
-
-
   // const [rnd, setRnd] = useState({ width: '100px', height: '100px', x: 10, y: 10 })
   //   const setPosition = (e, direction) => {
   //       setRnd((prev) => ({
@@ -119,7 +123,11 @@ export default function Page() {
                 </Rnd> */}
                 <LiveCalling username={session?.user?.id} roomId={uniqueRoomId} />
                 <Link href={'/table-discovery'} type='button' className="btn pluto-pink-btn leave-button ">Back to Table Discovery</Link>
-                <AiChat />
+                {(editor) => (
+                  <RoomProvider client={client} id={uniqueRoomId}>
+                    <AiChat editor={editor} />
+                  </RoomProvider>
+                )}
               </>
               :
               <>
