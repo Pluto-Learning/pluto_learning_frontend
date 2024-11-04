@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-.next/
 
 # testing
 /coverage
@@ -23,7 +22,10 @@
 !.vscode/extensions.json
 .idea
 *.suo
-*.ntvs*
+.ntvs
 *.njsproj
 *.sln
 *.sw?
+
+# Next.js build output
+.next
