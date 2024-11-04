@@ -1,9 +1,12 @@
 "use client"
 import { createCourse, deleteCourse, fetchCourse, fetchCourseById, updateCourse } from '@/app/api/crud';
+import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 export default function page() {
-
+  const { data: session } = useSession();
+  console.log('session', session?.user?.token)
   const [isUpdateing, setIsUpdateing] = useState(false);
   const [currentCourseId, setCurrentCourseId] = useState(null);
   const [course, setCourse] = useState([]);
@@ -25,13 +28,19 @@ export default function page() {
     }));
   };
 
-  const handleCreate = async (e) => {
+  const handleCreate = async () => {
     try {
-      await createCourse(formData);
-      resetForm();
-      getAllCourse();
+      if (!session || !session?.user?.token) {
+        toast.error('User not authenticated.');
+        return; // Prevent submission if not authenticated
+      }
+
+      await createCourse(formData, session?.user?.token); // Pass the token here
+      resetForm(); // Ensure resetForm is defined and working
+      getAllCourse(); // Ensure getAllCourse is defined and working
     } catch (error) {
-      console.error("Error creating university:", error);
+      console.error("Error creating Course:", error);
+      // toast.error('Error creating the course.'); // Notify user of error
     }
   };
 

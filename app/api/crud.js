@@ -155,14 +155,20 @@ export const fetchCourseById = async (id) => {
   }
 };
 
-export const createCourse = async (data) => {
+export const createCourse = async (data, token) => {
   try {
-    const response = await apiClient.post(routes.CreateCourse, data);
+    const response = await apiClient.post(routes.CreateCourse, data, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Use the token from the session
+      },
+    });
+
     toast.success('Course created successfully!');
     return response.data;
   } catch (error) {
-    toast.error('Error creating the course.');
-    throw error;
+    console.error('Error creating Course:', error);
+    toast.error('Error creating Course');
+    throw error; // Re-throw the error for handling in the component
   }
 };
 
