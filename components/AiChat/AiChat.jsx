@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { AtSign, X, MessageSquare, Upload, FileText, Check, X as XMark } from 'lucide-react';
+import { AtSign, X, MessageSquare, Upload, FileText, Check, X as XMark,SendHorizontal } from 'lucide-react';
 import { useStorage, useMutation } from '../../utils/liveblocks.config';
-
+import { createShapeId } from '@tldraw/tldraw';
+import { Rnd } from 'react-rnd';
 export default function AiChat({editor}) {
   const messages = useStorage((root) => root.messages ?? []);
   const [input, setInput] = useState('');
@@ -13,12 +14,25 @@ export default function AiChat({editor}) {
   const fileInputRef = useRef(null);
   const [pendingResponse, setPendingResponse] = useState(null);
   const [lastPosition, setLastPosition] = useState({ x: 100, y: 100 });
+  const [rnd, setRnd] = useState({ width: 900, height: 900, x: 0, y: 0 });
   const predefinedPrompts = [
     'What is the weather like today?',
     'Tell me a joke.',
     'What are the latest news headlines?',
     'Summarize the following document:'
   ];
+
+  const setPosition = (e, { x, y }) => {
+    setRnd(prev => ({ ...prev, x, y }));
+};
+const setSize = (e, direction, ref, delta, position) => {
+  setRnd(prev => ({
+      ...prev,
+      width: parseInt(ref.style.width, 10),
+      height: parseInt(ref.style.height, 10),
+      ...position,
+  }));
+};
 
   const addMessage = useMutation(({ storage }, message) => {
     const currentMessages = storage.get('messages') ?? [];
@@ -68,16 +82,18 @@ export default function AiChat({editor}) {
 
         const data = await response.json();
         
-        // Add AI analysis response
-        addMessage({
+        const aiMessage = {
           text: data.choices[0].message.content.trim(),
           sender: 'ai'
-        });
+        };
+        addMessage(aiMessage);
+        setPendingResponse(aiMessage);
 
         // Reset to predefined prompt
         setSelectedPrompt('Summarize the following document:');
         setInput('');
         setShowPrompts(false);
+
       } catch (error) {
         console.error('Error analyzing document:', error);
         addMessage({
@@ -207,24 +223,8 @@ export default function AiChat({editor}) {
     }
   };
   const addTextToCanvas = (text, appendToPrevious = false) => {
-    if (!editor) return;
 
-    if (appendToPrevious) {
-      const shapes = editor.getShapes();
-      const lastTextShape = [...shapes].reverse().find(shape => shape.type === 'text');
-      
-      if (lastTextShape) {
-        editor.updateShape({
-          id: lastTextShape.id,
-          type: 'text',
-          props: {
-            ...lastTextShape.props,
-            text: lastTextShape.props.text + '\n\n' + text
-          }
-        });
-        return;
-      }
-    }
+    if (!editor) return;
 
     const id = createShapeId();
     editor.createShape({
@@ -233,11 +233,11 @@ export default function AiChat({editor}) {
       x: lastPosition.x,
       y: lastPosition.y,
       props: {
+        w: 800,
         text: text,
-        size: 'md',
-        font: 'draw',
-        align: 'start',
-        autoSize: true
+        size: 's',
+        font: 'sans',  // Use a more readable font
+        autoSize: false
       }
     });
 
@@ -259,9 +259,16 @@ export default function AiChat({editor}) {
   }, [messages]);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 ai-chat">
+    <div className="fixed bottom-4 right-4 z-50 ai-chat" style={{ zIndex: 10000000 }}>
       {isOpen ? (
-        <div className="bg-light rounded shadow w-100" style={{ maxWidth: '800px', maxHeight: '500px', overflowY: 'auto',marginLeft:'300px' }}>
+        <>
+          <Rnd
+                size={{ width: rnd.width, height: rnd.height }}
+                position={{ x: rnd.x, y: rnd.y }}
+                onDragStop={setPosition}
+                onResizeStop={setSize}
+              >
+        <div className="bg-light rounded shadow w-100" style={{ maxWidth: '800px', maxHeight: '800px', overflowY: 'auto',marginLeft:'300px' }}>
           <div className="d-flex justify-content-between align-items-center p-3 border-bottom">
             <h2 className="h5 mb-0">Chat with AI</h2>
             <button
@@ -275,8 +282,8 @@ export default function AiChat({editor}) {
           <div className="flex-grow-1 p-3" style={{ overflowY: 'auto', maxHeight: '300px' }}>
           {messages?.map((message, index) => (
               <div key={index} className={`d-flex mb-3 ${message.sender === 'user' ? 'justify-content-end' : 'justify-content-start'}`}>
-                <div className={`p-3 rounded ${message.sender === 'user' ? 'bg-primary text-white' : 'bg-light'}`}
-                     style={{ maxWidth: '80%', wordBreak: 'break-word' }}>
+                <div className={`p-2 rounded ${message.sender === 'user' ? 'bg-primary text-white' : 'bg-light'}`}
+                     style={{ maxWidth: '100%', wordBreak: 'break-word' }}>
                   {message.text}
                   {message.sender === 'ai' && message === pendingResponse && (
                     <div className="mt-2 d-flex justify-content-end gap-2">
@@ -339,7 +346,7 @@ export default function AiChat({editor}) {
                   aria-label="Submit question"
                   disabled={isUploading}
                 >
-                  <AtSign className="w-6 h-6" />
+                  <SendHorizontal className="w-6 h-6"/>
                 </button>
               </div>
               {showPrompts && (
@@ -359,8 +366,10 @@ export default function AiChat({editor}) {
             </form>
           </div>
         </div>
+        </Rnd>
+        </>
       ) : (
-        <button
+       <button
           onClick={() => setIsOpen(true)}
           className="btn btn-light rounded-circle p-3 shadow"
           aria-label="Open chat"
