@@ -316,6 +316,17 @@ export const createUser = async (data) => {
   }
 };
 
+export const updateUserRegistrationData = async (id, data) => {
+  try {
+    const response = await apiClient.put(routes.UpdateRegistrationUserRegistrationData+'/'+id, data);
+    toast.success('Successfully Updated User Data');
+    return response.data;
+  } catch (error) {
+    toast.error('Error Updating User Data.');
+    throw error;
+  }
+}
+
 
 //==================== CRUD FOR USER PROFILE SETUP ====================
 
@@ -363,6 +374,7 @@ export const UserImageUpload = async (userID, imageFile) => {
 
 
 //==================== CRUD FOR USER SETUP ====================
+
 export const fetchAllUserSetupByUserId = async (id) => {
   try {
     const response = await apiClient.get(routes.GetAllUserSetupByUserId + '/' + id);
@@ -406,7 +418,7 @@ export const fetchAllTableDetails = async () => {
 
 export const createTable = async (data, token) => {
   try {
-    const response = await apiClient.post(routes.SaveTableInformation, data,{
+    const response = await apiClient.post(routes.SaveTableInformation, data, {
       headers: {
         Authorization: `Bearer ${token}`, // Use the token from the session
       },
@@ -459,7 +471,7 @@ export const FetchTableMembersDetailsById = async (id) => {
 
 export const addTableMember = async (data, token) => {
   try {
-    const response = await apiClient.post(routes.AddTableMember, data,{
+    const response = await apiClient.post(routes.AddTableMember, data, {
       headers: {
         Authorization: `Bearer ${token}`, // Use the token from the session
       },

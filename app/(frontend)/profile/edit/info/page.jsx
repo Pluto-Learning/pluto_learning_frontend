@@ -1,5 +1,5 @@
 "use client"
-import { fetchAllUserSetupByUserId, fetchUserProfileById, saveUserProfile } from '@/app/api/crud';
+import { fetchAllUserSetupByUserId, fetchUserProfileById, saveUserProfile, updateUserRegistrationData } from '@/app/api/crud';
 import HomeLayout from '@/layouts/homeLayout/HomeLayout';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -14,13 +14,19 @@ export default function page() {
 
     const [formData, setFormData] = useState({
         "userID": "",
-        "gender": "",
-        "mobile": "",
-        "dateOfBirth": "",
-        "studentYear": "",
-        "status": "active",
-        "profilePictureName": "",
-        "awsFileUrl": ""
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "userType": "",
+        "password": "",
+        "keepSignedIn": "",
+        "college": "",
+        
+        // "gender": "",
+        // "mobile": "",
+        // "dateOfBirth": "",
+        // "studentYear": "",
+        // "status": "active",
     });
 
     useEffect(() => {
@@ -61,11 +67,20 @@ export default function page() {
         }
     };
 
+    const handleUpdateUserData = async () => {
+        try {
+            await updateUserRegistrationData(session?.user?.id, formData)
+        } catch (error) {
+            console.error("Error Updating User Data:", error);
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleUserProfileSave();
-        getUserData()
-        console.log(formData);
+        // handleUserProfileSave();
+        // getUserData()
+        handleUpdateUserData()
+        console.log('User Profile Data: ',formData);
         router.push('/profile')
     };
 
@@ -73,14 +88,15 @@ export default function page() {
 
     const resetForm = () => {
         setFormData({
-            "userID": session?.user.id || "", // Reset to current user ID if available
-            "gender": "",
-            "mobile": "",
-            "dateOfBirth": "",
-            "studentYear": "",
-            "status": "",
-            "profilePictureName": "",
-            "awsFileUrl": ""
+            userID: session?.user.id || "", // Reset to current user ID if available
+            firstName: '',
+            lastName: '',
+            email: '',
+            gender: '',
+            userType: '',
+            // password: data?.password,
+            keepSignedIn: '',
+            college: '',
         });
     };
 
@@ -90,13 +106,15 @@ export default function page() {
             setSingleUserProfile(data);
             setFormData((prev) => ({
                 ...prev,
-                gender: data?.gender,
-                mobile: data?.mobile,
-                dateOfBirth: data?.dateOfBirth,
-                studentYear: data?.studentYear,
-                status: data?.status,
-                // profilePictureName: data?.profilePictureName,
-                // awsFileUrl: data?.awsFileUrl,
+                userID: session?.user.id,
+                firstName: data?.firstName,
+                lastName: data?.lastName,
+                email: data?.email,
+                userType: data?.userType,
+                // gender: data?.gender,
+                // password: data?.password,
+                keepSignedIn: data?.keepSignedIn,
+                college: data?.college,
             }));
         }
     };
@@ -198,56 +216,159 @@ export default function page() {
                             </li>
                         </ul> */}
 
-                        <div className="card mx-auto" style={{ maxWidth: '500px' }}>
+                        <div className="card mx-auto" >
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
-                                    <div className="mb-3">
-                                        <label htmlFor="userID" className="form-label">User ID</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="userID"
-                                            name="userID"
-                                            value={formData.userID}
-                                            readOnly // Make it read-only since it's set from session
-                                        />
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="userID" className="form-label">User ID</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="userID"
+                                                    name="userID"
+                                                    value={formData.userID}
+                                                    readOnly // Make it read-only since it's set from session
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="mobile" className="form-label">First Name</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="firstName"
+                                                    name="firstName"
+                                                    value={formData.firstName}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="mobile" className="form-label">Last Name</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="lastName"
+                                                    name="lastName"
+                                                    value={formData.lastName}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="mobile" className="form-label">Email</label>
+                                                <input
+                                                    type="email"
+                                                    className="form-control"
+                                                    id="email"
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="mobile" className="form-label">College</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="college"
+                                                    name="college"
+                                                    value={formData.college}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="mobile" className="form-label">Password</label>
+                                                <input
+                                                    type="password"
+                                                    className="form-control"
+                                                    id="password"
+                                                    name="password"
+                                                    value={formData.password}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="gender" className="form-label">Gender</label>
+                                                <select
+                                                    className="form-select"
+                                                    id="gender"
+                                                    name="gender"
+                                                    value={formData.gender}
+                                                    onChange={handleChange}
+                                                >
+                                                    <option value="">Select Gender</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div> */}
+                                        {/* <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="mobile" className="form-label">Mobile</label>
+                                                <input
+                                                    type="tel"
+                                                    className="form-control"
+                                                    id="mobile"
+                                                    name="mobile"
+                                                    value={formData.mobile}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div> */}
+                                        {/* <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="dateOfBirth" className="form-label">Date of Birth</label>
+                                                <input
+                                                    type="date"
+                                                    className="form-control"
+                                                    id="dateOfBirth"
+                                                    name="dateOfBirth"
+                                                    value={formData.dateOfBirth ? formData.dateOfBirth.split("T")[0] : ""} // Display date correctly
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div> */}
+                                        {/* <div className="col-lg-6">
+                                            <div className="mb-3">
+                                                <label htmlFor="studentYear" className="form-label">Student Year</label>
+                                                <select
+                                                    className="form-select"
+                                                    id="studentYear"
+                                                    name="studentYear"
+                                                    value={formData.studentYear}
+                                                    onChange={handleChange}
+                                                >
+                                                    <option value="">Select Student Year</option>
+                                                    <option value="freshman">Freshman</option>
+                                                    <option value="sophomore">Sophomore</option>
+                                                    <option value="junior">Junior</option>
+                                                    <option value="senior">Senior</option>
+                                                </select>
+                                            </div>
+                                        </div> */}
+
                                     </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="gender" className="form-label">Gender</label>
-                                        <select
-                                            className="form-select"
-                                            id="gender"
-                                            name="gender"
-                                            value={formData.gender}
-                                            onChange={handleChange}
-                                        >
-                                            <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="mobile" className="form-label">Mobile</label>
-                                        <input
-                                            type="tel"
-                                            className="form-control"
-                                            id="mobile"
-                                            name="mobile"
-                                            value={formData.mobile}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="dateOfBirth" className="form-label">Date of Birth</label>
-                                        <input
-                                            type="date"
-                                            className="form-control"
-                                            id="dateOfBirth"
-                                            name="dateOfBirth"
-                                            value={formData.dateOfBirth ? formData.dateOfBirth.split("T")[0] : ""} // Display date correctly
-                                            onChange={handleChange}
-                                        />
-                                    </div>
+
+
+
+
+
+
+
+
                                     {/* <div className="mb-3">
                                         <label htmlFor="studentYear" className="form-label">Student Year</label>
                                         <input
@@ -259,22 +380,8 @@ export default function page() {
                                             onChange={handleChange}
                                         />
                                     </div> */}
-                                    <div className="mb-3">
-                                        <label htmlFor="studentYear" className="form-label">Student Year</label>
-                                        <select
-                                            className="form-select"
-                                            id="studentYear"
-                                            name="studentYear"
-                                            value={formData.studentYear}
-                                            onChange={handleChange}
-                                        >
-                                            <option value="">Select Student Year</option>
-                                            <option value="freshman">Freshman</option>
-                                            <option value="sophomore">Sophomore</option>
-                                            <option value="junior">Junior</option>
-                                            <option value="senior">Senior</option>
-                                        </select>
-                                    </div>
+
+
 
                                     {/* <div className="mb-3">
                                         <label htmlFor="status" className="form-label">Status</label>
@@ -287,7 +394,9 @@ export default function page() {
                                             onChange={handleChange}
                                         />
                                     </div> */}
-                                    <button type="submit" className="btn pluto-deep-blue-btn btn-lg w-100">Submit</button>
+                                    <div className="btn-wrapper text-center">
+                                        <button type="submit" className="btn pluto-deep-blue-btn btn-lg ">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
