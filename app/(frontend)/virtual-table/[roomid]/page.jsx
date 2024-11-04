@@ -2,7 +2,7 @@
 import HomeLayout from '@/layouts/homeLayout/HomeLayout';
 import React, { useEffect, useState } from 'react';
 import { useSyncDemo, createPresenceStateDerivation } from '@tldraw/sync';
-import { Tldraw, useTldrawUser } from 'tldraw';
+import { Tldraw, useTldrawUser,useEditor } from 'tldraw';
 import 'tldraw/tldraw.css';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -21,9 +21,9 @@ const client = createClient({
 });
 
 export default function Page() {
-
-  const router = useRouter()
-  const pathname = usePathname()
+  const [editor, setEditor] = useState(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const uniqueRoomId = pathname.split("/").pop();
 
@@ -79,6 +79,10 @@ export default function Page() {
     return () => clearInterval(interval); // cleanup on component unmount
   }, []);
 
+  useEffect(() => {
+    console.log("editor",editor);
+  },[editor]);
+
   // const [rnd, setRnd] = useState({ width: '100px', height: '100px', x: 10, y: 10 })
   //   const setPosition = (e, direction) => {
   //       setRnd((prev) => ({
@@ -107,10 +111,15 @@ export default function Page() {
           {
             uniqueRoomId && session?.user?.id ?
               <>
-                <Tldraw
-                  store={store}
-                  user={user}
-                />
+
+              <Tldraw
+                store={store}
+                user={user}
+                onMount={(editorInstance) => {
+                  setEditor(editorInstance);
+                }}
+              />
+
                 <Link href={'/table-discovery'} type='button' className="btn pluto-pink-btn leave-button ">Back to Tables</Link>
 
                 {/* <Rnd
@@ -123,11 +132,11 @@ export default function Page() {
                 </Rnd> */}
                 <LiveCalling username={session?.user?.id} roomId={uniqueRoomId} />
                 <Link href={'/table-discovery'} type='button' className="btn pluto-pink-btn leave-button ">Back to Table Discovery</Link>
-                {(editor) => (
-                  <RoomProvider client={client} id={uniqueRoomId}>
-                    <AiChat editor={editor} />
-                  </RoomProvider>
-                )}
+                {editor && (
+                <RoomProvider client={client} id={uniqueRoomId}>
+                  <AiChat editor={editor} />
+                </RoomProvider>
+              )}
               </>
               :
               <>
