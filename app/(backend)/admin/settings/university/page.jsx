@@ -1,5 +1,5 @@
 "use client";
-import { createUniversitiy, deleteUniversity, fetchUniversity, fetchUniversityById, updateUniversity } from "@/app/api/crud";
+import { createUniversity, deleteUniversity, fetchUniversity, fetchUniversityById, updateUniversity } from "../../../../api/crud";
 import React, { useEffect, useState } from "react";
 
 export default function Page() {
@@ -27,7 +27,7 @@ export default function Page() {
 
   const handleCreate = async (e) => {
     try {
-      await createUniversitiy(formData);
+      await createUniversity(formData);
       resetForm();
       getAllUniversities();
     } catch (error) {
@@ -49,7 +49,6 @@ export default function Page() {
       console.error("Error updating university:", error);
     }
   };
-
 
   const resetForm = () => {
     setFormData({

@@ -43,7 +43,6 @@ const BackendLayout = ({ children }) => {
 
   console.log('isSettingsOpen: ', isSettingsOpen)
 
-
   const [collapse, setCollapse] = useState(false)
 
   console.log('collapse: ', collapse)

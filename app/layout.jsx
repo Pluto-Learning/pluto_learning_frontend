@@ -3,20 +3,24 @@
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Ensure this line is added
 
 import 'remixicon/fonts/remixicon.css'
-import NextAuthProvider from "@/Providers/NextAuthProvider";
+import NextAuthProvider from "../Providers/NextAuthProvider";
 
 import { RoomProvider } from "../utils/liveblocks.config";
 import { ToastContainer } from "react-toastify";
 import { createClient } from "@liveblocks/client";
+import { useEffect } from 'react';
 
 const client = createClient({
   publicApiKey: process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY
 });
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.bundle.min.js');
+  }, []);
+
   return (
     <html lang="en">
       <head>
