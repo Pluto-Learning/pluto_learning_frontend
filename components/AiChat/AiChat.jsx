@@ -16,9 +16,9 @@ export default function AiChat({editor}) {
   const [lastPosition, setLastPosition] = useState({ x: 100, y: 100 });
   const [rnd, setRnd] = useState({ width: 900, height: 900, x: 0, y: 0 });
   const predefinedPrompts = [
-    'What is the weather like today?',
-    'Tell me a joke.',
-    'What are the latest news headlines?',
+    'How To Be Happy In Life?',
+    'What is the future of AI?',
+    'How AI can Shape the modern world?',
     'Summarize the following document:'
   ];
 
