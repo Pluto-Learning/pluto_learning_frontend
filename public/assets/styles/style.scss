@@ -110,6 +110,7 @@
 
                     button {
                         padding: 0.5rem 3rem;
+                        white-space: nowrap;
                         font-size: 1rem;
                         line-height: 25px;
                         background: transparent;
@@ -221,6 +222,12 @@
     }
 
     .notification-dropdown {
+        margin: 0 15px 0 0;
+
+        @media screen and (max-width:992px) {
+            margin: 0 15px;
+        }
+
         .notification-btn {
             width: 48px;
             height: 48px;
@@ -229,6 +236,12 @@
             color: $pluto-dark-blue;
             position: relative;
             border: none;
+
+            @media screen and (max-width:599px) {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
 
             .notification-count {
                 position: absolute;
@@ -3710,6 +3723,7 @@ $background-color_8: #4f6ebd;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
+        min-height: 767px;
         height: 100vh;
         position: relative;
 
@@ -3725,7 +3739,7 @@ $background-color_8: #4f6ebd;
             padding: 40px 30px 70px 30px;
         }
 
-        .popular-table-slider-content{
+        .popular-table-slider-content {
             position: absolute;
             width: 100%;
             left: 0;
@@ -4320,10 +4334,10 @@ $background-color_8: #4f6ebd;
             align-items: center;
             transition: 0.5s;
 
-            img{
+            img {
                 width: 50px;
             }
-            
+
             svg {
                 path {
                     transition: 0.3s;
@@ -4332,6 +4346,7 @@ $background-color_8: #4f6ebd;
 
             &:hover {
                 transform: translateY(-10px);
+
                 svg {
                     path {
                         fill: $pluto-pink;
@@ -4983,6 +4998,7 @@ $background-color_8: #4f6ebd;
             border-radius: 8px;
             overflow: hidden;
             transition: all 0.3s;
+            cursor: pointer;
 
             @media (max-width: 991px) {
                 padding: 0;

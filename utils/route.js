@@ -75,5 +75,14 @@ export const routes = {
   GetSuggestPersonListByMainId: '/Friend/GetSuggestPersonListByMainId',
 
   // Notifications Routes
-  Notification: '/Notification'
+  Notification: '/Notification',
+
+  // Message Routes
+  SendMessageNormal: '/Messages/SendMessageNormal',
+  GetUserMessageByMainPersonId: '/Messages/GetUserMessageByMainPersonId',
+  GetUserMessageBySenderIdReceiverId: '/Messages/GetUserMessageBySenderIdReceiverId',
+
+
+
+
 };

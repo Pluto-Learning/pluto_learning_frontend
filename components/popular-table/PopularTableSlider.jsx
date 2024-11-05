@@ -39,6 +39,7 @@ export default function PopularTableSlider({ table, updateAllTableDetails }) {
                         spaceBetween: 150,
                     },
                 }}
+                
             >
                 {table?.length > 0 && table?.map((item, index) => (
                     <SwiperSlide key={index}>

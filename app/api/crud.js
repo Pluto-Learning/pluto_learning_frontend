@@ -318,7 +318,7 @@ export const createUser = async (data) => {
 
 export const updateUserRegistrationData = async (id, data) => {
   try {
-    const response = await apiClient.put(routes.UpdateRegistrationUserRegistrationData+'/'+id, data);
+    const response = await apiClient.put(routes.UpdateRegistrationUserRegistrationData + '/' + id, data);
     toast.success('Successfully Updated User Data');
     return response.data;
   } catch (error) {
@@ -547,6 +547,42 @@ export const acceptedFriendListByMainId = async (id) => {
 export const fetchNotifications = async (id) => {
   try {
     const response = await apiClient.get(routes.Notification + '/' + id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//==================== CRUD FOR MESSAGE ====================
+export const postMessage = async (data, token) => {
+  try {
+    const response = await apiClient.post(routes.SendMessageNormal, data, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Use the token from the session
+      },
+    });
+    if (response?.data == 1) {
+      toast.success("Messege Send Successfully")
+    }
+    return response?.data;
+  } catch (error) {
+    toast.error("Messege Send Failed")
+    throw error;
+  }
+}
+
+export const fetchAllMessageByMainPersonId = async (id) => {
+  try {
+    const response = await apiClient.get(routes.GetUserMessageByMainPersonId + '/' + id);
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const fetchAllMessageBySenderIdReceiverId = async (senderId, receiverId) => {
+  try {
+    const response = await apiClient.get(routes.GetUserMessageBySenderIdReceiverId + '/' + senderId + '/' + receiverId);
     return response?.data;
   } catch (error) {
     throw error;

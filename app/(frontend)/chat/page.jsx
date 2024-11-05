@@ -1,9 +1,96 @@
+"use client"
+import { acceptedFriendListByMainId, fetchAllMessageBySenderIdReceiverId, postMessage } from '@/app/api/crud'
 import HomeLayout from '@/layouts/homeLayout/HomeLayout'
 import ProfileLayout from '@/layouts/profileLayout/ProfileLayout'
+import { timeAgo } from '@/utils/hepler'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function page() {
+
+    const { data: session } = useSession()
+    const [friends, setFriends] = useState([])
+    const [messageBySenderReceiver, setMessageBySenderReceiver] = useState([])
+    const [receiver, setReceiver] = useState(null)
+    const [formData, setFormData] = useState({
+        messageId: "",
+        senderId: "",
+        receiverId: "",
+        msgContent: ""
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(formData)
+        handlePostMessage()
+        resetForm()
+    };
+
+    const getAcceptedFriends = async () => {
+        try {
+            const data = await acceptedFriendListByMainId(session?.user?.id)
+            setFriends(data?.friends)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleGetAllMessage = async (mainPersonId, receiverId) => {
+        console.log('ssss mainPersonId: ', mainPersonId)
+        console.log('ssss receiverId: ', receiverId)
+        setReceiver(receiverId)
+    }
+
+    const handleGetMessageBySenderReceiver = async (senderId, receiverId) => {
+        try {
+            const data = await fetchAllMessageBySenderIdReceiverId(senderId, receiverId)
+            setMessageBySenderReceiver(data)
+            setFormData((prev) => ({
+                ...prev,
+                receiverId: receiverId,
+                senderId: senderId
+            }));
+        } catch (error) {
+            console.log('Error Getting Message Sender and Receiver: ', error)
+        }
+    }
+
+    const handlePostMessage = async () => {
+        try {
+            await postMessage(formData, session?.user?.token)
+            handleGetMessageBySenderReceiver(formData?.senderId, formData?.receiverId)
+        } catch (error) {
+            console.log('Error Sending Message: ', error)
+        }
+    }
+
+    const resetForm = () => {
+        setFormData({
+            messageId: "",
+            senderId: "",
+            receiverId: "",
+            msgContent: ""
+        })
+    }
+
+    useEffect(() => {
+        getAcceptedFriends()
+        handleGetMessageBySenderReceiver()
+    }, [session])
+
+    console.log('messageBySenderReceiver: ', messageBySenderReceiver)
+
+
+
     return (
         <HomeLayout>
             <main class="content chat-message">
@@ -25,329 +112,49 @@ export default function page() {
                                 </div>
                                 <div className="card-body">
                                     <div class="people-list">
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
+                                        {
+                                            friends?.map((friend) => {
+                                                const {
+                                                    userID,
+                                                    firstName,
+                                                    lastName,
+                                                    email,
+                                                    userType,
+                                                    gender,
+                                                    mobile,
+                                                    dateOfBirth,
+                                                    studentYear,
+                                                    status,
+                                                    profilePictureName,
+                                                    awsFileUrl,
+                                                    college
+                                                } = friend;
+                                                return (
+                                                    <div class={`list-group-item list-group-item-action border-0 people ${receiver == userID ? 'active' : ''}`}
+                                                        key={userID}
+                                                        onClick={() => handleGetMessageBySenderReceiver(session?.user?.id, userID)}>
+                                                        <div class="d-flex align-items-start ">
+                                                            <div className="people-img position-relative">
+                                                                <img src={awsFileUrl} class="rounded-circle mr-1" alt={firstName + lastName} width="40" height="40" />
+                                                                <div class="small d-lg-none">
+                                                                    <span class="fas fa-circle chat-online"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-3 people-info">
+                                                                <h6 className="people-name mb-0 text-capitalize">
+                                                                    {firstName + ' ' + lastName}
+                                                                </h6>
+                                                                <div class="small">
+                                                                    <span class="fas fa-circle chat-online"></span> Online
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item list-group-item-action border-0 people">
-                                            <div class="d-flex align-items-start ">
-                                                <div className="people-img position-relative">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Steve Bangalter" width="40" height="40" />
-                                                    <div class="small d-lg-none">
-                                                        <span class="fas fa-circle chat-online"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3 people-info">
-                                                    <h6 className="people-name mb-0">
-                                                        Steve Bangalter
-                                                    </h6>
-                                                    <div class="small">
-                                                        <span class="fas fa-circle chat-online"></span> Online
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                )
+                                            })
+                                        }
+
+
                                     </div>
 
                                     {/* <div className="chat-list">
@@ -615,8 +422,41 @@ export default function page() {
 
                                     <div class="position-relative">
                                         <div class="chat-messages p-4">
+                                            {
+                                                messageBySenderReceiver && messageBySenderReceiver?.length > 0 &&
+                                                messageBySenderReceiver?.map((message) => {
+                                                    const {
+                                                        messageId,
+                                                        senderId,
+                                                        receiverId,
+                                                        msgContent,
+                                                        fileLink,
+                                                        userID,
+                                                        gender,
+                                                        profilePictureName,
+                                                        awsFileUrl,
+                                                        firstName,
+                                                        lastName,
+                                                        email,
+                                                        createDate
+                                                    } = message;
+                                                    return (
+                                                        <div class={` ${senderId == session?.user?.id ? 'chat-message-right' : 'chat-message-left'} pb-4`}>
+                                                            <div>
+                                                                <img src={awsFileUrl}
+                                                                    class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" />
+                                                                <div class="text-muted small text-nowrap mt-2">{timeAgo(createDate)}</div>
+                                                            </div>
+                                                            <div class="flex-shrink-1 bg-light  me-3 message">
+                                                                <div class="font-weight-bold mb-1">{senderId == session?.user?.id ? 'You' : senderId}</div>
+                                                                {msgContent}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
 
-                                            <div class="chat-message-right pb-4">
+                                            {/* <div class="chat-message-right pb-4">
                                                 <div>
                                                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
                                                         class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" />
@@ -638,141 +478,20 @@ export default function page() {
                                                     <div class="font-weight-bold mb-1">Sharon Lessman</div>
                                                     Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
                                                 </div>
-                                            </div>
+                                            </div> */}
 
-                                            <div class="chat-message-right mb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:35 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  me-3 message">
-                                                    <div class="font-weight-bold mb-1">You</div>
-                                                    Cum ea graeci tractatos.
-                                                </div>
-                                            </div>
 
-                                            <div class="chat-message-left pb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                        class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:36 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  ms-3 message">
-                                                    <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                    Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae
-                                                    commodo lectus mauris et velit.
-                                                    Proin ultricies placerat imperdiet. Morbi varius quam ac venenatis tempus.
-                                                </div>
-                                            </div>
-
-                                            <div class="chat-message-left pb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                        class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:37 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  ms-3 message">
-                                                    <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                    Cras pulvinar, sapien id vehicula aliquet, diam velit elementum orci.
-                                                </div>
-                                            </div>
-
-                                            <div class="chat-message-right mb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:38 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  me-3 message">
-                                                    <div class="font-weight-bold mb-1">You</div>
-                                                    Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
-                                                </div>
-                                            </div>
-
-                                            <div class="chat-message-left pb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                        class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:39 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  ms-3 message">
-                                                    <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                    Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
-                                                </div>
-                                            </div>
-
-                                            <div class="chat-message-right mb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:40 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  me-3 message">
-                                                    <div class="font-weight-bold mb-1">You</div>
-                                                    Cum ea graeci tractatos.
-                                                </div>
-                                            </div>
-
-                                            <div class="chat-message-right mb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:41 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  me-3 message">
-                                                    <div class="font-weight-bold mb-1">You</div>
-                                                    Morbi finibus, lorem id placerat ullamcorper, nunc enim ultrices massa, id
-                                                    dignissim metus urna eget purus.
-                                                </div>
-                                            </div>
-
-                                            <div class="chat-message-left pb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                        class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:42 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  ms-3 message">
-                                                    <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                    Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae
-                                                    commodo lectus mauris et velit.
-                                                    Proin ultricies placerat imperdiet. Morbi varius quam ac venenatis tempus.
-                                                </div>
-                                            </div>
-
-                                            <div class="chat-message-right mb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:43 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  me-3 message">
-                                                    <div class="font-weight-bold mb-1">You</div>
-                                                    Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
-                                                </div>
-                                            </div>
-
-                                            <div class="chat-message-left pb-4">
-                                                <div>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                        class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40" />
-                                                    <div class="text-muted small text-nowrap mt-2">2:44 am</div>
-                                                </div>
-                                                <div class="flex-shrink-1 bg-light  ms-3 message">
-                                                    <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                    Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
-                                                </div>
-                                            </div>
 
                                         </div>
                                     </div>
 
                                     <div class="flex-grow-0 py-3 px-4 border-top">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Type your message" />
-                                            <button class="btn btn-primary">Send</button>
-                                        </div>
+                                        <form onSubmit={handleSubmit}>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Type your message" name='msgContent' onChange={handleChange} value={formData?.msgContent} />
+                                                <button class="btn btn-primary" type='submit'>Send</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -957,7 +676,7 @@ export default function page() {
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
-                        <div className="card h-100 card-right">
+                            <div className="card h-100 card-right">
                                 <div className="card-header">
                                     <div class="py-2 px-4">
                                         <div class="d-flex justify-content-end align-items-center py-2">
