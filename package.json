@@ -36,6 +36,7 @@
     "cookies-next": "^4.2.1",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
+    "docx": "^9.0.2",
     "file-type": "^19.6.0",
     "iconoir-react": "^7.9.0",
     "livekit-client": "^2.5.10",

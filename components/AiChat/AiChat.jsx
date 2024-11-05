@@ -3,6 +3,10 @@ import { AtSign, X, MessageSquare, Upload, FileText, Check, X as XMark,SendHoriz
 import { useStorage, useMutation } from '../../utils/liveblocks.config';
 import { createShapeId } from '@tldraw/tldraw';
 import { Rnd } from 'react-rnd';
+import mammoth from 'mammoth';
+import * as pdfjs from 'pdfjs-dist/webpack';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
 export default function AiChat({editor}) {
   const messages = useStorage((root) => root.messages ?? []);
   const [input, setInput] = useState('');
@@ -40,72 +44,136 @@ const setSize = (e, direction, ref, delta, position) => {
   }, []);
 
   const handleFileUpload = async (event) => {
+    debugger;
     const file = event.target.files[0];
     if (!file) return;
 
     setIsUploading(true);
-    const reader = new FileReader();
 
-    reader.onload = async () => {
-      try {
-        const fileContent = reader.result;
-        
-        // Add file upload message
-        addMessage({
-          text: `Uploaded document: ${file.name}`,
-          sender: 'user',
-          fileType: 'document'
-        });
+    try {
+      let fileContent = '';
 
-        // Analyze document using Azure OpenAI
-        const response = await fetch(process.env.NEXT_PUBLIC_AZURE_OPENAI_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'api-key': process.env.NEXT_PUBLIC_AZURE_OPENAI_API_KEY
-          },
-          body: JSON.stringify({
-            messages: [
-              { 
-                role: 'system', 
-                content: 'You are a helpful assistant that analyzes documents. Please analyze the following document and provide a summary of its key points.' 
-              },
-              { 
-                role: 'user', 
-                content: `Please analyze this document content: ${fileContent}` 
-              }
-            ],
-            max_tokens: 1000,
-            temperature: 0.7
-          })
-        });
-
-        const data = await response.json();
-        
-        const aiMessage = {
-          text: data.choices[0].message.content.trim(),
-          sender: 'ai'
-        };
-        addMessage(aiMessage);
-        setPendingResponse(aiMessage);
-
-        // Reset to predefined prompt
-        setSelectedPrompt('Summarize the following document:');
-        setInput('');
-        setShowPrompts(false);
-
-      } catch (error) {
-        console.error('Error analyzing document:', error);
-        addMessage({
-          text: `Error analyzing document: ${error.message}`,
-          sender: 'ai'
-        });
-      } finally {
-        setIsUploading(false);
+      // Determine file type and extract text content
+      switch (file.type) {
+        case 'application/pdf':
+          fileContent = await extractPdfText(file);
+          break;
+        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        case 'application/msword':
+          fileContent = await extractDocxText(file);
+          break;
+        default:
+          // For other file types, use the existing text extraction
+          fileContent = await readFileAsText(file);
+          break;
       }
-    };
 
-    reader.readAsText(file);
+      // Add file upload message
+      addMessage({
+        text: `Uploaded document: ${file.name}`,
+        sender: 'user',
+        fileType: file.type
+      });
+
+      // Analyze document using Azure OpenAI
+      const response = await fetch(process.env.NEXT_PUBLIC_AZURE_OPENAI_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': process.env.NEXT_PUBLIC_AZURE_OPENAI_API_KEY
+        },
+        body: JSON.stringify({
+          messages: [
+            { 
+              role: 'system', 
+              content: 'You are a helpful assistant that analyzes documents. Please analyze the following document and provide a summary of its key points.' 
+            },
+            { 
+              role: 'user', 
+              content: `Please analyze this document content: ${fileContent}` 
+            }
+          ],
+          max_tokens: 1000,
+          temperature: 0.7
+        })
+      });
+
+      const data = await response.json();
+
+      const aiMessage={
+        text: data.choices[0].message.content.trim(),
+        sender: 'ai'
+      };
+      
+      // Add AI analysis response
+      addMessage(aiMessage);
+
+      // Reset to predefined prompt
+      setSelectedPrompt('Summarize the following document:');
+      setInput('');
+      setShowPrompts(false);
+      setPendingResponse(aiMessage);
+    } catch (error) {
+      console.error('Error analyzing document:', error);
+      addMessage({
+        text: `Error analyzing document: ${error.message}`,
+        sender: 'ai'
+      });
+      setPendingResponse(false);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const readFileAsText = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsText(file);
+    });
+  };
+
+  const extractPdfText = async (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const arrayBuffer = event.target.result;
+        try {
+          const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
+          let text = '';
+
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const pageText = await page.getTextContent();
+            text += pageText.items.map(item => item.str).join(' ');
+          }
+
+          resolve(text);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
+  };
+
+  const extractDocxText = async (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const arrayBuffer = event.target.result;
+        try {
+          const result = await mammoth.extractRawText({ arrayBuffer });
+          resolve(result.value);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
   };
 
   const handlePromptSelect = async (prompt) => {
